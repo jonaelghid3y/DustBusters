@@ -43,18 +43,17 @@ justify-content: center;
 gap: 25px;
 
 .länkar {
-    text-decoration: none; // Remove underline
-    color: white; // Or any color you prefer
-    font-size: 18px; // Adjust as needed
-    transition: color 0.3s ease; // Optional for smooth color transition
+    text-decoration: none; 
+    color: white; 
+    font-size: 18px; 
+    transition: color 0.3s ease; 
   }
 
   .länkar:hover {
-    color: #FFD530; // Color when hovered
-  }
+    color: #FFD530; 
 
   .länkar:active {
-    color: #e5e5e5; // Color when active
+    color: #e5e5e5; 
   }
   #länkknapp{
     background-color: #FFD530;
