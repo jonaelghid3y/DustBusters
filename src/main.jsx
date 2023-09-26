@@ -6,11 +6,11 @@ import {
 } from "react-router-dom";
 
 import './index.css'
-import Root from './Components/Pages/Root.jsx';
-import LandingPage from './Components/Pages/LandingPage';
-import Bookings from './Components/Pages/Bookings';
-import AboutUs from './Components/Pages/AboutUs';
-import Services from './Components/Pages/Services';
+import Root from './Pages/Root.jsx';
+import LandingPage from './Pages/LandingPage';
+import Bookings from './Pages/Bookings';
+import AboutUs from './Pages/AboutUs';
+import Services from './Pages/Services';
 
 const router = createBrowserRouter([
   {
