@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,500&display=swap');
+
+
+.storybook-button {
+  font-family: 'Poppins';
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+}
+.storybook-button--primary {
+  color: black;
+  background-color: #FFD530;
+  border: 2px solid transparent;
+}
+.storybook-button--secondary {
+  color: #333;
+  background-color: white;
+  border: 2px solid #FFD530;
+}
+.storybook-button--small {
+  font-size: 12px;
+  padding: 10px 16px;
+}
+.storybook-button--medium {
+  font-size: 14px;
+  padding: 11px 20px;
+}
+.storybook-button--large {
+  font-size: 16px;
+  padding: 12px 24px;
+}

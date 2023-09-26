@@ -1,0 +1,22 @@
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoText1 {
+    font-size:26px;
+}
+
+.logoText2 {
+    font-size:26px;
+    color: #FFD530;
+}
+
+.storybook-logo--primary {
+    color: white;
+}
+
+.storybook-logo--secondary {
+    color: black;
+}

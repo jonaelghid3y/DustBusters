@@ -3,16 +3,14 @@ import styled from 'styled-components'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import { Logo } from './Logo';
 
 function Nav() {
     const [isopen, setIsopen] = useState(false);
 
     return (
         <StyledNav>
-            <StyledLoggoDiv>
-                <StyledLogoText1>Dust</StyledLogoText1>
-                <StyledLogoText2>Busters</StyledLogoText2>
-            </StyledLoggoDiv>
+            <Logo primary/>
             <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
             <StyledLänkcontainer isopen={isopen}>
                 <Link to="/" className="links">Hem</Link>
@@ -78,21 +76,7 @@ const StyledLänkcontainer = styled.div`
     }
 `;
 
-const StyledLoggoDiv = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
 
-const StyledLogoText1 = styled.h2`
-    font-size:26px;
-    color: white;
-`;
-
-const StyledLogoText2 = styled.h2`
-    font-size:26px;
-    color: #FFD530;
-`;
 
 const StyledHamburgerIcon = styled(FaBars)`
     cursor: pointer;
