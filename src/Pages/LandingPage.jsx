@@ -4,6 +4,7 @@ import { AiFillSafetyCertificate,AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Button } from '../Components/Button';
 
 function LandingPage() {
 
@@ -30,9 +31,9 @@ function LandingPage() {
         <StyledHeadline>
           Who you gonna call?
         </StyledHeadline>
-        <StyledButton>
-          Book now!
-        </StyledButton>
+        
+        <Button primary size="large" label="Book now!" />
+
       </StyledLandingImg>
       <StyledRatingDiv>
         <StyledHeadlineDiv>
@@ -179,18 +180,7 @@ margin-top: 250px;
 font-size:60px;
 color: white;
 `
-const StyledButton = styled.button`
-margin-top: 50px;
-border: none;
-background-color: #FFD530;
-font-family: 'Poppins', sans-serif;
-font-size: 25px;
-font-weight: bold;
-border-radius: 20px;
-width: 180px;
-height: 50px;
 
-`
 const StyledRatingDiv = styled.div`
   width: 100%;
   min-height: 100vh;

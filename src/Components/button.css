@@ -5,7 +5,6 @@
   font-family: 'Poppins';
   font-weight: bold;
   border: none;
-  border-radius: 20px;
   cursor: pointer;
   display: inline-block;
   line-height: 1;
@@ -21,14 +20,13 @@
   border: 2px solid #FFD530;
 }
 .storybook-button--small {
-  font-size: 12px;
-  padding: 10px 16px;
-}
-.storybook-button--medium {
-  font-size: 14px;
-  padding: 11px 20px;
-}
-.storybook-button--large {
   font-size: 16px;
-  padding: 12px 24px;
+  padding: 10px 16px;
+  border-radius: 12px;
+}
+
+.storybook-button--large {
+  font-size: 24px;
+  padding: 16px 30px;
+  border-radius: 20px;
 }

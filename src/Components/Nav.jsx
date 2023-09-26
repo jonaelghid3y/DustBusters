@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Logo } from './Logo';
+import { Button } from './Button';
 
 function Nav() {
     const [isopen, setIsopen] = useState(false);
@@ -16,7 +17,7 @@ function Nav() {
                 <Link to="/" className="links">Hem</Link>
                 <Link to="/Bookings" className="links">Boka</Link>
                 <Link to="/Services" className="links">Tjänster</Link>
-                <Link to="/Aboutus" id="linkButton">Login</Link>
+                <Link to="/Aboutus" id="linkButton"><Button primary size="small" label="Log in" /></Link>
             </StyledLänkcontainer>
         </StyledNav>
     )
@@ -65,7 +66,7 @@ const StyledLänkcontainer = styled.div`
         color: #e5e5e5; 
     }
   
-    #linkButton {
+    /* #linkButton {
         background-color: #FFD530;
         border-radius: 5px;
         padding: 2px 7px;
@@ -73,7 +74,7 @@ const StyledLänkcontainer = styled.div`
         text-decoration: none; 
         font-size: 18px; 
         transition: color 0.3s ease;
-    }
+    } */
 `;
 
 
