@@ -20,7 +20,7 @@ function Services() {
 
   return (
     <div className="servicesContainer">
-      services
+      
     </div>
   )
 }
