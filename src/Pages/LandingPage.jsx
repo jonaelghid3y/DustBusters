@@ -251,7 +251,7 @@ const StyledIconsDiv = styled.div`
 const StyledImage = styled.img`
 
 height: 10vh;
-width; 10vw;
+width: 10vw;
 
 `
 const StyledSliderDiv = styled.div`

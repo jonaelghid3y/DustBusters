@@ -93,7 +93,7 @@ const liststyle = {
 }
 const Styledfooter = styled.footer`
   width: 100%;
-  height: 40vh;
+  // min-height: 40vh;
   display:flex;
   justify-content:space-around;
   background:#333333;
