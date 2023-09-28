@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion'
 import './button.css';
 
 /**
@@ -8,14 +9,19 @@ import './button.css';
 export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.1 }} 
+      whileTap={{ scale: 0.9 }}  
+      initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ duration: 2 }} 
       type="button"
       className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       style={backgroundColor && { backgroundColor }}
       {...props}
     >
       {label}
-    </button>
+    </motion.button>
   );
 };
 
