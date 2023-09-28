@@ -16,11 +16,11 @@ function Footer() {
 <hr style={{color:"orange",}}></hr>
 <br></br>
 <ul style={liststyle}>
-<li>Mån - Fre: 07:00 -16:00</li>
+<li>Mon - Fri: 07:00 -16:00</li>
 <br></br>
-<li>Lör: 09:00 - 16:00</li>
+<li>Sat: 09:00 - 16:00</li>
 <br></br>
-<li>Sön: 09:00 - 16:00</li>
+<li>Sun: 09:00 - 16:00</li>
 
 </ul>
 
