@@ -10,10 +10,6 @@ const Calendar = () => {
     const [currDate, setCurrDate] = useState("");
 
 
-    // const daysTag = document.querySelector(".days"),
-    // currentDate = document.querySelector(".current-date"),
-    // prevNextIcon = document.querySelectorAll(".icons span");
-    // // getting new date, current year and month
     const renderCalendar = () => {
         let date = new Date();
         setCurrDate(date.getDate());
@@ -23,80 +19,39 @@ const Calendar = () => {
 
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
-        "August", "September", "October", "November", "December"];
+    "August", "September", "October", "November", "December"];
 
 
 
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
     let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
-    let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(); // getting last day of month
     let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
 
-
-    const tr1 = [];
+    const calendarDates = [];
 
     for (let i = firstDayofMonth; i > 0; i--) { 
-        tr1.push({
+        calendarDates.push({
             date: lastDateofLastMonth - i + 1,
             class: "nonactive"
         }
         );
     }
-    for (let i = 1; i < 7; i++) {
-        tr1.push({
-            date: i,
-            class: "active"
-        })
-        if (tr1.length == 7) {
-            break
-        }
+    for (let i = 1; i<=lastDateofMonth; i++){
+        calendarDates.push(
+            {
+                date: i,
+                class: "active"
+            }
+        )
     }
-
-    const tr2 = [];
-    for (let i = 8 - firstDayofMonth; i < 15 - firstDayofMonth; i++) {
-        tr2.push({
-            date: i,
-            class: "active"
-        });
-    }
-
-    const tr3 = [];
-    for (let i = 15 - firstDayofMonth; i < 22 - firstDayofMonth; i++) { 
-        
-        tr3.push({
-            date: i,
-            class: "active"
-        });
-    }
-
-    const tr4 = [];
-    for (let i = 22 - firstDayofMonth; i < 29 - firstDayofMonth; i++) { 
-        tr4.push({
-            date: i,
-            class: "active"
-        });
-    }
-
-    const tr5 = [];
-    for (let i = 29 - firstDayofMonth; i < 36 - firstDayofMonth; i++) { 
-        tr5.push({
-            date: i,
-            class: "active"
-        });
-        if (i == lastDateofMonth) {
-            break
-        }
-    }
-    for (let i = 1; i < 7; i++) {
-        tr5.push({
+    for (let i = 1; calendarDates.length < 35; i++) {
+        calendarDates.push({
             date: i,
             class: "nonactive"
         });
-        if (tr5.length == 7) {
-            break
-        }
     }
-    console.log(tr5)
+    
+    console.log(calendarDates)
 
     useEffect(() => {
         renderCalendar();
@@ -111,101 +66,93 @@ const Calendar = () => {
                     <p className='month'>{months[currMonth]}</p>
                     <button id="next">&#62;</button>
                 </Styledheader>
-                <Table className="calendar">
-                    <thead>
-                        <tr className="days">
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="white-row"></tr>
-                        <tr>
-                            {
-                                tr1.map((item) => {
-                                    return <td class={item.class}>{item.date}</td>
-                                })
-                            }
-                        </tr>
-                        <tr>
-                            {
-                                tr2.map((item) => {
-                                    return <td class={item.class}>{item.date}</td>
-                                })
-                            }
-                        </tr>
-                        <tr>
-                            {
-                                tr3.map((item) => {
-                                    return <td class={item.class}>{item.date}</td>
-                                })
-                            }
-                        </tr>
-                        <tr>
-                            {
-                                tr4.map((item) => {
-                                    return <td class={item.class}>{item.date}</td>
-                                })
-                            }
-                        </tr>
-                        <tr>
-                            {
-                                tr5.map((item) => {
-                                    return <td class={item.class}>{item.date}</td>
-                                })
-                            }
-                        </tr>
+                <DaysDiv>
+                    <div><p>Mo</p></div>
+                    <div><p>Tu</p></div>
+                    <div><p>We</p></div>
+                    <div><p>Th</p></div>
+                    <div><p>Fr</p></div>
+                    <div><p>Sa</p></div>
+                    <div><p>Su</p></div>
+                </DaysDiv>
+                <CalendarDiv>
+                    {
+                        calendarDates.map((date)=> {
+                            return <div className={date.class}><p>{date.date}</p><div className='dot'></div></div>
+                        })
+                    }
+                </CalendarDiv>
+                
 
-
-                    </tbody>
-
-                </Table>
+                
             </div>
         </div>
     )
 }
 
 const Styledheader = styled.header`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-evenly;
-  button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    button {
     all: unset;
-
-  }
+    }
+    p {
+        font-size: 1.1rem;
+    }
 `
 
-const Table = styled.table`
-    border-collapse: collapse;
-    td, tr {
-        border: 1px solid black;
+const DaysDiv = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 500px;
+    background-color: #FFD530;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    p {
+        font-size: 1.2rem;
+        font-weight: 300;
     }
 
-    th, td {
-        width: 50px;
-        height: 50px;
-        font-weight: 300;
-        text-align: center;
+`
+
+const CalendarDiv = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 500px;
+    height: 360px;
+
+    div {
+        border: 1px solid black;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: gray;
+        }
+
     }
-    .days {
-        border: none;
-        background: #ffd530;
-        margin-bottom: 20px;
-        
-    }
+
     .nonactive {
         background-color: #d9d9d9;
         color: #68625A
     }
-    .white-row {
-        height: 20px;
-        border: none;
-    }
+
 `
+
+
 
 export default Calendar
