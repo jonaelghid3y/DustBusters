@@ -17,6 +17,7 @@ function Nav() {
                 <Link to="/" className="links">Hem</Link>
                 <Link to="/Bookings" className="links">Boka</Link>
                 <Link to="/Services" className="links">Tjänster</Link>
+                <Link to="/Aboutus" className="links">About us</Link>
                 <Link to="/Aboutus" id="linkButton"><Button primary size="small" label="Log in" /></Link>
             </StyledLänkcontainer>
         </StyledNav>
