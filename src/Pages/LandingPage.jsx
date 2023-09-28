@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { AiFillSafetyCertificate,AiFillStar } from 'react-icons/ai';
+import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -31,7 +31,7 @@ function LandingPage() {
         <StyledHeadline>
           Who you gonna call?
         </StyledHeadline>
-        
+
         <Button primary size="large" label="Book now!" />
 
       </StyledLandingImg>
@@ -48,20 +48,41 @@ function LandingPage() {
         <StyledSpan></StyledSpan>
 
         <StyledIconDiv>
-          <StyledIconsDiv className='virusCircle'>
-            <StyledImage src='/imgs/8541972_disease_bacteria_virus_germs_icon.png' />
+
+          <StyledIconsText>
+            <StyledIconsDiv className='virusCircle'>
+              <StyledImage src='/imgs/Monster.png' />
+            </StyledIconsDiv>
+            <StyledText>Say bye to all your germs!</StyledText>
+          </StyledIconsText>
+
+          <StyledIconsText>
+            <StyledIconsDiv className='certifiedCircle'>
 
 
-          </StyledIconsDiv>
-          <StyledIconsDiv className='certifiedCircle'>
-          <AiFillSafetyCertificate size={80} color='#FFD530' />
-         
-          </StyledIconsDiv>
-         
-          <StyledIconsDiv className='MoneyCircle'>
-            
-            <StyledImage src='/imgs/2639867_bag_money_icon (1).png' />
-          </StyledIconsDiv>
+              <StyledImage src='/imgs/Certified.png' />
+
+
+
+            </StyledIconsDiv>
+            <StyledText> Certified and reliable</StyledText>
+          </StyledIconsText>
+
+
+
+
+
+          <StyledIconsText>
+
+            <StyledIconsDiv className='MoneyCircle'>
+
+              <StyledImage src='/imgs/Moneybag.png' />
+
+            </StyledIconsDiv>
+
+            <StyledText> Most bang for your buck!</StyledText>
+          </StyledIconsText>
+
         </StyledIconDiv>
 
         <StyledSliderDiv>
@@ -69,97 +90,104 @@ function LandingPage() {
             <div >
               <StyledSlides className='slides'>
                 <StyledRowDiv2>
-                    
-                    <StyledRatingh3>Anna87</StyledRatingh3>
+
+                  <StyledRatingh3>Lordcommander72</StyledRatingh3>
                 </StyledRowDiv2>
                 <StyledP>
-                  "Grym städning och jättetrevlig personal tack så mycket!!"
+                  "Fantastisk städning, dock pratade daniel lite för mycket!"
                 </StyledP>
-               
+
                 <StyledRowDiv1>
-                  
-                  <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/>
-                
+
+                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
+
                 </StyledRowDiv1>
-                
+
               </StyledSlides>
             </div>
             <div>
-            <StyledSlides className='slides'>
+              <StyledSlides className='slides'>
                 <StyledRowDiv2>
-                    
-                    <StyledRatingh3>Anna87</StyledRatingh3>
+
+                  <StyledRatingh3>Olof den tredje</StyledRatingh3>
                 </StyledRowDiv2>
                 <StyledP>
-                  "Grym städning och jättetrevlig personal tack så mycket!!"
+                  "Bästa städ firman i stan!, Rekommenderar starkt"
                 </StyledP>
-               
+
                 <StyledRowDiv1>
-                  
-                  <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/>
-                
+
+                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
+
                 </StyledRowDiv1>
-                
+
               </StyledSlides>
             </div>
             <div>
-            <StyledSlides className='slides'>
+              <StyledSlides className='slides'>
                 <StyledRowDiv2>
-                    
-                    <StyledRatingh3>Anna87</StyledRatingh3>
+
+                  <StyledRatingh3>Anna87</StyledRatingh3>
                 </StyledRowDiv2>
                 <StyledP>
                   "Grym städning och jättetrevlig personal tack så mycket!!"
                 </StyledP>
-               
+
                 <StyledRowDiv1>
-                  
-                  <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/>
-                
+
+                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
+
                 </StyledRowDiv1>
-                
+
               </StyledSlides>
             </div>
             <div>
-            <StyledSlides className='slides'>
+              <StyledSlides className='slides'>
                 <StyledRowDiv2>
-                    
-                    <StyledRatingh3>Anna87</StyledRatingh3>
+
+                  <StyledRatingh3>Anna87</StyledRatingh3>
                 </StyledRowDiv2>
                 <StyledP>
                   "Grym städning och jättetrevlig personal tack så mycket!!"
                 </StyledP>
-               
+
                 <StyledRowDiv1>
-                  
-                  <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/>
-                
+
+                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
+
                 </StyledRowDiv1>
-                
+
               </StyledSlides>
             </div>
-            <div>
-            <StyledSlides className='slides'>
-                <StyledRowDiv2>
-                    
-                    <StyledRatingh3>Anna87</StyledRatingh3>
-                </StyledRowDiv2>
-                <StyledP>
-                  "Grym städning och jättetrevlig personal tack så mycket!!"
-                </StyledP>
-               
-                <StyledRowDiv1>
-                  
-                  <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/> <AiFillStar color='#FFD530' size={30}/>
-                
-                </StyledRowDiv1>
-                
-              </StyledSlides>
-            </div>
+
           </Slider>
         </StyledSliderDiv>
-
       </StyledRatingDiv>
+      <StyledServicesDiv>
+        <Styledh2headline3> What can we offer you?</Styledh2headline3>
+        <StyledSpan></StyledSpan>
+        <StyledServicesRowDiv>
+          <StyledIconsText>
+            <StyledServicesImg1 />
+            <StyledServicesText>Everyday cleaning</StyledServicesText>
+          </StyledIconsText>
+          <StyledIconsText>
+            <StyledServicesImg2 />
+            <StyledServicesText>Final cleaning</StyledServicesText>
+          </StyledIconsText>
+          <StyledIconsText>
+            <StyledServicesImg3 />
+            <StyledServicesText>Window cleaning</StyledServicesText>
+          </StyledIconsText>
+
+
+
+        </StyledServicesRowDiv>
+
+        <Button primary size="large" label="More services!" />
+
+      </StyledServicesDiv>
+
     </StyledDiv>
   )
 }
@@ -180,10 +208,10 @@ const StyledLandingImg = styled.div`
   background-image: url('/imgs/pexels-tima-miroshnichenko-6195125.jpg');
   background-size: cover;
   background-position: bottom;  
-  
 `
 const StyledHeadline = styled.h1`
 margin-top: 40vh;
+margin-bottom: 6vh;
 font-size:60px;
 color: white;
 `
@@ -227,14 +255,17 @@ const StyledIconDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 150px;
+  gap: 11.5vw;
   flex-direction: row;
 
 
 `
 const StyledText = styled.p`
-
-font-size: 18px;
+text-align: center;
+color: white;
+font-weight: bold;
+font-size: 20px;
+width: 13vw;
 
 `
 const StyledIconsDiv = styled.div`
@@ -248,10 +279,20 @@ const StyledIconsDiv = styled.div`
   background-color: white;
   border: 1px solid white;
 `
+const StyledIconsText = styled.div`
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  
+  
+`
 const StyledImage = styled.img`
 
-height: 10vh;
-width: 10vw;
+height: 100px;
+width: 100px;
 
 `
 const StyledSliderDiv = styled.div`
@@ -322,16 +363,79 @@ font-weight: normal;
 text-align: center;
 
 `
-const StyledRatingimg = styled.div`
+const StyledServicesDiv = styled.div`
 
-height: 40px;
-width: 40px;
-border-radius: 20px;
+width: 100%;
+min-height: 80vh;
+padding: 100px 0;
 border: 1px solid black;
-
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 `
 
-;
+const Styledh2headline3 = styled.h2`
+
+font-size:40px;
+color: black;
+`
+const StyledServicesRowDiv = styled.div`
+ margin-top: 50px;
+ margin-bottom: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 11vw;
+
+`
+const StyledServicesImg1 = styled.img`
+
+ 
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+  background-color: white;
+  border: 3px solid #FFD530;
+  background-image: url(/imgs/pexels-tima-miroshnichenko-6195278.jpg);
+  background-size: cover;
+  background-position: center;
+`
+const StyledServicesImg2 = styled.img`
+
+ 
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+  background-color: white;
+  border: 3px solid #FFD530;
+  background-image: url(/imgs/pexels-tima-miroshnichenko-6196685.jpg);
+  background-size: cover;
+  background-position: center;
+`
+const StyledServicesImg3 = styled.img`
+
+ 
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+  background-color: white;
+  border: 3px solid #FFD530;
+  background-image: url(/imgs/pexels-tima-miroshnichenko-6197122.jpg);
+  background-size: cover;
+  background-position: center;
+
+`
+const StyledServicesText = styled.p`
+text-align: center;
+color: black;
+font-weight: bold;
+font-size: 20px;
+width: 13vw;
+
+`
 
 
 export default LandingPage
