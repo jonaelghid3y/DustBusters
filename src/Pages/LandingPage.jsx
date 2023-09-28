@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
 import { Link } from 'react-router-dom';
+import {motion} from 'framer-motion'
 
 function LandingPage() {
 
@@ -33,7 +34,7 @@ function LandingPage() {
           Who you gonna call?
         </StyledHeadline>
         <Link to="/bookings">
-        <Button primary size="large" label="Book now!" />
+          <Button primary size="large" label="Book now!" />
         </Link>
 
       </StyledLandingImg>

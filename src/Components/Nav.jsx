@@ -1,23 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Logo } from './Logo';
 import { Button } from './Button';
+import { motion } from 'framer-motion'
 
 function Nav() {
     const [isopen, setIsopen] = useState(false);
+    const location = useLocation();
 
     return (
         <StyledNav>
-            <Logo primary/>
+            <Logo primary />
             <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
             <StyledLänkcontainer isopen={isopen}>
-                <Link to="/" className="links">Hem</Link>
-                <Link to="/Bookings" className="links">Boka</Link>
-                <Link to="/Services" className="links">Tjänster</Link>
-                <Link to="/Aboutus" className="links">About us</Link>
+               
+                <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Hem</StyledLink>
+                <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Boka</StyledLink>
+                <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Tjänster</StyledLink>
+                <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
+
                 <Link to="/Aboutus" id="linkButton"><Button primary size="small" label="Log in" /></Link>
             </StyledLänkcontainer>
         </StyledNav>
@@ -77,6 +81,11 @@ const StyledLänkcontainer = styled.div`
         transition: color 0.3s ease;
     } */
 `;
+const StyledLink = styled(NavLink)`
+    &.active {
+        color: #FFD530; 
+    }
+`;
 
 
 
@@ -88,5 +97,8 @@ const StyledHamburgerIcon = styled(FaBars)`
         display: none;
     }
 `;
+
+
+
 
 export default Nav;
