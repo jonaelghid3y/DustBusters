@@ -37,20 +37,21 @@ const StyledContainer = styled.div`
   width: 100%;
   height: 125vh;
   font-family: 'Poppins', sans-serif;
-
-`
+  
+  `
 
 const StyledDiv = styled.div`
   width: 100%;
   height: 75vh;
+  padding:  5vw;
   display: flex;
   align-items: center;
-  justify-content: space-around;
 
 `
 const StyledImage = styled.img `
   height: 60vh;
   width: 100vh;
+  margin-right: 5vw;
   border-radius: 35px;
 `
 
