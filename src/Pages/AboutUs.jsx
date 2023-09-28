@@ -18,7 +18,7 @@ function AboutUs() {
           </StyledText>
         </StyledTextContainer>
       </StyledDiv>
-      <StyledDiv style={{height: '50vh', backgroundColor: '#232323'}}>
+      <StyledDiv style={{display: 'flex', justifyContent: 'center', height: '50vh', backgroundColor: '#232323'}}>
         <StyledTextContainer style={{color: 'white', width: '80%'}}>
           <StyledText >
           Our vision is to enable cleaning services for everyone, regardless of where in the country you are. Therefore, it is important that you feel comfortable and secure with us both when it comes to price, execution and quality.          </StyledText>
