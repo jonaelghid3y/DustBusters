@@ -12,6 +12,7 @@ html, body {
   padding:0;
   margin: 0;
 
+  font-family: 'Poppins'
 }
 #root{
 width: 100%;
