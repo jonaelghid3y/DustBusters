@@ -36,6 +36,7 @@ function LandingPage() {
 
       </StyledLandingImg>
       <StyledRatingDiv>
+
         <StyledHeadlineDiv>
           <Styledh2headline1>
             Why Dust
@@ -45,15 +46,21 @@ function LandingPage() {
           </Styledh2headline2>
         </StyledHeadlineDiv>
         <StyledSpan></StyledSpan>
+
         <StyledIconDiv>
-          <StyledIconsDiv>
-            hej
+          <StyledIconsDiv className='virusCircle'>
+            <StyledImage src='/imgs/8541972_disease_bacteria_virus_germs_icon.png' />
+
+
           </StyledIconsDiv>
-          <StyledIconsDiv>
-            hej
+          <StyledIconsDiv className='certifiedCircle'>
+          <AiFillSafetyCertificate size={80} color='#FFD530' />
+         
           </StyledIconsDiv>
-          <StyledIconsDiv>
-            <AiFillSafetyCertificate size={80} color='#FFD530' />
+         
+          <StyledIconsDiv className='MoneyCircle'>
+            
+            <StyledImage src='/imgs/2639867_bag_money_icon (1).png' />
           </StyledIconsDiv>
         </StyledIconDiv>
 
@@ -176,7 +183,7 @@ const StyledLandingImg = styled.div`
   
 `
 const StyledHeadline = styled.h1`
-margin-top: 250px;
+margin-top: 40vh;
 font-size:60px;
 color: white;
 `
@@ -195,7 +202,7 @@ const StyledHeadlineDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  margin-top: 150px;
+  margin-top: 100px;
 
 `
 const Styledh2headline1 = styled.h2`
@@ -216,12 +223,19 @@ border-radius: 10px;
 `
 const StyledIconDiv = styled.div`
   width: 100%;
-  margin-top:80px;
+  margin-top:70px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 150px;
   flex-direction: row;
+
+
+`
+const StyledText = styled.p`
+
+font-size: 18px;
+
 `
 const StyledIconsDiv = styled.div`
 
@@ -234,10 +248,16 @@ const StyledIconsDiv = styled.div`
   background-color: white;
   border: 1px solid white;
 `
+const StyledImage = styled.img`
+
+height: 10vh;
+width; 10vw;
+
+`
 const StyledSliderDiv = styled.div`
 
 
-margin-top: 150px;
+margin-top: 100px;
 
 padding:20px;
 
