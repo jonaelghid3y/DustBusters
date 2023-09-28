@@ -5,6 +5,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
 
@@ -31,8 +32,9 @@ function LandingPage() {
         <StyledHeadline>
           Who you gonna call?
         </StyledHeadline>
-
+        <Link to="/bookings">
         <Button primary size="large" label="Book now!" />
+        </Link>
 
       </StyledLandingImg>
       <StyledRatingDiv>
@@ -167,6 +169,7 @@ function LandingPage() {
         <Styledh2headline3> What can we offer you?</Styledh2headline3>
         <StyledSpan></StyledSpan>
         <StyledServicesRowDiv>
+          
           <StyledIconsText>
             <StyledServicesImg1 />
             <StyledServicesText>Everyday cleaning</StyledServicesText>
@@ -183,8 +186,9 @@ function LandingPage() {
 
 
         </StyledServicesRowDiv>
-
+       <Link to="/Services">
         <Button primary size="large" label="More services!" />
+        </Link>
 
       </StyledServicesDiv>
 
@@ -208,12 +212,23 @@ const StyledLandingImg = styled.div`
   background-image: url('/imgs/pexels-tima-miroshnichenko-6195125.jpg');
   background-size: cover;
   background-position: bottom;  
+  @media (max-width: 768px) {
+    
+
+ 
+  }
+  
 `
 const StyledHeadline = styled.h1`
 margin-top: 40vh;
 margin-bottom: 6vh;
 font-size:60px;
 color: white;
+@media (max-width: 768px) {
+
+  font-size: 40px;
+  text-align: center;
+}
 `
 
 const StyledRatingDiv = styled.div`
@@ -231,23 +246,38 @@ const StyledHeadlineDiv = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-top: 100px;
+ 
 
 `
 const Styledh2headline1 = styled.h2`
 
 font-size:40px;
 color: white;
+@media (max-width: 768px) {
+
+  font-size: 30px;
+  text-align: center;
+}
 `
 const Styledh2headline2 = styled.h2`
 
 font-size:40px;
 color: #FFD530;
+@media (max-width: 768px) {
+
+  font-size: 30px;
+  text-align: center;
+}
 `
 const StyledSpan = styled.span`
 height: 5px;
 width: 60px;
 background-color: #FFD530;
 border-radius: 10px;
+@media (max-width: 768px) {
+
+ width: 40px;
+}
 `
 const StyledIconDiv = styled.div`
   width: 100%;
@@ -257,6 +287,10 @@ const StyledIconDiv = styled.div`
   justify-content: center;
   gap: 11.5vw;
   flex-direction: row;
+  @media (max-width: 768px) {
+
+    flex-direction: column;
+   }
 
 
 `
@@ -266,6 +300,10 @@ color: white;
 font-weight: bold;
 font-size: 20px;
 width: 13vw;
+@media (max-width: 768px) {
+
+  width: 40vw;
+ }
 
 `
 const StyledIconsDiv = styled.div`
@@ -278,6 +316,11 @@ const StyledIconsDiv = styled.div`
   border-radius: 75px;
   background-color: white;
   border: 1px solid white;
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+   }
 `
 const StyledIconsText = styled.div`
   
@@ -293,6 +336,10 @@ const StyledImage = styled.img`
 
 height: 100px;
 width: 100px;
+@media (max-width: 768px) {
+  width: 70px;
+  height: 70px;
+ }
 
 `
 const StyledSliderDiv = styled.div`
@@ -304,7 +351,10 @@ padding:20px;
 
 height: 400px;
 width: 70%;
+@media (max-width: 768px) {
 
+  width: 83%;
+ }
 
 
 
@@ -327,6 +377,10 @@ const StyledSlides = styled.div`
   gap: 20px;
   padding: 20px;
 
+  @media (max-width: 768px) {
+
+    width: 280px;
+   }
 `
 
 const StyledRowDiv1 = styled.div`
@@ -379,6 +433,10 @@ const Styledh2headline3 = styled.h2`
 
 font-size:40px;
 color: black;
+@media (max-width: 768px) {
+
+  font-size: 30px;
+ }
 `
 const StyledServicesRowDiv = styled.div`
  margin-top: 50px;
@@ -389,6 +447,10 @@ const StyledServicesRowDiv = styled.div`
   justify-content: center;
   width: 100%;
   gap: 11vw;
+  @media (max-width: 768px) {
+
+    flex-direction: column;
+   }
 
 `
 const StyledServicesImg1 = styled.img`
@@ -398,10 +460,21 @@ const StyledServicesImg1 = styled.img`
   width: 300px;
   border-radius: 150px;
   background-color: white;
-  border: 3px solid #FFD530;
+  border: 4px solid #FFD530;
   background-image: url(/imgs/pexels-tima-miroshnichenko-6195278.jpg);
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
+  transition: 1s ease;
+  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
+  
+  &:hover {
+    background-size: 110%;
+  }
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+   }
 `
 const StyledServicesImg2 = styled.img`
 
@@ -410,10 +483,23 @@ const StyledServicesImg2 = styled.img`
   width: 300px;
   border-radius: 150px;
   background-color: white;
-  border: 3px solid #FFD530;
+  border: 4px solid #FFD530;
   background-image: url(/imgs/pexels-tima-miroshnichenko-6196685.jpg);
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
+  transition: 1s ease;
+  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
+  
+  
+  &:hover {
+    background-size: 110%;
+
+  }
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+   }
 `
 const StyledServicesImg3 = styled.img`
 
@@ -422,10 +508,22 @@ const StyledServicesImg3 = styled.img`
   width: 300px;
   border-radius: 150px;
   background-color: white;
-  border: 3px solid #FFD530;
+  border: 4px solid #FFD530;
   background-image: url(/imgs/pexels-tima-miroshnichenko-6197122.jpg);
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
+  transition: 1s ease;
+  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
+  
+  &:hover {
+    background-size: 110%;
+   
+  }
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+   }
 
 `
 const StyledServicesText = styled.p`
@@ -434,6 +532,10 @@ color: black;
 font-weight: bold;
 font-size: 20px;
 width: 13vw;
+@media (max-width: 768px) {
+
+  width: 40vw;
+ }
 
 `
 
