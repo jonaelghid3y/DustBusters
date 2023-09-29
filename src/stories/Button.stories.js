@@ -21,12 +21,14 @@ export const Primary = {
   args: {
     primary: true,
     label: 'Button',
+    size: 'large'
   },
 };
 
 export const Secondary = {
   args: {
     label: 'Button',
+    size: 'large'
   },
 };
 
