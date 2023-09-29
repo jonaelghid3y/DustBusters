@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components';
 import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
@@ -9,6 +9,21 @@ import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
 
 function LandingPage() {
+
+  useEffect(() => {
+    fetchReviews()
+  }, [])
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review')
+      const data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const settings = {
     dots: true,
