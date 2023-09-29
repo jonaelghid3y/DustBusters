@@ -7,7 +7,7 @@ function Footer() {
     <StyledFooter>
       <FooterContainer1>
         <h3 style={{ ...footerHeader, color: '#FFD530' }}>Opening hours</h3>
-        <hr style={{ color: 'orange' }} />
+        <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <li>Mon - Fri: 07:00 -16:00</li>
           <li>Sat: 09:00 - 16:00</li>
@@ -17,7 +17,7 @@ function Footer() {
 
       <FooterContainer2>
         <h3 style={{ ...footerHeader, color: '#FFD530' }}>Follow DustBusters</h3>
-        <hr style={{ color: 'orange' }} />
+        <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <div>
             <i className="fa fa-facebook"> Facebook</i>
@@ -36,7 +36,7 @@ function Footer() {
 
       <FooterContainer3>
         <h3 style={{ ...footerHeader, color: '#FFD530' }}>Contacts</h3>
-        <hr style={{ color: 'orange' }} />
+        <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <li>Tel: +46 347 82 83</li>
           <li>E-mail: DustBusters@gmail.se</li>
