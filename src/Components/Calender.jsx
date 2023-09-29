@@ -126,16 +126,16 @@ const Calendar = () => {
                     {
                         calendarDates.map((date) => { 
                             return date.class == "current" 
-                                ? <div className="active">
+                                ? <button className="active">
                                     <div className={date.class}>
                                         <p>{date.date}</p>
                                     </div>
                                     <div className={date.dotClass}></div>
-                                </div>
-                                : <div className={date.class}>
+                                </button>
+                                : <button className={date.class}>
                                     <p>{date.date}</p>
                                     <div className={date.dotClass}></div>
-                                </div>
+                                </button>
                         })
                     }
                 </CalendarDiv>
@@ -181,7 +181,8 @@ const CalendarDiv = styled.div`
     width: 500px;
     height: 360px;
 
-    div {
+    div, button {
+        cursor: pointer;
         border: 1px solid black;
         display: flex;
         flex-flow: column nowrap;
@@ -216,11 +217,16 @@ const CalendarDiv = styled.div`
         color: #68625A
     }
     .current {
-        border: 3px solid yellow;
+        border: 3px solid #FFD530;
         width: 60%;
         height: 50%;
         border-radius: 50%;
         margin-bottom: -4px;
+    }
+
+    .active:hover {
+        background-color:  #232323;
+        color: white;
     }
 
 `
