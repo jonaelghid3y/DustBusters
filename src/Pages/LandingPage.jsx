@@ -30,9 +30,15 @@ function LandingPage() {
   return (
     <StyledDiv>
       <StyledLandingImg>
+      <motion.div 
+      initial={{ opacity: 0, x: -200 }} 
+      animate={{ opacity: 1, x: 0 }} 
+      transition={{ ease: "easeOut", duration: 2 }} 
+      >
         <StyledHeadline>
           Who you gonna call?
         </StyledHeadline>
+        </motion.div>
         <Link to="/bookings">
           <Button primary size="large" label="Book now!" />
         </Link>
@@ -335,8 +341,7 @@ const StyledIconsText = styled.div`
 `
 const StyledImage = styled.img`
 
-height: 100px;
-width: 100px;
+width: 80%;
 @media (max-width: 768px) {
   width: 70px;
   height: 70px;
