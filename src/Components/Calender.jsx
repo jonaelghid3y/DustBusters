@@ -33,13 +33,22 @@ const Calendar = () => {
         if (i == currDate) {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
-                class: "current"
+                class: "current",
+                dotClass: "green"
+            }
+            );
+        } else if (i < currDate) {
+            calendarDates.push({
+                date: lastDateofLastMonth - i + 1,
+                class: "nonactive",
+                dotClass: "grey"
             }
             );
         } else {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
-                class: "nonactive"
+                class: "nonactive",
+                dotClass: "green"
             }
             );
 
@@ -50,14 +59,24 @@ const Calendar = () => {
             calendarDates.push(
                 {
                     date: i,
-                    class: "current"
+                    class: "current",
+                    dotClass: "green"
                 }
             )
-        } else {
+        } else if (i < currDate) {
+            calendarDates.push({
+                date: i,
+                class: "active",
+                dotClass: "grey"
+            }
+            );
+        }
+        else {
             calendarDates.push(
                 {
                     date: i,
-                    class: "active"
+                    class: "active",
+                    dotClass: "green"
                 }
             )
         }
@@ -66,12 +85,14 @@ const Calendar = () => {
         if (i == currDate) {
             calendarDates.push({
                 date: i,
-                class: "current"
+                class: "current",
+                dotClass: "green"
             });
         } else {
             calendarDates.push({
                 date: i,
-                class: "nonactive"
+                class: "nonactive",
+                dotClass: "grey"
             });
         }
     }
@@ -105,8 +126,16 @@ const Calendar = () => {
                     {
                         calendarDates.map((date) => { 
                             return date.class == "current" 
-                                ? <div className="active"><div className={date.class}><p>{date.date}</p></div><div className='dot'></div></div>
-                                : <div className={date.class}><p>{date.date}</p><div className='dot'></div></div>
+                                ? <div className="active">
+                                    <div className={date.class}>
+                                        <p>{date.date}</p>
+                                    </div>
+                                    <div className={date.dotClass}></div>
+                                </div>
+                                : <div className={date.class}>
+                                    <p>{date.date}</p>
+                                    <div className={date.dotClass}></div>
+                                </div>
                         })
                     }
                 </CalendarDiv>
@@ -165,11 +194,16 @@ const CalendarDiv = styled.div`
             font-weight: 300;
         }
 
-        .dot {
-        width: 5px;
-        height: 5px;
+        .grey, .green {
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
+        border-color: gray;
         background-color: gray;
+        }
+        .green {
+            background-color: green;
+            border-color: green;
         }
 
     }
