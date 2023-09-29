@@ -73,7 +73,7 @@ const StyledButton = styled(motion.button)`
 Button.propTypes = {
   primary: PropTypes.bool,
   backgroundColor: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(['small', 'large']),
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
@@ -81,6 +81,6 @@ Button.propTypes = {
 Button.defaultProps = {
   backgroundColor: null,
   primary: false,
-  size: 'medium',
+  size: 'large',
   onClick: undefined,
 };
