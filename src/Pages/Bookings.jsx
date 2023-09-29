@@ -13,10 +13,9 @@ function Bookings() {
 }
 
 const Section = styled.section`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  padding: 10%
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 5%;
 `
 
 

@@ -155,14 +155,16 @@ const Styledheader = styled.header`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
+    width: 500px;
     margin-bottom: 20px;
     button {
     all: unset;
     cursor: pointer;
     }
     p {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
+
 `
 
 const DaysDiv = styled.div`
