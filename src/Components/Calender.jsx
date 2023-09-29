@@ -17,10 +17,12 @@ const Calendar = () => {
         setCurrMonth(date.getMonth())
     }
 
+    useEffect(() => {
+        renderCalendar();
+    }, []);
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
-
 
 
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
@@ -30,7 +32,7 @@ const Calendar = () => {
     const calendarDates = [];
 
     for (let i = firstDayofMonth; i > 0; i--) {
-        if (i == currDate) {
+        if (i == currDate && currMonth == new Date().getMonth()) {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
                 class: "current",
@@ -55,19 +57,17 @@ const Calendar = () => {
         }
     }
     for (let i = 1; i <= lastDateofMonth; i++) {
-        if (i == currDate) {
+        if (i == currDate && currMonth == new Date().getMonth()) {
             calendarDates.push(
                 {
                     date: i,
-                    class: "current",
-                    dotClass: "green"
+                    class: "current"
                 }
             )
         } else if (i < currDate) {
             calendarDates.push({
                 date: i,
-                class: "active",
-                dotClass: "grey"
+                class: "active"
             }
             );
         }
@@ -75,43 +75,47 @@ const Calendar = () => {
             calendarDates.push(
                 {
                     date: i,
-                    class: "active",
-                    dotClass: "green"
+                    class: "active"
                 }
             )
         }
     }
     for (let i = 1; calendarDates.length < 35; i++) {
-        if (i == currDate) {
+        if (i == currDate && currMonth == new Date().getMonth()) {
             calendarDates.push({
                 date: i,
-                class: "current",
-                dotClass: "green"
+                class: "current"
             });
         } else {
             calendarDates.push({
                 date: i,
-                class: "nonactive",
-                dotClass: "grey"
+                class: "nonactive"
             });
         }
     }
 
-    console.log(calendarDates)
-    console.log(currDate)
-
-    useEffect(() => {
-        renderCalendar();
-    }, []);
-
+    
+    const showNextMonth = () => {
+        if (currMonth < 11)
+        setCurrMonth(currMonth+1)
+        else 
+        setCurrMonth(0)
+        
+    }
+    const showPrevMonth = () => {
+        if (currMonth > 0)
+        setCurrMonth(currMonth-1)
+        else
+        setCurrMonth(11)
+    }
 
     return (
         <div>
             <div className="wrapper">
                 <Styledheader>
-                    <button id="prev">&#60;</button>
+                    <button id="prev" onClick={() => showPrevMonth()}>&#60;</button>
                     <p className='month'>{months[currMonth]}</p>
-                    <button id="next">&#62;</button>
+                    <button id="next" onClick={() => showNextMonth()}>&#62;</button>
                 </Styledheader>
                 <DaysDiv>
                     <div><p>Mo</p></div>
@@ -130,11 +134,11 @@ const Calendar = () => {
                                     <div className={date.class}>
                                         <p>{date.date}</p>
                                     </div>
-                                    <div className={date.dotClass}></div>
+                                    <div className="dot"></div>
                                 </button>
                                 : <button className={date.class}>
                                     <p>{date.date}</p>
-                                    <div className={date.dotClass}></div>
+                                    <div className="dot"></div>
                                 </button>
                         })
                     }
@@ -154,6 +158,7 @@ const Styledheader = styled.header`
     margin-bottom: 20px;
     button {
     all: unset;
+    cursor: pointer;
     }
     p {
         font-size: 1.1rem;
@@ -188,23 +193,19 @@ const CalendarDiv = styled.div`
         flex-flow: column nowrap;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 10px;
 
         p {
             font-size: 1.2rem;
             font-weight: 300;
         }
 
-        .grey, .green {
+        .dot {
         width: 8px;
         height: 8px;
         border-radius: 50%;
         border-color: gray;
         background-color: gray;
-        }
-        .green {
-            background-color: green;
-            border-color: green;
         }
 
     }
@@ -218,10 +219,11 @@ const CalendarDiv = styled.div`
     }
     .current {
         border: 3px solid #FFD530;
-        width: 60%;
-        height: 50%;
+        width: 50%;
+        height: 45%;
         border-radius: 50%;
         margin-bottom: -4px;
+        margin-top: -5px;
     }
 
     .active:hover {
