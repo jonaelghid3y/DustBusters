@@ -30,9 +30,15 @@ function LandingPage() {
   return (
     <StyledDiv>
       <StyledLandingImg>
+      <motion.div 
+      initial={{ opacity: 0, x: -200 }} 
+      animate={{ opacity: 1, x: 0 }} 
+      transition={{ ease: "easeOut", duration: 2 }} 
+      >
         <StyledHeadline>
           Who you gonna call?
         </StyledHeadline>
+        </motion.div>
         <Link to="/bookings">
           <Button primary size="large" label="Book now!" />
         </Link>
