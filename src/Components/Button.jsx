@@ -14,7 +14,7 @@ export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
       whileTap={{ scale: 0.9 }}  
       initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
-        transition={{ duration: 2 }} 
+        transition={{ duration: 0.5 }} 
       type="button"
       className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       style={backgroundColor && { backgroundColor }}
