@@ -341,8 +341,7 @@ const StyledIconsText = styled.div`
 `
 const StyledImage = styled.img`
 
-height: 100px;
-width: 100px;
+width: 80%;
 @media (max-width: 768px) {
   width: 70px;
   height: 70px;
