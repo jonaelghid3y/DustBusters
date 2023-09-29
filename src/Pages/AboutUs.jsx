@@ -1,84 +1,74 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../Components/Logo';
-
 
 function AboutUs() {
   return (
     <StyledContainer>
       <StyledDiv>
-        <StyledImage src='public\imgs\pexels-tima-miroshnichenko-6197108.jpg' />
+        <StyledImage src='/imgs/pexels-tima-miroshnichenko-6197108.jpg' alt="DustBusters Cleaning" />
         <StyledTextContainer>
           <StyledText>
-            <BrandName1>Dust</BrandName1><BrandName2>Busters</BrandName2> is a very experienced cleaning company with solid and trained staff. High flexibility with a wide range of services enables us to provide you with both complete and partial solutions. We are established in Stockholm but perform our services all over the country.
-            </StyledText>
-          <br/>
+            <BrandName1>Dust</BrandName1><BrandName2>Busters</BrandName2> is a highly experienced cleaning company with a dedicated and trained staff. Our flexibility and wide range of services allow us to provide both complete and partial cleaning solutions. We are based in Stockholm but offer our services nationwide.
+          </StyledText>
           <StyledText>
-            We cater to private individuals by providing a range of services including everyday cleaning, window cleaning, final cleaning, and our specialty: <BrandName2>dust busting</BrandName2>. Whether the task is grand or modest, we're committed to offering you comprehensive cleaning support!
+            We cater to private individuals by offering a range of services including everyday cleaning, window cleaning, final cleaning, and our specialty: <BrandName2>dust busting</BrandName2>. Whether the task is large or small, we are committed to providing comprehensive cleaning support!
           </StyledText>
         </StyledTextContainer>
       </StyledDiv>
-      <StyledDiv style={{display: 'flex', justifyContent: 'center', height: '50vh', backgroundColor: '#232323'}}>
-        <StyledTextContainer style={{color: 'white', width: '80%'}}>
-          <StyledText >
-          Our vision is to enable cleaning services for everyone, regardless of where in the country you are. Therefore, it is important that you feel comfortable and secure with us both when it comes to price, execution and quality.          </StyledText>
-            <br/>
-          <StyledText >
-            With <BrandName1 style={{ color: 'white'}}>Dust</BrandName1><BrandName2>Busters</BrandName2> cleaning will never feel like a chore, so you can blow off steam and relax while we do the work for you in the meantime. Of course, we have company insurance and a driving license. We take care of the RUT deduction for you so that you get a deduction of 50% on the labor cost. Therefore, it is important that you feel comfortable and secure with us both when it comes to price, execution and quality.
+      <StyledDiv style={{ backgroundColor: '#232323', color: 'white' }}>
+        <StyledTextContainer>
+          <StyledText>
+            Our vision is to make cleaning services accessible to everyone, regardless of their location in the country. Therefore, it is important to us that you feel comfortable and confident in our services, including pricing, execution, and quality.
+          </StyledText>
+          <StyledText>
+            With <BrandName1>Dust</BrandName1><BrandName2>Busters</BrandName2>, cleaning will never feel like a chore. You can relax while we do the work for you. We are fully insured, licensed, and handle the RUT deduction for you, allowing you to benefit from a 50% deduction on labor costs.
           </StyledText>
         </StyledTextContainer>
-
       </StyledDiv>
     </StyledContainer>
-  )
+  );
 }
 
 const StyledContainer = styled.div`
   width: 100%;
-  height: 125vh;
   font-family: 'Poppins', sans-serif;
-  
-  `
+`;
 
 const StyledDiv = styled.div`
   width: 100%;
-  height: 75vh;
-  padding:  5vw;
-  display: flex;
-  align-items: center;
-
-`
-const StyledImage = styled.img `
-  height: 60vh;
-  width: 100vh;
-  margin-right: 5vw;
-  border-radius: 35px;
-`
-
-const StyledTextContainer = styled.div`
+  padding: 5vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 60vh;
-  width: 80vh;
-`
+  align-items: center;
+`;
+
+const StyledImage = styled.img`
+  height: auto;
+  max-width: 100%;
+  border-radius: 35px;
+  margin-bottom: 2rem;
+`;
+
+const StyledTextContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+`;
 
 const StyledText = styled.p`
   font-size: 19px;
-  
-`
+  margin-bottom: 1.5rem;
+`;
 
-const BrandName1 = styled.p `
-  display: inline-block;
-  font-weight: 600;
-  color: #232323;
-`
-const BrandName2 = styled.p `
-  display: inline-block;
+const BrandName1 = styled.span`
   font-weight: 600;
   color: #FFD530;
-`
+`;
 
+const BrandName2 = styled.span`
+  font-weight: 600;
+  color: #FFD530;
+`;
 
-
-export default AboutUs
+export default AboutUs;
