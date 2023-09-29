@@ -19,7 +19,7 @@ const Calendar = () => {
 
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
-    "August", "September", "October", "November", "December"];
+        "August", "September", "October", "November", "December"];
 
 
 
@@ -29,29 +29,55 @@ const Calendar = () => {
 
     const calendarDates = [];
 
-    for (let i = firstDayofMonth; i > 0; i--) { 
-        calendarDates.push({
-            date: lastDateofLastMonth - i + 1,
-            class: "nonactive"
-        }
-        );
-    }
-    for (let i = 1; i<=lastDateofMonth; i++){
-        calendarDates.push(
-            {
-                date: i,
-                class: "active"
+    for (let i = firstDayofMonth; i > 0; i--) {
+        if (i == currDate) {
+            calendarDates.push({
+                date: lastDateofLastMonth - i + 1,
+                class: "current"
             }
-        )
+            );
+        } else {
+            calendarDates.push({
+                date: lastDateofLastMonth - i + 1,
+                class: "nonactive"
+            }
+            );
+
+        }
+    }
+    for (let i = 1; i <= lastDateofMonth; i++) {
+        if (i == currDate) {
+            calendarDates.push(
+                {
+                    date: i,
+                    class: "current"
+                }
+            )
+        } else {
+            calendarDates.push(
+                {
+                    date: i,
+                    class: "active"
+                }
+            )
+        }
     }
     for (let i = 1; calendarDates.length < 35; i++) {
-        calendarDates.push({
-            date: i,
-            class: "nonactive"
-        });
+        if (i == currDate) {
+            calendarDates.push({
+                date: i,
+                class: "current"
+            });
+        } else {
+            calendarDates.push({
+                date: i,
+                class: "nonactive"
+            });
+        }
     }
-    
+
     console.log(calendarDates)
+    console.log(currDate)
 
     useEffect(() => {
         renderCalendar();
@@ -77,14 +103,16 @@ const Calendar = () => {
                 </DaysDiv>
                 <CalendarDiv>
                     {
-                        calendarDates.map((date)=> {
-                            return <div className={date.class}><p>{date.date}</p><div className='dot'></div></div>
+                        calendarDates.map((date) => { 
+                            return date.class == "current" 
+                                ? <div className="active"><div className={date.class}><p>{date.date}</p></div><div className='dot'></div></div>
+                                : <div className={date.class}><p>{date.date}</p><div className='dot'></div></div>
                         })
                     }
                 </CalendarDiv>
-                
 
-                
+
+
             </div>
         </div>
     )
@@ -130,7 +158,7 @@ const CalendarDiv = styled.div`
         flex-flow: column nowrap;
         align-items: center;
         justify-content: center;
-        gap: 5px;
+        gap: 8px;
 
         p {
             font-size: 1.2rem;
@@ -145,10 +173,20 @@ const CalendarDiv = styled.div`
         }
 
     }
+    .active {
+        background-color: white;
+    }
 
     .nonactive {
         background-color: #d9d9d9;
         color: #68625A
+    }
+    .current {
+        border: 3px solid yellow;
+        width: 60%;
+        height: 50%;
+        border-radius: 50%;
+        margin-bottom: -4px;
     }
 
 `
