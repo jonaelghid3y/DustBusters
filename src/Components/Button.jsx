@@ -1,56 +1,86 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion'
-import './button.css';
+import styled, { css } from 'styled-components';
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+
+export const Button = ({ label, ...rest }) => {
   return (
-    <motion.button
+    <StyledButton
       whileHover={{ scale: 1.1 }} 
       whileTap={{ scale: 0.9 }}  
       initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ duration: 0.5 }} 
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={backgroundColor && { backgroundColor }}
-      {...props}
+      {...rest}
     >
       {label}
-    </motion.button>
+    </StyledButton>
   );
 };
 
+const getVariantStyles = ({ primary = false }) =>
+  primary
+    ? css`
+        color: black;
+        background-color: #FFD530;
+        border: 2px solid transparent;
+      `
+    : css`
+        color: #333;
+        background-color: white;
+        border: 2px solid #FFD530;
+      `;
+
+
+const getSizeStyles = ({ size = 'large' }) => {
+  switch (size) {
+    case 'small': {
+      return css`
+        font-size: 16px;
+        padding: 10px 16px;
+        border-radius: 12px;
+      `;
+    }
+    default: {
+      return css`
+        font-size: 24px;
+        padding: 16px 30px;
+        border-radius: 20px;
+      `;
+    }
+  }
+};
+
+const StyledButton = styled(motion.button)`
+  font-family: 'Poppins';
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+
+  ${(props) => getVariantStyles(props)}
+  ${(props) => getSizeStyles(props)}
+  ${({ backgroundColor }) =>
+    backgroundColor &&
+    css`
+      background-color: ${backgroundColor};
+    `}
+`
+  
+
 Button.propTypes = {
-  /**
-   * Is this the principal call to action on the page?
-   */
   primary: PropTypes.bool,
-  /**
-   * What background color to use
-   */
   backgroundColor: PropTypes.string,
-  /**
-   * How large should the button be?
-   */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Button contents
-   */
+  size: PropTypes.oneOf(['small', 'large']),
   label: PropTypes.string.isRequired,
-  /**
-   * Optional click handler
-   */
   onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   backgroundColor: null,
   primary: false,
-  size: 'medium',
+  size: 'large',
   onClick: undefined,
 };

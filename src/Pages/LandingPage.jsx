@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react'
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
@@ -12,6 +13,21 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 function LandingPage() {
+
+  useEffect(() => {
+    fetchReviews()
+  }, [])
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review')
+      const data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // ***** Effekt för första raden iconer******
   const controls = useAnimation();
