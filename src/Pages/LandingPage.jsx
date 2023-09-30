@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
@@ -6,10 +6,58 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
 import { Link } from 'react-router-dom';
-import {motion} from 'framer-motion'
+import { Icon } from '../Components/Icons';
+import { ImageDivs } from '../Components/ImageDivs';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function LandingPage() {
 
+  // ***** Effekt för första raden iconer******
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start(i => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: i * 0.4,
+        },
+      }));
+    }
+  }, [controls, inView])
+  // ***** Effekt för första raden iconer******
+
+  // ***** Effekt för andra raden iconer******
+
+  const servicesControls = useAnimation();
+  const [servicesRef, servicesInView] = useInView({
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (servicesInView) {
+      servicesControls.start(i => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: i * 0.4 + 0.3,
+        },
+      }));
+    }
+  }, [servicesControls, servicesInView]);
+
+
+
+
+  // ***** Effekt för andra raden iconer******
+
+
+  // ***** Effekt för slidern******
   const settings = {
     dots: true,
     infinite: true,
@@ -26,18 +74,19 @@ function LandingPage() {
       },
     ],
   }
+  // ***** Effekt för slidern******
 
   return (
     <StyledDiv>
       <StyledLandingImg>
-      <motion.div 
-      initial={{ opacity: 0, x: -200 }} 
-      animate={{ opacity: 1, x: 0 }} 
-      transition={{ ease: "easeOut", duration: 2 }} 
-      >
-        <StyledHeadline>
-          Who you gonna call?
-        </StyledHeadline>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ ease: "easeOut", duration: 1 }}
+        >
+          <StyledHeadline>
+            Who you gonna call?
+          </StyledHeadline>
         </motion.div>
         <Link to="/bookings">
           <Button primary size="large" label="Book now!" />
@@ -56,42 +105,25 @@ function LandingPage() {
         </StyledHeadlineDiv>
         <StyledSpan></StyledSpan>
 
-        <StyledIconDiv>
-
-          <StyledIconsText>
-            <StyledIconsDiv className='virusCircle'>
-              <StyledImage src='/imgs/Monster.png' />
-            </StyledIconsDiv>
-            <StyledText>Say bye to all your germs!</StyledText>
-          </StyledIconsText>
-
-          <StyledIconsText>
-            <StyledIconsDiv className='certifiedCircle'>
-
-
-              <StyledImage src='/imgs/Certified.png' />
-
-
-
-            </StyledIconsDiv>
-            <StyledText> Certified and reliable</StyledText>
-          </StyledIconsText>
-
-
-
-
-
-          <StyledIconsText>
-
-            <StyledIconsDiv className='MoneyCircle'>
-
-              <StyledImage src='/imgs/Moneybag.png' />
-
-            </StyledIconsDiv>
-
-            <StyledText> Most bang for your buck!</StyledText>
-          </StyledIconsText>
-
+        <StyledIconDiv ref={ref}>
+          <motion.div custom={0} animate={controls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <Icon primary size="medium" src='/imgs/Monster.png' />
+              <StyledText>Say bye to all your germs!</StyledText>
+            </StyledIconsText>
+          </motion.div>
+          <motion.div custom={1} animate={controls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <Icon primary size="medium" src='/imgs/Certified.png' />
+              <StyledText> Certified and reliable</StyledText>
+            </StyledIconsText>
+          </motion.div>
+          <motion.div custom={2} animate={controls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <Icon primary size="medium" src='/imgs/Moneybag.png' />
+              <StyledText> Most bang for your buck!</StyledText>
+            </StyledIconsText>
+          </motion.div>
         </StyledIconDiv>
 
         <StyledSliderDiv>
@@ -175,26 +207,32 @@ function LandingPage() {
       <StyledServicesDiv>
         <Styledh2headline3> What can we offer you?</Styledh2headline3>
         <StyledSpan></StyledSpan>
-        <StyledServicesRowDiv>
-          
-          <StyledIconsText>
-            <StyledServicesImg1 />
-            <StyledServicesText>Everyday cleaning</StyledServicesText>
-          </StyledIconsText>
-          <StyledIconsText>
-            <StyledServicesImg2 />
-            <StyledServicesText>Final cleaning</StyledServicesText>
-          </StyledIconsText>
-          <StyledIconsText>
-            <StyledServicesImg3 />
-            <StyledServicesText>Window cleaning</StyledServicesText>
-          </StyledIconsText>
+        <StyledServicesRowDiv ref={servicesRef}>
 
+          <motion.div custom={0} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6195278.jpg' />
+              <StyledServicesText>Everyday cleaning</StyledServicesText>
+            </StyledIconsText>
+          </motion.div>
 
+          <motion.div custom={1} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6196685.jpg' />
+              <StyledServicesText>Final cleaning</StyledServicesText>
+            </StyledIconsText>
+          </motion.div>
+
+          <motion.div custom={2} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
+            <StyledIconsText>
+              <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6197122.jpg' />
+              <StyledServicesText>Window cleaning</StyledServicesText>
+            </StyledIconsText>
+          </motion.div>
 
         </StyledServicesRowDiv>
-       <Link to="/Services">
-        <Button primary size="large" label="More services!" />
+        <Link to="/Services">
+          <Button primary size="large" label="More services!" />
         </Link>
 
       </StyledServicesDiv>
@@ -313,22 +351,8 @@ width: 13vw;
  }
 
 `
-const StyledIconsDiv = styled.div`
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  width: 150px;
-  border-radius: 75px;
-  background-color: white;
-  border: 1px solid white;
-  @media (max-width: 768px) {
-    width: 120px;
-    height: 120px;
-    border-radius: 60px;
-   }
-`
+
 const StyledIconsText = styled.div`
   
   display: flex;
@@ -339,15 +363,7 @@ const StyledIconsText = styled.div`
   
   
 `
-const StyledImage = styled.img`
 
-width: 80%;
-@media (max-width: 768px) {
-  width: 70px;
-  height: 70px;
- }
-
-`
 const StyledSliderDiv = styled.div`
 
 
@@ -459,79 +475,6 @@ const StyledServicesRowDiv = styled.div`
    }
 
 `
-const StyledServicesImg1 = styled.img`
-
- 
-  height: 300px;
-  width: 300px;
-  border-radius: 150px;
-  background-color: white;
-  border: 4px solid #FFD530;
-  background-image: url(/imgs/pexels-tima-miroshnichenko-6195278.jpg);
-  background-size: 100%;
-  background-position: center;
-  transition: 1s ease;
-  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
-  
-  &:hover {
-    background-size: 110%;
-  }
-  @media (max-width: 768px) {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-   }
-`
-const StyledServicesImg2 = styled.img`
-
- 
-  height: 300px;
-  width: 300px;
-  border-radius: 150px;
-  background-color: white;
-  border: 4px solid #FFD530;
-  background-image: url(/imgs/pexels-tima-miroshnichenko-6196685.jpg);
-  background-size: 100%;
-  background-position: center;
-  transition: 1s ease;
-  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
-  
-  
-  &:hover {
-    background-size: 110%;
-
-  }
-  @media (max-width: 768px) {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-   }
-`
-const StyledServicesImg3 = styled.img`
-
- 
-  height: 300px;
-  width: 300px;
-  border-radius: 150px;
-  background-color: white;
-  border: 4px solid #FFD530;
-  background-image: url(/imgs/pexels-tima-miroshnichenko-6197122.jpg);
-  background-size: 100%;
-  background-position: center;
-  transition: 1s ease;
-  box-shadow: 0px 6px 8px 4px rgba(0, 0, 0, 0.2); 
-  
-  &:hover {
-    background-size: 110%;
-   
-  }
-  @media (max-width: 768px) {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-   }
-
-`
 const StyledServicesText = styled.p`
 text-align: center;
 color: black;
@@ -544,6 +487,4 @@ width: 13vw;
  }
 
 `
-
-
 export default LandingPage

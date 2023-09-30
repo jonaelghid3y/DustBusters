@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,500&display=swap');
+
+.iconDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 150px;
+    border-radius: 75px;
+    background-color: white;
+    border: 1px solid rgb(1, 1, 1);
+}
+.storybook-icon--small {
+    width: 60%;
+  }
+  
+  .storybook-icon--medium {
+    width: 80%;
+  }
+  
+  .storybook-icon--large {
+    width: 100%;
+  }
+.storybook-icon--primary {
+  
+ 
+}
+
+@media (max-width: 768px) {
+    .iconDiv{
+
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+
+    }
+   
+   }

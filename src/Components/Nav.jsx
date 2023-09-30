@@ -13,10 +13,12 @@ function Nav() {
 
     return (
         <StyledNav>
-            <Logo primary />
+            <Link style={{textDecoration: 'none'}} to="/">
+                <Logo primary />
+            </Link>
             <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
-            <StyledLänkcontainer isopen={isopen}>
-               
+            <StyledLänkcontainer $isopen={isopen}>
+
                 <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
                 <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
                 <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
@@ -53,7 +55,7 @@ const StyledLänkcontainer = styled.div`
         background-color: #232323;
         width: 30%;
         flex-direction: column;
-        display: ${props => (props.isopen ? 'flex' : 'none')};
+        display: ${props => (props.$isopen ? 'flex' : 'none')};
     }
 
     .links {
