@@ -14,6 +14,7 @@ import { useInView } from 'react-intersection-observer';
 function LandingPage() {
 
   // ***** Effekt för första raden iconer******
+
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -30,6 +31,7 @@ function LandingPage() {
       }));
     }
   }, [controls, inView])
+
   // ***** Effekt för första raden iconer******
 
   // ***** Effekt för andra raden iconer******
@@ -51,9 +53,6 @@ function LandingPage() {
     }
   }, [servicesControls, servicesInView]);
 
-
-
-
   // ***** Effekt för andra raden iconer******
 
 
@@ -74,7 +73,9 @@ function LandingPage() {
       },
     ],
   }
+   // ***** Effekt för slidern******
 
+    // ***** Fetch för reviews ******
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -90,6 +91,7 @@ function LandingPage() {
     
     fetchReviews(); 
   }, []);
+  // ***** Fetch för reviews ******
 
   return (
     <StyledDiv>
