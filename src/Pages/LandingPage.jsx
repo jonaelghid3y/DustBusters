@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
@@ -73,9 +73,9 @@ function LandingPage() {
       },
     ],
   }
-   // ***** Effekt för slidern******
+  // ***** Effekt för slidern******
 
-    // ***** Fetch för reviews ******
+  // ***** Fetch för reviews ******
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -83,13 +83,13 @@ function LandingPage() {
       try {
         const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review');
         const data = await response.json();
-        setReviews(data); 
+        setReviews(data);
       } catch (error) {
         console.log(error);
       }
     };
-    
-    fetchReviews(); 
+
+    fetchReviews();
   }, []);
   // ***** Fetch för reviews ******
 
@@ -145,23 +145,23 @@ function LandingPage() {
 
         <StyledSliderDiv>
           <Slider  {...settings}>
-          {reviews.map(review => (
-          <div key={review.id}>
-            <StyledSlides className='slides'>
-              <StyledRowDiv2>
-                <StyledRatingh3>{review.name}</StyledRatingh3>
-              </StyledRowDiv2>
-              <StyledP>
-                {review.content}
-              </StyledP>
-              <StyledRowDiv1>
-                {[...Array(review.stars)].map((_, index) => (
-                  <AiFillStar key={index} color='#FFD530' size={30} />
-                ))}
-              </StyledRowDiv1>
-            </StyledSlides>
-          </div>
-        ))}
+            {reviews.map(review => (
+              <div key={review.id}>
+                <StyledSlides className='slides'>
+                  <StyledRowDiv2>
+                    <StyledRatingh3>{review.name}</StyledRatingh3>
+                  </StyledRowDiv2>
+                  <StyledP>
+                    {review.content}
+                  </StyledP>
+                  <StyledRowDiv1>
+                    {[...Array(review.stars)].map((_, index) => (
+                      <AiFillStar key={index} color='#FFD530' size={30} />
+                    ))}
+                  </StyledRowDiv1>
+                </StyledSlides>
+              </div>
+            ))}
           </Slider>
         </StyledSliderDiv>
       </StyledRatingDiv>
@@ -195,9 +195,7 @@ function LandingPage() {
         <Link to="/Services">
           <Button primary size="large" label="More services!" />
         </Link>
-
       </StyledServicesDiv>
-
     </StyledDiv>
   )
 }
@@ -214,16 +212,12 @@ const StyledLandingImg = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-
   background-image: url('/imgs/pexels-tima-miroshnichenko-6195125.jpg');
   background-size: cover;
   background-position: bottom;  
   @media (max-width: 768px) {
-    
 
- 
   }
-  
 `
 const StyledHeadline = styled.h1`
 margin-top: 40vh;
@@ -252,25 +246,20 @@ const StyledHeadlineDiv = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-top: 100px;
- 
-
 `
 const Styledh2headline1 = styled.h2`
 
 font-size:40px;
 color: white;
 @media (max-width: 768px) {
-
   font-size: 30px;
   text-align: center;
 }
 `
 const Styledh2headline2 = styled.h2`
-
 font-size:40px;
 color: #FFD530;
 @media (max-width: 768px) {
-
   font-size: 30px;
   text-align: center;
 }
@@ -281,7 +270,6 @@ width: 60px;
 background-color: #FFD530;
 border-radius: 10px;
 @media (max-width: 768px) {
-
  width: 40px;
 }
 `
@@ -294,11 +282,8 @@ const StyledIconDiv = styled.div`
   gap: 11.5vw;
   flex-direction: row;
   @media (max-width: 768px) {
-
     flex-direction: column;
    }
-
-
 `
 const StyledText = styled.p`
 text-align: center;
@@ -307,45 +292,26 @@ font-weight: bold;
 font-size: 20px;
 width: 13vw;
 @media (max-width: 768px) {
-
   width: 40vw;
  }
-
 `
-
-
 const StyledIconsText = styled.div`
-  
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-  
-  
 `
-
 const StyledSliderDiv = styled.div`
-
-
 margin-top: 100px;
-
 padding:20px;
-
 height: 400px;
 width: 70%;
 @media (max-width: 768px) {
-
   width: 83%;
  }
-
-
-
-
 `
 const StyledSlides = styled.div`
- 
-
   color: black;
   background-color: white;
   height: 200px;
@@ -353,22 +319,16 @@ const StyledSlides = styled.div`
   margin: auto;
   border-radius: 10px;
   border: 1px solid black;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 20px;
-
   @media (max-width: 768px) {
-
     width: 280px;
    }
 `
-
 const StyledRowDiv1 = styled.div`
- 
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,31 +337,22 @@ const StyledRowDiv1 = styled.div`
 
 `
 const StyledRowDiv2 = styled.div`
- 
-
 display: flex;
 align-items: center;
 justify-content: flex-start;
-
 width: 100%;
 gap: 10px;
-
 `
 const StyledRatingh3 = styled.h3`
-
 font-size:20px;
 margin-left: 5%;
-
 `
 const StyledP = styled.h3`
-
 font-size:15px;
 font-weight: normal;
 text-align: center;
-
 `
 const StyledServicesDiv = styled.div`
-
 width: 100%;
 min-height: 80vh;
 padding: 100px 0;
@@ -411,27 +362,22 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 `
-
 const Styledh2headline3 = styled.h2`
-
 font-size:40px;
 color: black;
 @media (max-width: 768px) {
-
   font-size: 30px;
  }
 `
 const StyledServicesRowDiv = styled.div`
  margin-top: 50px;
  margin-bottom: 100px;
-
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   gap: 11vw;
   @media (max-width: 768px) {
-
     flex-direction: column;
    }
 
@@ -443,7 +389,6 @@ font-weight: bold;
 font-size: 20px;
 width: 13vw;
 @media (max-width: 768px) {
-
   width: 40vw;
  }
 
