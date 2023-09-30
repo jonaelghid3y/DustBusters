@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
 import Slider from 'react-slick'
@@ -13,21 +12,6 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 function LandingPage() {
-
-  useEffect(() => {
-    fetchReviews()
-  }, [])
-
-  const fetchReviews = async () => {
-    try {
-      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review')
-      const data = await response.json();
-      console.log(data)
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   // ***** Effekt för första raden iconer******
   const controls = useAnimation();
@@ -90,7 +74,22 @@ function LandingPage() {
       },
     ],
   }
-  // ***** Effekt för slidern******
+
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review');
+        const data = await response.json();
+        setReviews(data); 
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
+    fetchReviews(); 
+  }, []);
 
   return (
     <StyledDiv>
@@ -144,79 +143,23 @@ function LandingPage() {
 
         <StyledSliderDiv>
           <Slider  {...settings}>
-            <div >
-              <StyledSlides className='slides'>
-                <StyledRowDiv2>
-
-                  <StyledRatingh3>Lordcommander72</StyledRatingh3>
-                </StyledRowDiv2>
-                <StyledP>
-                  "Fantastisk städning, dock pratade daniel lite för mycket!"
-                </StyledP>
-
-                <StyledRowDiv1>
-
-                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
-
-                </StyledRowDiv1>
-
-              </StyledSlides>
-            </div>
-            <div>
-              <StyledSlides className='slides'>
-                <StyledRowDiv2>
-
-                  <StyledRatingh3>Olof den tredje</StyledRatingh3>
-                </StyledRowDiv2>
-                <StyledP>
-                  "Bästa städ firman i stan!, Rekommenderar starkt"
-                </StyledP>
-
-                <StyledRowDiv1>
-
-                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
-
-                </StyledRowDiv1>
-
-              </StyledSlides>
-            </div>
-            <div>
-              <StyledSlides className='slides'>
-                <StyledRowDiv2>
-
-                  <StyledRatingh3>Anna87</StyledRatingh3>
-                </StyledRowDiv2>
-                <StyledP>
-                  "Grym städning och jättetrevlig personal tack så mycket!!"
-                </StyledP>
-
-                <StyledRowDiv1>
-
-                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
-
-                </StyledRowDiv1>
-
-              </StyledSlides>
-            </div>
-            <div>
-              <StyledSlides className='slides'>
-                <StyledRowDiv2>
-
-                  <StyledRatingh3>Anna87</StyledRatingh3>
-                </StyledRowDiv2>
-                <StyledP>
-                  "Grym städning och jättetrevlig personal tack så mycket!!"
-                </StyledP>
-
-                <StyledRowDiv1>
-
-                  <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} /> <AiFillStar color='#FFD530' size={30} />
-
-                </StyledRowDiv1>
-
-              </StyledSlides>
-            </div>
-
+          {reviews.map(review => (
+          <div key={review.id}>
+            <StyledSlides className='slides'>
+              <StyledRowDiv2>
+                <StyledRatingh3>{review.name}</StyledRatingh3>
+              </StyledRowDiv2>
+              <StyledP>
+                {review.content}
+              </StyledP>
+              <StyledRowDiv1>
+                {[...Array(review.stars)].map((_, index) => (
+                  <AiFillStar key={index} color='#FFD530' size={30} />
+                ))}
+              </StyledRowDiv1>
+            </StyledSlides>
+          </div>
+        ))}
           </Slider>
         </StyledSliderDiv>
       </StyledRatingDiv>

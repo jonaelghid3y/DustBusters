@@ -8,9 +8,9 @@
     border: 4px solid #FFD530;
     transition: 1s ease;
 }
-.storybook-imageDivs--primary:hover{
+/* .storybook-imageDivs--primary:hover{
     
-}
+} */
 
 .storybook-imageDivs--small {
     height: 100px;
@@ -33,8 +33,8 @@
 
 @media (max-width: 768px) {
     .storybook-imageDivs--primary {
-        width: 120px;
-        height: 120px;
-        border-radius: 60px;
+        width: 180px;
+        height: 180px;
+        border-radius: 90px;
     }
 }
