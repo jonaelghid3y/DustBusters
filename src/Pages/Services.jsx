@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 function Services() {
 
-  const [fetchedData, setfetchedData] = useState('[]');
+  const [fetchedData, setfetchedData] = useState([]);
 
   useEffect(() => {
     fetchServices()
@@ -16,76 +16,96 @@ function Services() {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services')
       const data = await response.json();
       setfetchedData(data);
-      console.log(fetchedData);
+    
 
     } catch (error) {
       console.log(error)
     }
   }
 
+ 
+  
+  const renderedData = fetchedData.map((item, index) => (
+
+<div key={item.id} style={index % 2 === 0 ? component : component1}>
+
+ <img style={images} src={item.imgURL} alt="cleaning"></img>
+
+ <div style={StyledTextContainer}>
+  <h1>{item.title}</h1>
+  <br></br>
+  <p style={paragraph}>{item.description}</p>
+  </div>
+    </div>
+  
+  ));
+
+
 
   return (
     <>
-     <StyledDiv1>
+    
+{renderedData}
 
-<img style={images} src={fetchedData[0].imgURL} alt="image1" />
-
-<StyledTextContainer>
-<h2>{fetchedData[0].title}</h2>
-<br></br>
-<h4>{fetchedData[0].description}</h4>
-</StyledTextContainer>
-
-
-</StyledDiv1>
-
-<StyledDiv2>
-<h2>{fetchedData[0].title}</h2>
-
-</StyledDiv2>
 
     </>
   )
 
 
-  
+
 }
 
 
-const StyledDiv1 = styled.div`
-  width: 100%;
-  height:60vh;
-  background-color:white;
-  display:flex;
-  justify-content:space-around;
-  flex-direction:row;
-`
 
-const StyledDiv2 = styled.div`
-  width: 100%;
-  height:60vh;
-  background-color:pink;
-`
 
-const StyledTextContainer = styled.div`
-  width: 50%;
-  height:70%;
-  background-color:pink;
-  position:relative;
-  top:60px;
-  right:30px;
-  padding:25px;
-  font-family:verdana;
-`
+const StyledTextContainer = {
+  width: "50%",
+  height:"70%",
+  backgroundColor:"pink",
+  position:"relative",
+  top:"60px",
+  padding:"25px",
+  fontFamily:"verdana",
+  overflowY:"scroll",
+  
+}
 
 const images ={
 
-height:"70%",
-width:"20vw",
+height:"auto",
+width:"300px",
 borderRadius:"20px",
 margin:"60px",
 
 
+}
+
+const component ={
+  width: "100%",
+  height:"60vh",
+  backgroundColor:"gray",
+  display:"flex",
+  justifyContent:"space-around",
+  flexDirection:"row",
+ 
+
+}
+
+const component1 ={
+  width: "100%",
+  height:"60vh",
+  backgroundColor:"lightblue",
+  display:"flex",
+  justifyContent:"space-around",
+  flexDirection:"row-reverse",
+
+  
+ 
+}
+
+const paragraph = {
+  fontSize:"1rem",
+  
 }
 
 
