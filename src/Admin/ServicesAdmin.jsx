@@ -37,11 +37,9 @@ class ServicesAdmin extends Component {
         const { title, price, editingServiceId } = this.state;
 
         if (editingServiceId) {
-
             const updatedService = {
                 title,
                 price,
-
             };
 
             axios
@@ -55,7 +53,6 @@ class ServicesAdmin extends Component {
                     });
                 });
         } else {
-
             const newService = {
                 title,
                 price,
@@ -86,13 +83,15 @@ class ServicesAdmin extends Component {
     };
 
     render() {
+
         return (
-            <div>
+            <div style={containerStyle}>
                 <h1>List of Services</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form style={formStyle} onSubmit={this.handleSubmit}>
                     <div>
                         <label>Title:</label>
                         <input
+                            style={inputStyle}
                             type="text"
                             name="title"
                             value={this.state.title}
@@ -103,6 +102,7 @@ class ServicesAdmin extends Component {
                     <div>
                         <label>Price:</label>
                         <input
+                            style={inputStyle}
                             type="text"
                             name="price"
                             value={this.state.price}
@@ -110,24 +110,79 @@ class ServicesAdmin extends Component {
                         />
                     </div>
 
-                    <button type="submit">
+                    <button style={buttonStyle} type="submit">
                         {this.state.editingServiceId ? "Update" : "Add new service"}
                     </button>
                 </form>
-                <ul>
-                    {this.state.services.map((service) => (
-                        <li key={service.id}>
-                            <strong>{service.title}</strong>
+                <table style={tableStyle}>
+                    <thead>
+                        <tr>
+                            <th style={thStyle}>Title</th>
+                            <th style={thStyle}>Price</th>
+                            <th style={thStyle}>Edit</th>
+                            <th style={thStyle}>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.services.map((service, index) => (
+                            <tr key={service.id} style={{ backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
+                                <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{service.title}</td>
+                                <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{service.price}</td>
+                                <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
+                                    <button onClick={() => this.handleEdit(service)}>Edit</button>
+                                </td>
+                                <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
+                                    <button onClick={() => this.handleDelete(service.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
 
-                            <p>Price: {service.price}</p>
-                            <button onClick={() => this.handleEdit(service)}>Edit</button>
-                            <button onClick={() => this.handleDelete(service.id)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                </table>
+            </div >
         );
     }
 }
+
+const containerStyle = {
+    padding: "20px",
+    width: "600px",
+    margin: "0 auto",
+    fontFamily: 'Poppins',
+};
+
+const formStyle = {
+    marginBottom: "20px",
+};
+
+const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "10px",
+};
+
+const buttonStyle = {
+    padding: "10px 20px",
+    background: "#FFD530",
+    color: "#333333",
+};
+
+const tableStyle = {
+    width: "100%",
+    borderCollapse: "collapse",
+};
+
+const thStyle = {
+    backgroundColor: "#FFD530",
+    color: "#333333",
+    padding: "10px",
+    textAlign: "left",
+    margin: "10px",
+};
+
+const tdStyle = {
+    padding: "10px",
+    color: "white",
+};
 
 export default ServicesAdmin;
