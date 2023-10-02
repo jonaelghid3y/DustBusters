@@ -32,14 +32,7 @@ const Calendar = () => {
     const calendarDates = [];
 
     for (let i = firstDayofMonth; i > 0; i--) {
-        if (i == currDate && currMonth == new Date().getMonth()) {
-            calendarDates.push({
-                date: lastDateofLastMonth - i + 1,
-                class: "current",
-                dotClass: "green"
-            }
-            );
-        } else if (i < currDate) {
+        if (i < currDate) {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
                 class: "nonactive",
@@ -57,14 +50,7 @@ const Calendar = () => {
         }
     }
     for (let i = 1; i <= lastDateofMonth; i++) {
-        if (i == currDate && currMonth == new Date().getMonth()) {
-            calendarDates.push(
-                {
-                    date: i,
-                    class: "current"
-                }
-            )
-        } else if (i < currDate) {
+        if (i < currDate) {
             calendarDates.push({
                 date: i,
                 class: "active"
@@ -81,32 +67,25 @@ const Calendar = () => {
         }
     }
     for (let i = 1; calendarDates.length < 35; i++) {
-        if (i == currDate && currMonth == new Date().getMonth()) {
-            calendarDates.push({
-                date: i,
-                class: "current"
-            });
-        } else {
-            calendarDates.push({
-                date: i,
-                class: "nonactive"
-            });
-        }
+        calendarDates.push({
+            date: i,
+            class: "nonactive"
+        });
     }
 
-    
+
     const showNextMonth = () => {
         if (currMonth < 11)
-        setCurrMonth(currMonth+1)
-        else 
-        setCurrMonth(0)
-        
+            setCurrMonth(currMonth + 1)
+        else
+            setCurrMonth(0)
+
     }
     const showPrevMonth = () => {
         if (currMonth > 0)
-        setCurrMonth(currMonth-1)
+            setCurrMonth(currMonth - 1)
         else
-        setCurrMonth(11)
+            setCurrMonth(11)
     }
 
     return (
@@ -128,10 +107,12 @@ const Calendar = () => {
                 </DaysDiv>
                 <CalendarDiv>
                     {
-                        calendarDates.map((date) => { 
-                            return date.class == "current" 
+                        calendarDates.map((date) => {
+                            return date.date == new Date().getDate() 
+                                                && currMonth == new Date().getMonth() 
+                                                && date.class != "nonactive"
                                 ? <button className="active">
-                                    <div className={date.class}>
+                                    <div className="current">
                                         <p>{date.date}</p>
                                     </div>
                                     <div className="dot"></div>
@@ -216,6 +197,7 @@ const CalendarDiv = styled.div`
     }
 
     .nonactive {
+        cursor: default;
         background-color: #d9d9d9;
         color: #68625A
     }
