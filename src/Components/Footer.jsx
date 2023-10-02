@@ -50,7 +50,7 @@ function Footer() {
 const footerHeader = {
   fontFamily: 'Poppins',
   textAlign: 'left',
-  fontSize: '30px',
+  fontSize: '20px',
 };
 
 const listStyle = {
