@@ -11,6 +11,7 @@ import LandingPage from './Pages/LandingPage';
 import Bookings from './Pages/Bookings';
 import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
+import ServicesAdmin from './Admin/ServicesAdmin';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <LandingPage/>,
+        element: <LandingPage />,
       },
       {
         path: "/Bookings",
@@ -32,8 +33,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/Services",
-        element: <Services />,
+        element: (
+          <>
+            <Services />,
+            < ServicesAdmin />,
+          </>
+        ),
       },
+
+
 
     ]
   },
