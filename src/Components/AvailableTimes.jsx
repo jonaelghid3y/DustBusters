@@ -3,51 +3,25 @@ import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { Button } from './Button'
 
-const AvailableTimes = () => {
+const AvailableTimes = ({availiableTimesArr, clickedDate, currMonth, currDay}) => {
 
-  const [bookedTimes, setBookedTimes] = useState('[]');
-
-  useEffect(() => {
-    fetchServices()
-  }, [])
-
-  const fetchServices = async () => {
-    try {
-      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking')
-      const data = await response.json();
-      setBookedTimes(data);
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  let availiableTimesArr = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
   return (
     <Section>
-      {/* <p id='chooseDate'>
-        Choose a date in the calendar to see available times.
-      </p> */}
       <p id='todaysDate'>
-        Thursday 21 September
+        {days[currDay]} {clickedDate} {currMonth}
       </p>
       <div id='times'>
       {
         availiableTimesArr.map((time) => {
-          return <div className='timeslot'>
+          return <div key ={time} className='timeslot'>
           <p>{time}.00</p>
           <Button primary size="small" label="Book"/>
           </div>
         })
       }
       </div>
-      {/* <p>9.00</p>
-      <Button primary size="small" label="Book"/>
-      <p>10.00</p>
-      <Button primary size="small" label="Book"/>
-      <p>11.00</p>
-      <Button primary size="small" label="Book"/> */}
     </Section>
   )
 }
