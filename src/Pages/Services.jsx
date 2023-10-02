@@ -30,13 +30,20 @@ function Services() {
 
     <div key={item.id} style={index % 2 === 0 ? component : component1}>
 
-      <img style={images} src={item.imgURL} alt="cleaning"></img>
 
-      <div style={StyledTextContainer}>
-        <h1>{item.title}</h1>
-        <br></br>
-        <p style={paragraph}>{item.description}</p>
-      </div>
+
+ <img style={images} src={item.imgURL} alt="cleaning"></img>
+
+ <div style={StyledTextContainer}>
+  <h1>{item.title}</h1>
+  <br></br>
+  <p style={paragraph}>{item.description}</p>
+ <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
+
+  </div>
+
+
+  
     </div>
 
   ));
@@ -58,16 +65,16 @@ function Services() {
 
 
 
-
 const StyledTextContainer = {
   width: "50%",
-  height: "70%",
-  backgroundColor: "pink",
-  position: "relative",
-  top: "60px",
-  padding: "25px",
-  fontFamily: "verdana",
-  overflowY: "scroll",
+  height:"70%",
+  position:"relative",
+  top:"60px",
+  padding:"25px",
+  fontFamily:"verdana",
+  overflowY:"scroll",
+  
+
 
 }
 
@@ -83,30 +90,35 @@ const images = {
 
 const component = {
   width: "100%",
-  height: "60vh",
-  backgroundColor: "gray",
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "row",
-
-
+  height:"60vh",
+  backgroundColor:"white",
+  display:"flex",
+  justifyContent:"space-around",
+  flexDirection:"row",
 }
 
-const component1 = {
+const pricestyle= {
+
+position:"relative",
+top:"15%",
+float:"right",
+textDecoration:"underline",
+textUnderlineOffset: "10px",
+textDecorationColor:"#FFD530",
+textDecorationWidth:"30px",
+}
+const component1 ={
   width: "100%",
-  height: "60vh",
-  backgroundColor: "lightblue",
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "row-reverse",
-
-
+  height:"60vh",
+  backgroundColor:"#333333",
+  display:"flex",
+  justifyContent:"space-around",
+  flexDirection:"row-reverse",
 
 }
 
 const paragraph = {
-  fontSize: "1rem",
-
+  fontSize:"1rem",
 }
 
 
