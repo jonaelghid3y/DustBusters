@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
+
 function Services() {
 
   const [fetchedData, setfetchedData] = useState([]);
@@ -16,18 +17,19 @@ function Services() {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services')
       const data = await response.json();
       setfetchedData(data);
-    
+
 
     } catch (error) {
       console.log(error)
     }
   }
 
- 
-  
+
+
   const renderedData = fetchedData.map((item, index) => (
 
-<div key={item.id} style={index % 2 === 0 ? component : component1}>
+    <div key={item.id} style={index % 2 === 0 ? component : component1}>
+
 
 
  <img style={images} src={item.imgURL} alt="cleaning"></img>
@@ -40,16 +42,18 @@ function Services() {
 
   </div>
 
-    </div>
+
   
+    </div>
+
   ));
 
 
 
   return (
     <>
-    
-{renderedData}
+
+      {renderedData}
 
 
     </>
@@ -70,19 +74,21 @@ const StyledTextContainer = {
   fontFamily:"verdana",
   overflowY:"scroll",
   
-}
-
-const images ={
-
-height:"auto",
-width:"300px",
-borderRadius:"20px",
-margin:"60px",
 
 
 }
 
-const component ={
+const images = {
+
+  height: "auto",
+  width: "300px",
+  borderRadius: "20px",
+  margin: "60px",
+
+
+}
+
+const component = {
   width: "100%",
   height:"60vh",
   backgroundColor:"white",
