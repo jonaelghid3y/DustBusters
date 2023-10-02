@@ -66,9 +66,15 @@ function LandingPage() {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 1, // Number of slides to show on mobile devices
+          slidesToShow: 2, 
+        },
+      },
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 1, 
         },
       },
     ],
@@ -92,6 +98,60 @@ function LandingPage() {
     fetchReviews();
   }, []);
   // ***** Fetch för reviews ******
+
+  //**** open modal function *****/
+
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const leaveReview = () => {
+
+    setModalOpen(!isModalOpen);
+
+  }
+
+  const variants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: "-100vh" },
+  };
+  //**** open modal function *****/
+  //**** Leave a review function *****/
+
+
+  const [name, setName] = useState('');
+  const [content, setContent] = useState('');
+  const [rating, setRating] = useState(0);
+
+  const handleSubmit = async (e) => {
+   
+
+   
+    try {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+          content: content,
+          stars: rating,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //**** Leave a review function *****/
 
   return (
     <StyledDiv>
@@ -143,6 +203,7 @@ function LandingPage() {
           </motion.div>
         </StyledIconDiv>
 
+
         <StyledSliderDiv>
           <Slider  {...settings}>
             {reviews.map(review => (
@@ -164,7 +225,54 @@ function LandingPage() {
             ))}
           </Slider>
         </StyledSliderDiv>
+        <Button primary size="small" label="Leave review!" onClick={leaveReview} />
+        {isModalOpen && (
+
+          <StyledReviewModal
+          initial="closed"
+          animate={isModalOpen ? "open" : "closed"}
+          variants={variants}
+          >
+            <StyledFormHeadline>
+              Review
+            </StyledFormHeadline>
+            <StyledForm onSubmit={handleSubmit}>
+              <StyledFormDivs>
+                <StyledLabel> Name:</StyledLabel>
+
+                <StyledInput type="text" name='name' required value={name} onChange={(e) => setName(e.target.value)}/>
+              </StyledFormDivs>
+              <StyledFormDivs>
+                <StyledLabel> Comments or feedback:</StyledLabel>
+                <Styledtextarea required value={content} onChange={(e) => setContent(e.target.value)} />
+              </StyledFormDivs>
+              <StyledRowDiv2>
+                {[...Array(5)].map((_, i) => (
+                  <StyledStar
+                    key={i}
+                    selected={i < rating}
+                    onClick={() => setRating(i + 1)}
+                  >
+                    <AiFillStar size={30} />
+                  </StyledStar>
+                ))}
+              </StyledRowDiv2>
+
+              <Button primary size="small" label="submit" />
+
+
+            </StyledForm>
+
+
+
+            <Button secondary size="small" label="go back" onClick={leaveReview} />
+
+          </StyledReviewModal>
+
+
+        )}
       </StyledRatingDiv>
+
       <StyledServicesDiv>
         <Styledh2headline3> What can we offer you?</Styledh2headline3>
         <StyledSpan></StyledSpan>
@@ -239,6 +347,7 @@ const StyledRatingDiv = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  padding-bottom: 100px;
 `
 const StyledHeadlineDiv = styled.div`
   display: flex;
@@ -325,9 +434,92 @@ const StyledSlides = styled.div`
   gap: 20px;
   padding: 20px;
   @media (max-width: 768px) {
-    width: 280px;
+    width: 260px;
    }
+
 `
+
+const StyledReviewModal = styled(motion.div)`
+position: fixed;
+right: 50;
+top: 10vh;
+border: 1px solid lightgrey;
+background-color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+width: 40%;
+min-height: 550px;
+padding: 25px;
+border-radius: 20px;
+padding: 25px;
+gap: 20px;
+@media (max-width: 768px) {
+
+  width: 80%;
+  min-height: 600px;
+  
+ }
+`
+const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid black
+  width: 80%;
+  height: 80%;
+  gap: 25px;
+  
+`
+const StyledFormHeadline = styled.h3`
+
+font-size: 30px;
+margin-bottom: 20px;
+`
+
+const StyledFormDivs = styled.div`
+display: flex;
+align-items: flex-start;
+justify-content: center;
+flex-direction: column;
+`
+const StyledLabel = styled.label`
+
+`
+const StyledInput = styled.input`
+
+width: 20vw;
+height: 5vh;
+@media (max-width: 768px) {
+
+  width: 60vw;
+  
+ }
+
+`
+const Styledtextarea = styled.textarea`
+width: 20vw;
+height: 9vw;
+font-size: 18px;
+resize: none;
+
+@media (max-width: 768px) {
+
+  width: 60vw;
+  height: 15vh;
+  
+ }
+
+`
+const StyledStar = styled.div`
+  cursor: pointer;
+  color: ${props => (props.selected ? '#FFD530' : '#ccc')};
+  display: flex;
+  flex-direction: row;
+  transition: 0.5s;
+`;
 const StyledRowDiv1 = styled.div`
   display: flex;
   align-items: center;
@@ -339,7 +531,7 @@ const StyledRowDiv1 = styled.div`
 const StyledRowDiv2 = styled.div`
 display: flex;
 align-items: center;
-justify-content: flex-start;
+justify-content: center;
 width: 100%;
 gap: 10px;
 `
