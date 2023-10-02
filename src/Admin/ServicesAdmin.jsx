@@ -41,7 +41,6 @@ class ServicesAdmin extends Component {
             const updatedService = {
                 title,
                 price,
-
             };
 
             axios
