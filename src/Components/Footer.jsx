@@ -51,7 +51,7 @@ function Footer() {
 const footerHeader = {
   fontFamily: 'Poppins',
   textAlign: 'left',
-  fontSize: '20px',
+  fontSize: '24px',
 };
 
 const listStyle = {
@@ -59,7 +59,6 @@ const listStyle = {
   margin: '10px 0',
   padding: '2px',
   color: 'white',
-  fontSize: '17px',
   fontFamily: 'Poppins',
 };
 
