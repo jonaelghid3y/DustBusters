@@ -489,7 +489,7 @@ const StyledLabel = styled.label`
 
 `
 const StyledInput = styled.input`
-
+font-size: 16.5px;
 width: 20vw;
 height: 5vh;
 @media (max-width: 768px) {
