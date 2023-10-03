@@ -1,77 +1,59 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 class ServicesAdmin extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            services: [],
-            title: "",
-            price: "",
-            editingServiceId: null,
-        };
-    }
+    state = {
+        services: [],
+        title: "",
+        price: "",
+        editingServiceId: null,
+    };
 
     componentDidMount() {
         this.fetchServices();
     }
 
-    fetchServices = () => {
-        axios.get("https://api-s5hih6nmta-uc.a.run.app/services").then((response) => {
+    fetchServices = async () => {
+        try {
+            const response = await axios.get("https://api-s5hih6nmta-uc.a.run.app/services");
             this.setState({ services: response.data });
-        });
-    };
-
-    handleTitleChange = (event) => {
-        this.setState({ title: event.target.value });
-    };
-
-    handlePriceChange = (event) => {
-        this.setState({ price: event.target.value });
-    };
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-
-        const { title, price, editingServiceId } = this.state;
-
-        if (editingServiceId) {
-            const updatedService = {
-                title,
-                price,
-            };
-
-            axios
-                .put(`https://api-s5hih6nmta-uc.a.run.app/services/${editingServiceId}`, updatedService)
-                .then(() => {
-                    this.fetchServices();
-                    this.setState({
-                        editingServiceId: null,
-                        title: "",
-                        price: "",
-                    });
-                });
-        } else {
-            const newService = {
-                title,
-                price,
-            };
-
-            axios.post("https://api-s5hih6nmta-uc.a.run.app/services", newService).then(() => {
-                this.fetchServices();
-                this.setState({
-                    title: "",
-                    price: "",
-                });
-            });
+        } catch (error) {
+            console.error("Error fetching services:", error);
         }
     };
 
-    handleDelete = (id) => {
-        axios.delete(`https://api-s5hih6nmta-uc.a.run.app/services/${id}`).then(() => {
+    handleInputChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const { title, price, editingServiceId } = this.state;
+        const serviceData = { title, price };
+
+        try {
+            if (editingServiceId) {
+                await axios.put(`https://api-s5hih6nmta-uc.a.run.app/services/${editingServiceId}`, serviceData);
+            } else {
+                await axios.post("https://api-s5hih6nmta-uc.a.run.app/services", serviceData);
+            }
+
             this.fetchServices();
-        });
+            this.clearForm();
+        } catch (error) {
+            console.error("Error submitting service:", error);
+        }
+    };
+
+    handleDelete = async (id) => {
+        try {
+            await axios.delete(`https://api-s5hih6nmta-uc.a.run.app/services/${id}`);
+            this.fetchServices();
+        } catch (error) {
+            console.error("Error deleting service:", error);
+        }
     };
 
     handleEdit = (service) => {
@@ -82,7 +64,16 @@ class ServicesAdmin extends Component {
         });
     };
 
+    clearForm = () => {
+        this.setState({
+            title: "",
+            price: "",
+            editingServiceId: null,
+        });
+    };
+
     render() {
+        const { title, price, editingServiceId, services } = this.state;
 
         return (
             <div style={containerStyle}>
@@ -94,8 +85,8 @@ class ServicesAdmin extends Component {
                             style={inputStyle}
                             type="text"
                             name="title"
-                            value={this.state.title}
-                            onChange={this.handleTitleChange}
+                            value={title}
+                            onChange={this.handleInputChange}
                         />
                     </div>
 
@@ -105,13 +96,13 @@ class ServicesAdmin extends Component {
                             style={inputStyle}
                             type="text"
                             name="price"
-                            value={this.state.price}
-                            onChange={this.handlePriceChange}
+                            value={price}
+                            onChange={this.handleInputChange}
                         />
                     </div>
 
                     <button style={buttonStyle} type="submit">
-                        {this.state.editingServiceId ? "Update" : "Add new service"}
+                        {editingServiceId ? "Update" : "Add new service"}
                     </button>
                 </form>
                 <table style={tableStyle}>
@@ -124,22 +115,31 @@ class ServicesAdmin extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.services.map((service, index) => (
+                        {services.map((service, index) => (
                             <tr key={service.id} style={{ backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
                                 <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{service.title}</td>
                                 <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{service.price}</td>
                                 <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
-                                    <button onClick={() => this.handleEdit(service)}>Edit</button>
+                                    <button
+                                        onClick={() => this.handleEdit(service)}
+                                        style={iconButtonStyle}
+                                    >
+                                        <MdEdit />
+                                    </button>
                                 </td>
                                 <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
-                                    <button onClick={() => this.handleDelete(service.id)}>Delete</button>
+                                    <button
+                                        onClick={() => this.handleDelete(service.id)}
+                                        style={iconButtonStyle}
+                                    >
+                                        <MdDelete />
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
-            </div >
+            </div>
         );
     }
 }
@@ -165,6 +165,8 @@ const buttonStyle = {
     padding: "10px 20px",
     background: "#FFD530",
     color: "#333333",
+    border: "none",
+    borderRadius: "5px",
 };
 
 const tableStyle = {
@@ -183,6 +185,13 @@ const thStyle = {
 const tdStyle = {
     padding: "10px",
     color: "white",
+};
+
+const iconButtonStyle = {
+    background: 'none',
+    border: 'none',
+    color: 'white',
+    cursor: 'pointer',
 };
 
 export default ServicesAdmin;
