@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import 'font-awesome/css/font-awesome.min.css';
+import { AiFillFacebook } from 'react-icons/ai';
+import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -20,16 +21,16 @@ function Footer() {
         <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <div>
-            <i className="fa fa-facebook"> Facebook</i>
+            <AiFillFacebook /> Facebook
           </div>
           <div>
-            <i className="fa fa-instagram"> Instagram</i>
+            <FaInstagram /> Instagram
           </div>
           <div>
-            <i className="fa fa-linkedin"> LinkedIn</i>
+            <FaLinkedin /> LinkedIn
           </div>
           <div>
-            <i className="fa fa-twitter"> Twitter</i>
+            <FaTwitter /> Twitter
           </div>
         </ul>
       </FooterContainer2>
