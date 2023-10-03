@@ -10,7 +10,7 @@ const AvailableTimes = ({availiableTimesArr, clickedDate, currMonth, currDay}) =
   return (
     <Section>
       <p id='todaysDate'>
-        {days[currDay]} {clickedDate} {currMonth}
+        {days[new Date(currYear, currMonth, clickedDate).getDay()]} {clickedDate} {months[currMonth]}
       </p>
       <div id='times'>
       {
