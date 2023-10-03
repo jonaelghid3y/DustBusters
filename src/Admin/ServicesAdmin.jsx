@@ -146,9 +146,10 @@ class ServicesAdmin extends Component {
 
 const containerStyle = {
     padding: "20px",
-    width: "600px",
+    maxWidth: "800px",
     margin: "0 auto",
     fontFamily: 'Poppins',
+    textAlign: "center",
 };
 
 const formStyle = {
@@ -156,9 +157,10 @@ const formStyle = {
 };
 
 const inputStyle = {
-    width: "100%",
+    width: "30%",
     padding: "10px",
     marginBottom: "10px",
+    margin: "5px",
 };
 
 const buttonStyle = {
@@ -167,10 +169,12 @@ const buttonStyle = {
     color: "#333333",
     border: "none",
     borderRadius: "5px",
+    display: "block",
+    width: "40%",
 };
 
 const tableStyle = {
-    width: "100%",
+    width: "80%",
     borderCollapse: "collapse",
 };
 
