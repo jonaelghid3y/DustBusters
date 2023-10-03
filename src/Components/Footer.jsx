@@ -56,10 +56,10 @@ const footerHeader = {
 
 const listStyle = {
   listStyle: 'none',
-  margin: '10px',
+  margin: '10px 0',
   padding: '2px',
   color: 'white',
-  fontSize: '20px',
+  fontSize: '17px',
   fontFamily: 'Poppins',
 };
 
