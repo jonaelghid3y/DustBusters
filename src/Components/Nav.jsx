@@ -24,7 +24,7 @@ function Nav() {
                 <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
                 <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
 
-                <Link to="/Aboutus" id="linkButton"><Button primary size="small" label="Log in" /></Link>
+                <Link to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
             </StyledLänkcontainer>
         </StyledNav>
     )
