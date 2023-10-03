@@ -2,33 +2,72 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
-
 import { Button } from '../Components/Button';
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function Login() {
+
+    const [isRegistering, setIsRegistering] = useState(false);
+
+    const toggleForm = () => {
+        setIsRegistering(!isRegistering);
+    };
+
     return (
         <StyledDiv>
             <StyledReviewModal>
-                <StyledFormHeadline>
-                    Sign in
-                </StyledFormHeadline>
-                <StyledForm >
-                    <StyledFormDivs>
-                        <StyledLabel> Username:</StyledLabel>
-                        <StyledInput type="text" name='name' />
-                    </StyledFormDivs>
-                    <StyledFormDivs>
-                        <StyledLabel> Password:</StyledLabel>
-                        <StyledInput type="password" name='name' />
-                    </StyledFormDivs>
-                    <StyledP>Dont have an acount? <Link>Register</Link></StyledP>
-                    <Button primary size="small" label="Log in" />
-                    
-                </StyledForm>
-               
+            <AnimatePresence mode='wait'>
+                
+                {isRegistering ? (
+                   <motion.div
+                   key="registerForm"
+                   initial={{ opacity: 0 }}
+                   animate={{ opacity: 1 }}
+                   exit={{ opacity: 0 }}
+               >
+                        <StyledFormHeadline>
+                            Register
+                        </StyledFormHeadline>
+                        <StyledForm>
+                            <StyledFormDivs>
+                                <StyledLabel> Username:</StyledLabel>
+                                <StyledInput type="text" name='username' />
+                            </StyledFormDivs>
+                            <StyledFormDivs>
+                                <StyledLabel> Password:</StyledLabel>
+                                <StyledInput type="password" name='password' />
+                            </StyledFormDivs>
+                            <StyledP>Already have an account? <Link onClick={toggleForm}>Sign in</Link></StyledP>
+                            <Button primary size="small" label="Register" />
+                        </StyledForm>
+                        </motion.div>
+                ) : (
+                    <motion.div
+                    key="loginForm"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                        <StyledFormHeadline>
+                            Sign in
+                        </StyledFormHeadline>
+                        <StyledForm>
+                            <StyledFormDivs>
+                                <StyledLabel> Username:</StyledLabel>
+                                <StyledInput type="text" name='username' />
+                            </StyledFormDivs>
+                            <StyledFormDivs>
+                                <StyledLabel> Password:</StyledLabel>
+                                <StyledInput type="password" name='password' />
+                            </StyledFormDivs>
+                            <StyledP>Don't have an account? <Link onClick={toggleForm}>Register</Link></StyledP>
+                            <Button primary size="small" label="Log in" />
+                        </StyledForm>
+                        </motion.div>
+                )}
+                </AnimatePresence>
             </StyledReviewModal>
+
         </StyledDiv>
     )
 }
@@ -40,11 +79,12 @@ const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #D9D9D9;
   
 `
 const StyledReviewModal = styled(motion.div)`
 
-border: 1px solid gray;
+border: 1px solid lightgray;
 background-color: white;
 display: flex;
 align-items: center;
@@ -56,6 +96,7 @@ padding: 25px;
 border-radius: 20px;
 padding: 25px;
 gap: 20px;
+box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 @media (max-width: 768px) {
 
   width: 80%;
