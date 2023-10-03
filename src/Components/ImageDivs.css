@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,500&display=swap');
 
-.storybook-imageDivs--primary {
+.imageDiv{
     height: 300px;
     width: 300px;
     border-radius: 150px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     border: 4px solid #FFD530;
-    transition: 1s ease;
+    overflow: hidden;
 }
-/* .storybook-imageDivs--primary:hover{
+
+.storybook-imageDivs--primary img {
     
-} */
+    transition: 1s ease;
+    object-fit: cover;  
+}
 
 .storybook-imageDivs--small {
     height: 100px;
@@ -25,7 +28,6 @@
 }
 
 .storybook-imageDivs--large {
-    
     height: 300px;
     width: 300px;
     border-radius: 150px;

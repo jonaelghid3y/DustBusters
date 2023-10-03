@@ -8,7 +8,11 @@ export const ImageDivs = ({ primary, src, size }) => {
     const mode = primary ? 'storybook-imageDivs--primary' : 'storybook-imageDivs--secondary';
     const sizeClass = `storybook-imageDivs--${size}`;
     return (
-        <motion.img className={`${mode} ${sizeClass}`} src={src} alt="Icon" />
+        <div className={`imageDiv ${mode}`}>
+
+            <motion.img whileHover={{scale:1.1}} className={` ${sizeClass}`} src={src} alt="Icon" />
+
+        </div>
     );
 };
 
