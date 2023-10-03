@@ -3,12 +3,19 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import AvailableTimes from '../Components/AvailableTimes'
+import { Button } from './Button'
 
 const Calendar = () => {
 
     const [currMonth, setCurrMonth] = useState("");
     const [currYear, setCurrYear] = useState("");
     const [currDate, setCurrDate] = useState("");
+
+    const [clicked, setClicked] = useState(false)
+    const [clickedDate, setClickedDate] = useState(null)
+
+    const [bookedTimes, setBookedTimes] = useState([]);
+    const [availiableTimesArr, setAvailiableTimesArr] = useState([9, 10, 11, 12, 13, 14, 15, 16, 17])
 
     const renderCurrDate = () => {
         let date = new Date();
@@ -20,18 +27,18 @@ const Calendar = () => {
     useEffect(() => {
         renderCurrDate();
         fetchBookings();
-    }, []);
+    }, [clickedDate]);
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
 
-    var curr = new Date();
-    console.log(curr + 'curr')
-    var first = curr.getDay()  - ((curr.getDay() + 6) % 7);
-    console.log(first)
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() -1; // getting first day of month
-    if(firstDayofMonth == -1) {
+    var curr = new Date();
+    var first = curr.getDay() - ((curr.getDay() + 6) % 7);
+
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
+    if (firstDayofMonth == -1) {
         firstDayofMonth = 6
     }
     let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
@@ -79,7 +86,7 @@ const Calendar = () => {
             date: i,
             class: "nonactive"
         });
-        if(calendarDates.length == 35) break
+        if (calendarDates.length == 35) break
     }
 
 
@@ -97,9 +104,7 @@ const Calendar = () => {
             setCurrMonth(11)
     }
 
-    const [bookedTimes, setBookedTimes] = useState([]);
 
-    
     const fetchBookings = async () => {
         try {
             const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking');
@@ -109,29 +114,20 @@ const Calendar = () => {
             console.log(error);
         }
     };
-    
 
-    const [clicked, setClicked] = useState(false)
-    const [clickedDate, setClickedDate] = useState(null)
 
-    const [availiableTimesArr, setAvailiableTimesArr] = useState([9, 10, 11, 12, 13, 14, 15, 16, 17])
-
-    const getAvailiableTimes = (e) => {
+    const getAvailiableTimes = (date) => {
         setAvailiableTimesArr([9, 10, 11, 12, 13, 14, 15, 16, 17])
         setClicked(true);
-        let date = e.target.value;
         setClickedDate(date);
-        let newArr = []
-        
+
         bookedTimes.map((booking) => {
-            console.log(booking);
-            if(new Date(booking.date).getDate() == e.target.value){
+            if (new Date(booking.date).getDate() == date) {
                 let newArr = availiableTimesArr.filter(time => booking.startTime !== time)
-                console.log(newArr)
                 setAvailiableTimesArr(newArr);
-                
+                console.log(availiableTimesArr);
+                console.log(newArr);
             }
-            
         })
     }
 
@@ -159,27 +155,42 @@ const Calendar = () => {
                                 return date.date == new Date().getDate()
                                     && currMonth == new Date().getMonth()
                                     && date.class != "nonactive"
-                                    ? <button className="active" value={date.date} onClick={(e) => getAvailiableTimes(e)}>
-                                        <div className="current">
+                                    ? <button className="active" key={date.date} onClick={() => getAvailiableTimes(date.date)}>
+                                        <div className="current" value={date.date}>
                                             <p>{date.date}</p>
                                         </div>
                                         <div className="dot"></div>
                                     </button>
-                                    : <button className={date.class} value={date.date} onClick={(e) => getAvailiableTimes(e)}>
-                                        <p>{date.date}</p>
-                                        <div className="dot"></div>
-                                    </button>
+                                    : date.class == "active"
+                                        ? <button className="active" key={date.date} onClick={() => getAvailiableTimes(date.date)}>
+                                            <p>{date.date}</p>
+                                            <div className="dot"></div>
+                                        </button>
+                                        : <button className="nonactive" key={date.date+31} disabled onClick={() => getAvailiableTimes(date.date)}>
+                                            <p>{date.date}</p>
+                                            <div className="dot"></div>
+                                        </button>
                             })
                         }
                     </CalendarDiv>
                 </div>
                 {
                     clicked == true
-                        ? <AvailableTimes 
-                            availiableTimesArr={availiableTimesArr} 
-                            clickedDate={clickedDate} 
-                            currMonth={months[currMonth]} 
-                            currDay={new Date(currYear, currMonth, clickedDate).getDay()}/>
+                        ? <Section>
+                            <p id='todaysDate'>
+                                {days[new Date(currYear, currMonth, clickedDate).getDay()]} {clickedDate} {months[currMonth]}
+                            </p>
+                            <div id='times'>
+                                {
+                                    availiableTimesArr.map((time) => {
+                                        return <div key={time} className='timeslot'>
+                                            <p>{time}.00</p>
+                                            <Button primary size="small" label="Book" />
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </Section>
                         : <ChooseDate>
                             Choose a date in the calendar to see available times.
                         </ChooseDate>
@@ -279,8 +290,30 @@ const CalendarDiv = styled.div`
     }
 
 `
-const ChooseDate = styled.p `
+const ChooseDate = styled.p`
     padding-top: 30%;
+`
+
+const Section = styled.section`
+  
+  #chooseDate {
+    margin-top: 200px;
+    font-size: 1.3rem;
+  }
+  #todaysDate {
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+  }
+  #times {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 10%;
+
+  }
+  .timeslot {
+    margin: 20px;
+  }
 `
 
 
