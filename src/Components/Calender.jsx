@@ -10,7 +10,7 @@ const Calendar = () => {
     const [currYear, setCurrYear] = useState("");
     const [currDate, setCurrDate] = useState("");
 
-    const renderCalendar = () => {
+    const renderCurrDate = () => {
         let date = new Date();
         setCurrDate(date.getDate());
         setCurrYear(date.getFullYear())
@@ -18,13 +18,22 @@ const Calendar = () => {
     }
 
     useEffect(() => {
-        renderCalendar();
+        renderCurrDate();
+        fetchBookings();
     }, []);
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
 
-    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
+    var curr = new Date();
+    console.log(curr + 'curr')
+    var first = curr.getDay()  - ((curr.getDay() + 6) % 7);
+    console.log(first)
+
+    let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() -1; // getting first day of month
+    if(firstDayofMonth == -1) {
+        firstDayofMonth = 6
+    }
     let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
     let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
 
@@ -65,11 +74,12 @@ const Calendar = () => {
             )
         }
     }
-    for (let i = 1; calendarDates.length < 35; i++) {
+    for (let i = 1; calendarDates.length < 42; i++) {
         calendarDates.push({
             date: i,
             class: "nonactive"
         });
+        if(calendarDates.length == 35) break
     }
 
 
@@ -87,7 +97,7 @@ const Calendar = () => {
             setCurrMonth(11)
     }
 
-    const [bookedTimes, setBookedTimes] = useState('[]');
+    const [bookedTimes, setBookedTimes] = useState([]);
 
     
     const fetchBookings = async () => {
@@ -100,33 +110,26 @@ const Calendar = () => {
         }
     };
     
-    useEffect(() => {
-        fetchBookings();
-    }, []);
 
     const [clicked, setClicked] = useState(false)
     const [clickedDate, setClickedDate] = useState(null)
 
-    const [availiableTimesArr, setAvailiableTimesArr] = useState([])
+    const [availiableTimesArr, setAvailiableTimesArr] = useState([9, 10, 11, 12, 13, 14, 15, 16, 17])
 
     const getAvailiableTimes = (e) => {
+        setAvailiableTimesArr([9, 10, 11, 12, 13, 14, 15, 16, 17])
         setClicked(true);
         let date = e.target.value;
         setClickedDate(date);
         let newArr = []
         
         bookedTimes.map((booking) => {
-            
-            if(new Date(booking.date).getDate() == e.target.value) {
-                let i = 9;
-                while (i != booking.startTime) {
-                    newArr.push(i);
-                    i++;
-                }
-                for(let i = booking.startTime + booking.duration; i <= 17; i++) {
-                    newArr.push(i);
-                }
-                setAvailiableTimesArr(newArr)
+            console.log(booking);
+            if(new Date(booking.date).getDate() == e.target.value){
+                let newArr = availiableTimesArr.filter(time => booking.startTime !== time)
+                console.log(newArr)
+                setAvailiableTimesArr(newArr);
+                
             }
             
         })
@@ -196,7 +199,7 @@ const Styledheader = styled.header`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
-    width: 500px;
+    width: 35vw;
     margin-bottom: 20px;
     button {
     all: unset;
@@ -211,7 +214,7 @@ const Styledheader = styled.header`
 const DaysDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 500px;
+    width: 35vw;
     background-color: #FFD530;
     text-align: center;
     padding: 10px 0;
@@ -226,8 +229,7 @@ const DaysDiv = styled.div`
 const CalendarDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 500px;
-    height: 360px;
+    width: 35vw;
 
     div, button {
         cursor: pointer;
@@ -237,6 +239,7 @@ const CalendarDiv = styled.div`
         align-items: center;
         justify-content: center;
         gap: 10px;
+        height: 72px;
 
         p {
             font-size: 1.2rem;

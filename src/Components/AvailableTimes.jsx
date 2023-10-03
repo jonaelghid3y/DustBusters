@@ -5,7 +5,7 @@ import { Button } from './Button'
 
 const AvailableTimes = ({availiableTimesArr, clickedDate, currMonth, currDay}) => {
 
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
   return (
     <Section>
