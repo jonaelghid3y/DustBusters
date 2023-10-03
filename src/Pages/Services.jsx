@@ -33,15 +33,16 @@ function Services() {
 
 
  <img style={images} src={item.imgURL} alt="cleaning"></img>
-
+ 
  <div style={StyledTextContainer}>
+
   <h1>{item.title}</h1>
   <br></br>
   <p style={paragraph}>{item.description}</p>
  <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
 
   </div>
-
+ 
 
   
     </div>
@@ -54,7 +55,6 @@ function Services() {
     <>
 
       {renderedData}
-
 
     </>
   )
@@ -71,22 +71,24 @@ const StyledTextContainer = {
   position:"relative",
   top:"60px",
   padding:"25px",
-  fontFamily:"verdana",
-  overflowY:"scroll",
+  fontFamily:"poppins",
+  overflowY:"auto",
+  zIndex:"0",
   
-
-
 }
+
+
 
 const images = {
 
   height: "auto",
-  width: "300px",
+  minWidth: "25%",
   borderRadius: "20px",
   margin: "60px",
 
-
 }
+
+
 
 const component = {
   width: "100%",
@@ -114,6 +116,7 @@ const component1 ={
   display:"flex",
   justifyContent:"space-around",
   flexDirection:"row-reverse",
+  color:"white",
 
 }
 

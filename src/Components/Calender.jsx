@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import styled from 'styled-components'
+import AvailableTimes from '../Components/AvailableTimes'
+import { Button } from './Button'
 
 const Calendar = () => {
 
@@ -9,8 +11,13 @@ const Calendar = () => {
     const [currYear, setCurrYear] = useState("");
     const [currDate, setCurrDate] = useState("");
 
+    const [clicked, setClicked] = useState(false)
+    const [clickedDate, setClickedDate] = useState(null)
 
-    const renderCalendar = () => {
+    const [bookedTimes, setBookedTimes] = useState([]);
+    const [availiableTimesArr, setAvailiableTimesArr] = useState([9, 10, 11, 12, 13, 14, 15, 16, 17])
+
+    const renderCurrDate = () => {
         let date = new Date();
         setCurrDate(date.getDate());
         setCurrYear(date.getFullYear())
@@ -18,14 +25,22 @@ const Calendar = () => {
     }
 
     useEffect(() => {
-        renderCalendar();
-    }, []);
+        renderCurrDate();
+        fetchBookings();
+    }, [clickedDate]);
 
     const months = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
 
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+    var curr = new Date();
+    var first = curr.getDay() - ((curr.getDay() + 6) % 7);
 
     let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
+    if (firstDayofMonth == -1) {
+        firstDayofMonth = 6
+    }
     let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
     let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
 
@@ -66,11 +81,12 @@ const Calendar = () => {
             )
         }
     }
-    for (let i = 1; calendarDates.length < 35; i++) {
+    for (let i = 1; calendarDates.length < 42; i++) {
         calendarDates.push({
             date: i,
             class: "nonactive"
         });
+        if (calendarDates.length == 35) break
     }
 
 
@@ -88,55 +104,113 @@ const Calendar = () => {
             setCurrMonth(11)
     }
 
+
+    const fetchBookings = async () => {
+        try {
+            const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking');
+            const data = await response.json();
+            setBookedTimes(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+    const getAvailiableTimes = (date) => {
+        setAvailiableTimesArr([9, 10, 11, 12, 13, 14, 15, 16, 17])
+        setClicked(true);
+        setClickedDate(date);
+
+        bookedTimes.map((booking) => {
+            if (new Date(booking.date).getDate() == date) {
+                let newArr = availiableTimesArr.filter(time => booking.startTime !== time)
+                setAvailiableTimesArr(newArr);
+                console.log(availiableTimesArr);
+                console.log(newArr);
+            }
+        })
+    }
+
     return (
         <div>
-            <div className="wrapper">
-                <Styledheader>
-                    <button id="prev" onClick={() => showPrevMonth()}>&#60;</button>
-                    <p className='month'>{months[currMonth]}</p>
-                    <button id="next" onClick={() => showNextMonth()}>&#62;</button>
-                </Styledheader>
-                <DaysDiv>
-                    <div><p>Mo</p></div>
-                    <div><p>Tu</p></div>
-                    <div><p>We</p></div>
-                    <div><p>Th</p></div>
-                    <div><p>Fr</p></div>
-                    <div><p>Sa</p></div>
-                    <div><p>Su</p></div>
-                </DaysDiv>
-                <CalendarDiv>
-                    {
-                        calendarDates.map((date) => {
-                            return date.date == new Date().getDate() 
-                                                && currMonth == new Date().getMonth() 
-                                                && date.class != "nonactive"
-                                ? <button className="active">
-                                    <div className="current">
-                                        <p>{date.date}</p>
-                                    </div>
-                                    <div className="dot"></div>
-                                </button>
-                                : <button className={date.class}>
-                                    <p>{date.date}</p>
-                                    <div className="dot"></div>
-                                </button>
-                        })
-                    }
-                </CalendarDiv>
-
-
-
-            </div>
+            <Wrapper className="wrapper">
+                <div>
+                    <Styledheader>
+                        <button id="prev" onClick={() => showPrevMonth()}>&#60;</button>
+                        <p className='month'>{months[currMonth]}</p>
+                        <button id="next" onClick={() => showNextMonth()}>&#62;</button>
+                    </Styledheader>
+                    <DaysDiv>
+                        <div><p>Mo</p></div>
+                        <div><p>Tu</p></div>
+                        <div><p>We</p></div>
+                        <div><p>Th</p></div>
+                        <div><p>Fr</p></div>
+                        <div><p>Sa</p></div>
+                        <div><p>Su</p></div>
+                    </DaysDiv>
+                    <CalendarDiv>
+                        {
+                            calendarDates.map((date) => {
+                                return date.date == new Date().getDate()
+                                    && currMonth == new Date().getMonth()
+                                    && date.class != "nonactive"
+                                    ? <button className="active" key={date.date} onClick={() => getAvailiableTimes(date.date)}>
+                                        <div className="current" value={date.date}>
+                                            <p>{date.date}</p>
+                                        </div>
+                                        <div className="dot"></div>
+                                    </button>
+                                    : date.class == "active"
+                                        ? <button className="active" key={date.date} onClick={() => getAvailiableTimes(date.date)}>
+                                            <p>{date.date}</p>
+                                            <div className="dot"></div>
+                                        </button>
+                                        : <button className="nonactive" key={date.date+31} disabled onClick={() => getAvailiableTimes(date.date)}>
+                                            <p>{date.date}</p>
+                                            <div className="dot"></div>
+                                        </button>
+                            })
+                        }
+                    </CalendarDiv>
+                </div>
+                {
+                    clicked == true
+                        ? <Section>
+                            <p id='todaysDate'>
+                                {days[new Date(currYear, currMonth, clickedDate).getDay()]} {clickedDate} {months[currMonth]}
+                            </p>
+                            <div id='times'>
+                                {
+                                    availiableTimesArr.map((time) => {
+                                        return <div key={time} className='timeslot'>
+                                            <p>{time}.00</p>
+                                            <Button primary size="small" label="Book" />
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        </Section>
+                        : <ChooseDate>
+                            Choose a date in the calendar to see available times.
+                        </ChooseDate>
+                }
+            </Wrapper>
         </div>
     )
 }
+
+const Wrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5%;
+`
 
 const Styledheader = styled.header`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
-    width: 500px;
+    width: 35vw;
     margin-bottom: 20px;
     button {
     all: unset;
@@ -151,7 +225,7 @@ const Styledheader = styled.header`
 const DaysDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 500px;
+    width: 35vw;
     background-color: #FFD530;
     text-align: center;
     padding: 10px 0;
@@ -166,8 +240,7 @@ const DaysDiv = styled.div`
 const CalendarDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 500px;
-    height: 360px;
+    width: 35vw;
 
     div, button {
         cursor: pointer;
@@ -177,6 +250,7 @@ const CalendarDiv = styled.div`
         align-items: center;
         justify-content: center;
         gap: 10px;
+        height: 72px;
 
         p {
             font-size: 1.2rem;
@@ -216,7 +290,31 @@ const CalendarDiv = styled.div`
     }
 
 `
+const ChooseDate = styled.p`
+    padding-top: 30%;
+`
 
+const Section = styled.section`
+  
+  #chooseDate {
+    margin-top: 200px;
+    font-size: 1.3rem;
+  }
+  #todaysDate {
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+  }
+  #times {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 10%;
+
+  }
+  .timeslot {
+    margin: 20px;
+  }
+`
 
 
 export default Calendar

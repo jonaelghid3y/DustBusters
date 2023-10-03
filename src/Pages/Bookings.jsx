@@ -1,14 +1,12 @@
 import React from 'react'
-import AvailableTimes from '../Components/AvailableTimes'
 import Calendar from '../Components/Calender'
 import styled from 'styled-components'
 
 function Bookings() {
   return (
-    <Section className="bookingsContainer">
+    <section className="bookingsContainer">
         <Calendar />
-        <AvailableTimes />
-    </Section>
+    </section>
   )
 }
 

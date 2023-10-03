@@ -12,6 +12,7 @@ import Bookings from './Pages/Bookings';
 import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
 import ServicesAdmin from './Admin/ServicesAdmin';
+import Login from './Pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,13 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      {
+        path: "/login",
+        element: <Login/>
+
+      }
+    
+
 
 
 
