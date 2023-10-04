@@ -10,6 +10,7 @@ import { Icon } from '../Components/Icons';
 import { ImageDivs } from '../Components/ImageDivs';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Modal from '../Components/Modal';
 
 function LandingPage() {
 
@@ -68,13 +69,13 @@ function LandingPage() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2, 
+          slidesToShow: 2,
         },
       },
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 1, 
+          slidesToShow: 1,
         },
       },
     ],
@@ -105,25 +106,15 @@ function LandingPage() {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const leaveReview = () => {
-
     setModalOpen(!isModalOpen);
-
   }
-
-  const variants = {
-    open: { opacity: 1, y: 0 },
-    closed: { opacity: 0, y: "-100vh" },
-  };
-  //**** open modal function *****/
-  //**** Leave a review function *****/
-
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
 
   const handleSubmit = async (e) => {
-   
+
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review', {
         method: 'POST',
@@ -157,8 +148,7 @@ function LandingPage() {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
+          transition={{ ease: "easeOut", duration: 1 }}>
           <StyledHeadline>
             Who you gonna call?
           </StyledHeadline>
@@ -166,10 +156,9 @@ function LandingPage() {
         <Link to="/bookings">
           <Button primary size="large" label="Book now!" />
         </Link>
-
       </StyledLandingImg>
+      
       <StyledRatingDiv>
-
         <StyledHeadlineDiv>
           <Styledh2headline1>
             Why Dust
@@ -201,7 +190,6 @@ function LandingPage() {
           </motion.div>
         </StyledIconDiv>
 
-
         <StyledSliderDiv>
           <Slider  {...settings}>
             {reviews.map(review => (
@@ -223,51 +211,21 @@ function LandingPage() {
             ))}
           </Slider>
         </StyledSliderDiv>
-        <Button primary size="small" label="Leave review!" onClick={leaveReview} />
+
+        <Button primary size="large" label="Leave review!" onClick={leaveReview} />
+
         {isModalOpen && (
-
-          <StyledReviewModal
-          initial="closed"
-          animate={isModalOpen ? "open" : "closed"}
-          variants={variants}
-          >
-            <StyledFormHeadline>
-              Review
-            </StyledFormHeadline>
-            <StyledForm onSubmit={handleSubmit}>
-              <StyledFormDivs>
-                <StyledLabel> Name:</StyledLabel>
-
-                <StyledInput type="text" name='name' required value={name} onChange={(e) => setName(e.target.value)}/>
-              </StyledFormDivs>
-              <StyledFormDivs>
-                <StyledLabel> Comments or feedback:</StyledLabel>
-                <Styledtextarea required value={content} onChange={(e) => setContent(e.target.value)} />
-              </StyledFormDivs>
-              <StyledRowDiv2>
-                {[...Array(5)].map((_, i) => (
-                  <StyledStar
-                    key={i}
-                    selected={i < rating}
-                    onClick={() => setRating(i + 1)}
-                  >
-                    <AiFillStar size={30} />
-                  </StyledStar>
-                ))}
-              </StyledRowDiv2>
-
-              <Button primary size="small" label="submit" />
-
-
-            </StyledForm>
-
-
-
-            <Button secondary size="small" label="go back" onClick={leaveReview} />
-
-          </StyledReviewModal>
-
-
+          <Modal
+            title="Review"
+            modalOpen={isModalOpen}
+            setModalOpen={setModalOpen}
+            name={name}
+            setName={setName}
+            content={content}
+            setContent={setContent}
+            rating={rating}
+            setRating={setRating}
+            handleSubmit={handleSubmit} />
         )}
       </StyledRatingDiv>
 

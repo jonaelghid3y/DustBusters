@@ -7,65 +7,74 @@ import { Button } from '../Components/Button';
 import { motion } from 'framer-motion';
 
 
-const Modal = ({ modalOpen, setModalOpen }) => {
+const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, handleSubmit }) => {
 
-    const [content, setContent] = useState('');
-    const [rating, setRating] = useState(0);
-
-    const leaveReview = () => {
+    const handleModal = () => {
         setModalOpen(!modalOpen);
-      }
+    }
 
     const variants = {
         open: { opacity: 1, y: 0 },
         closed: { opacity: 0, y: "-100vh" },
     };
 
-    const handleSubmit = async (e) => {
-   
-        console.log("Good job!")
-      };
 
     return (
         <StyledReviewModal
             initial="closed"
             animate={modalOpen ? "open" : "closed"}
-            variants={variants}
-        >
+            variants={variants}>
             <StyledFormHeadline>
-                Review
+                {title}
             </StyledFormHeadline>
             <StyledForm onSubmit={handleSubmit}>
                 <StyledFormDivs>
                     <StyledLabel> Name:</StyledLabel>
-
-                    <StyledInput type="text" name='name' required value={name} onChange={(e) => setName(e.target.value)} />
+                    <StyledInput
+                        type="text"
+                        name='name'
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)} />
                 </StyledFormDivs>
-                <StyledFormDivs>
-                    <StyledLabel> Comments or feedback:</StyledLabel>
-                    <Styledtextarea required value={content} onChange={(e) => setContent(e.target.value)} />
-                </StyledFormDivs>
-                <StyledRowDiv2>
-                    {[...Array(5)].map((_, i) => (
-                        <StyledStar
-                            key={i}
-                            selected={i < rating}
-                            onClick={() => setRating(i + 1)}
-                        >
-                            <AiFillStar size={30} />
-                        </StyledStar>
-                    ))}
-                </StyledRowDiv2>
+                {title == "Review"
+                    ? <>
+                        <StyledFormDivs>
+                            <StyledLabel> Comments or feedback:</StyledLabel>
+                            <Styledtextarea
+                                required value={content}
+                                onChange={(e) => setContent(e.target.value)} />
+                        </StyledFormDivs>
+                        <StyledRowDiv2>
+                            {[...Array(5)].map((_, i) => (
+                                <StyledStar
+                                    key={i}
+                                    selected={i < rating}
+                                    onClick={() => setRating(i + 1)}
+                                >
+                                    <AiFillStar size={30} />
+                                </StyledStar>
+                            ))}
+                        </StyledRowDiv2>
+                    </>
+                    : title == "Book"
+                        ? <StyledFormDivs>
+                            <StyledLabel> Adress:</StyledLabel>
+                            <StyledInput
+                                type="text"
+                                name='name'
+                                required
+                                value={adress}
+                                onChange={(e) => setName(e.target.value)} />
+                        </StyledFormDivs>
+                        : null}
 
-                <Button primary size="small" label="submit" />
-
-
+                <Button primary size="small" label="Submit" />
             </StyledForm>
-
-
-
-            <Button secondary size="small" label="go back" onClick={leaveReview} />
-
+            <Button
+                secondary size="small"
+                label="Go back"
+                onClick={handleModal} />
         </StyledReviewModal>
     )
 }
