@@ -124,8 +124,6 @@ function LandingPage() {
 
   const handleSubmit = async (e) => {
    
-
-   
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review', {
         method: 'POST',
