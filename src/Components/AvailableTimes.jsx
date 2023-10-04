@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button } from './Button'
 
@@ -21,8 +21,8 @@ const AvailableTimes = ({ availiableTimesArr, clickedDate, currMonth, currYear, 
               <p>{time}.00</p>
               <Button 
                 primary size="small" 
-                label="Book" 
-                onClick={bookTime} />
+                label="Book"
+                onClick={(time) => bookTime(time)} />
             </TimeSlot>
           })
         }

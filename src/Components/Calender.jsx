@@ -78,7 +78,8 @@ const Calendar = ({ currYear, currMonth, currDate, getAvailiableTimes }) => {
                             : <button
                                 className="nonactive"
                                 key={date.date + 31}
-                                disabled onClick={() => getAvailiableTimes(date.date)}>
+                                disabled 
+                                onClick={() => getAvailiableTimes(date.date)}>
                                 <p>{date.date}</p>
                             </button>
                 })

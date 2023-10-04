@@ -20,9 +20,11 @@ function Bookings() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
   const [adress, setAdress] = useState('');
+  const [email, setEmail] = useState('');
+  const [clickedTime, setClickedTime] = useState(0);
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
-  "August", "September", "October", "November", "December"];
+    "August", "September", "October", "November", "December"];
 
   const renderCurrDate = () => {
     let date = new Date();
@@ -31,11 +33,15 @@ function Bookings() {
     setCurrMonth(date.getMonth())
   }
 
-  const bookTime = () => {
+  const bookTime = (time) => {
     setModalOpen(!isModalOpen);
+    setClickedTime(time)
   }
 
   const handleSubmit = async (e) => {
+    console.log(name)
+    console.log(clickedTime)
+    console.log()
 
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking', {
@@ -46,7 +52,7 @@ function Bookings() {
         body: JSON.stringify({
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
-          startTime: 10,
+          startTime: clickedTime,
           service: "Vardagsstädning"
         }),
       });
@@ -128,7 +134,7 @@ function Bookings() {
           <Calendar
             currYear={currYear}
             currMonth={currMonth}
-            currDate={currDate} 
+            currDate={currDate}
             getAvailiableTimes={getAvailiableTimes}
           />
         </div>
@@ -156,6 +162,8 @@ function Bookings() {
             setName={setName}
             adress={adress}
             setAdress={setAdress}
+            email={email}
+            setEmail={setEmail}
             handleSubmit={handleSubmit} />
         )}
       </ModalContainer>

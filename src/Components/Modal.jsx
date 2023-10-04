@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 import 'slick-carousel/slick/slick.css';
@@ -7,7 +7,25 @@ import { Button } from '../Components/Button';
 import { motion } from 'framer-motion';
 
 
-const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, handleSubmit }) => {
+const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, email, setEmail, handleSubmit }) => {
+
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        fetchServices()
+    }, [])
+
+    const fetchServices = async () => {
+        try {
+            const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services')
+            const data = await response.json();
+            setServices(data);
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleModal = () => {
         setModalOpen(!modalOpen);
@@ -58,15 +76,33 @@ const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setCont
                         </StyledRowDiv2>
                     </>
                     : title == "Book"
-                        ? <StyledFormDivs>
-                            <StyledLabel> Adress:</StyledLabel>
-                            <StyledInput
-                                type="text"
-                                name='name'
-                                required
-                                value={adress}
-                                onChange={(e) => setName(e.target.value)} />
-                        </StyledFormDivs>
+                        ? <>
+                            <StyledFormDivs>
+                                <StyledLabel> Adress:</StyledLabel>
+                                <StyledInput
+                                    type="text"
+                                    name='name'
+                                    required
+                                    value={adress}
+                                    onChange={(e) => setAdress(e.target.value)} />
+                            </StyledFormDivs>
+                            <StyledFormDivs>
+                                <StyledLabel> Email:</StyledLabel>
+                                <StyledInput
+                                    type="text"
+                                    name='name'
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)} />
+                            </StyledFormDivs>
+                            <label htmlFor="select-service">Choose service:</label>
+                            <StyledSelect name="pets" id="select-service">
+                                <option value="">--Please choose a service--</option>
+                                {services.map((service) => {
+                                    return <option key={service.id} value={service.title}>{service.title}</option>
+                                })}
+                            </StyledSelect>
+                        </>
                         : null}
 
                 <Button primary size="small" label="Submit" />
@@ -81,27 +117,27 @@ const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setCont
 
 
 const StyledReviewModal = styled(motion.div)`
-position: fixed;
-right: 50;
-top: 10vh;
-border: 1px solid lightgrey;
-background-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-width: 40%;
-min-height: 550px;
-padding: 25px;
-border-radius: 20px;
-padding: 25px;
-gap: 20px;
-@media (max-width: 768px) {
+    position: fixed;
+    right: 50;
+    top: 10vh;
+    border: 1px solid lightgrey;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+    min-height: 550px;
+    padding: 25px;
+    border-radius: 20px;
+    padding: 25px;
+    gap: 20px;
+    @media (max-width: 768px) {
 
-  width: 80%;
-  min-height: 600px;
-  
- }
+    width: 80%;
+    min-height: 600px;
+    
+    }
 `
 const StyledForm = styled.form`
   display: flex;
@@ -115,36 +151,35 @@ const StyledForm = styled.form`
   
 `
 const StyledFormHeadline = styled.h3`
-
-font-size: 30px;
-margin-bottom: 20px;
-`
+    font-size: 30px;
+    margin-bottom: 20px;
+    `
 
 const StyledFormDivs = styled.div`
-display: flex;
-align-items: flex-start;
-justify-content: center;
-flex-direction: column;
-`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    `
 const StyledLabel = styled.label`
 
 `
 const StyledInput = styled.input`
-font-size: 16.5px;
-width: 20vw;
-height: 5vh;
-@media (max-width: 768px) {
+    font-size: 16.5px;
+    width: 20vw;
+    height: 5vh;
+    @media (max-width: 768px) {
 
-  width: 60vw;
-  
- }
+    width: 60vw;
+    
+    }
 
 `
 const Styledtextarea = styled.textarea`
-width: 20vw;
-height: 9vw;
-font-size: 18px;
-resize: none;
+    width: 20vw;
+    height: 9vw;
+    font-size: 18px;
+    resize: none;
 
 @media (max-width: 768px) {
 
@@ -163,15 +198,27 @@ const StyledStar = styled.div`
 `;
 
 const StyledRowDiv2 = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
 `
+
+const StyledSelect = styled.select `
+    font-size: 16.5px;
+    width: 20vw;
+    height: 5vh;
+    @media (max-width: 768px) {
+
+    width: 60vw;
+    
+    }
+`
+
 const StyledRatingh3 = styled.h3`
-font-size:20px;
-margin-left: 5%;
+    font-size:20px;
+    margin-left: 5%;
 `
 const StyledP = styled.h3`
 font-size:15px;
