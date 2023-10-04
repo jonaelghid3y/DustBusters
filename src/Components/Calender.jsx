@@ -117,18 +117,18 @@ const Calendar = () => {
 
 
     const getAvailiableTimes = (date) => {
-        setAvailiableTimesArr([9, 10, 11, 12, 13, 14, 15, 16, 17])
+
         setClicked(true);
         setClickedDate(date);
 
-        bookedTimes.map((booking) => {
-            if (new Date(booking.date).getDate() == date) {
-                let newArr = availiableTimesArr.filter(time => booking.startTime !== time)
-                setAvailiableTimesArr(newArr);
-                console.log(availiableTimesArr);
-                console.log(newArr);
-            }
-        })
+        const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date);
+        const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+        
+        let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+        availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+        
+        setAvailiableTimesArr(availableTimes);
+        
     }
 
     return (
