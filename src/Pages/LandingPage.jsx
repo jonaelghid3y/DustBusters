@@ -101,7 +101,6 @@ function LandingPage() {
 
   //**** open modal function *****/
 
-
   const [isModalOpen, setModalOpen] = useState(false);
 
   const leaveReview = () => {
