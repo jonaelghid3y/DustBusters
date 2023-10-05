@@ -22,7 +22,7 @@ const AvailableTimes = ({ availiableTimesArr, clickedDate, currMonth, currYear, 
               <Button 
                 primary size="small" 
                 label="Book"
-                onClick={(time) => bookTime(time)} />
+                onClick={() => bookTime(time)} />
             </TimeSlot>
           })
         }

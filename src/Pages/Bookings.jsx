@@ -22,6 +22,7 @@ function Bookings() {
   const [adress, setAdress] = useState('');
   const [email, setEmail] = useState('');
   const [clickedTime, setClickedTime] = useState(0);
+  const [selectedValue, setSelectedValue] = useState("")
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -39,9 +40,6 @@ function Bookings() {
   }
 
   const handleSubmit = async (e) => {
-    console.log(name)
-    console.log(clickedTime)
-    console.log()
 
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking', {
@@ -53,7 +51,7 @@ function Bookings() {
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
           startTime: clickedTime,
-          service: "Vardagsstädning"
+          service: selectedValue
         }),
       });
 
@@ -164,6 +162,8 @@ function Bookings() {
             setAdress={setAdress}
             email={email}
             setEmail={setEmail}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
             handleSubmit={handleSubmit} />
         )}
       </ModalContainer>
