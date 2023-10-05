@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, months }) => {
 
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
-    firstDayofMonth = 6
+    firstDayofMonth = 6;
   }
   let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
   let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
@@ -42,7 +42,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
           date: i,
           class: "active"
         }
-      )
+      );
     }
   }
   for (let i = 1; calendarDates.length < 42; i++) {
@@ -50,22 +50,22 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
       date: i,
       class: "nonactive"
     });
-    if (calendarDates.length == 35) break
+    if (calendarDates.length == 35) break;
   }
 
   const showNextMonth = () => {
     if (currMonth < 11)
-      setCurrMonth(currMonth + 1)
+      setCurrMonth(currMonth + 1);
     else
-      setCurrMonth(0)
+      setCurrMonth(0);
 
-  }
+  };
   const showPrevMonth = () => {
     if (currMonth > 0)
-      setCurrMonth(currMonth - 1)
+      setCurrMonth(currMonth - 1);
     else
-      setCurrMonth(11)
-  }
+      setCurrMonth(11);
+  };
 
   return (
     <div>
@@ -110,13 +110,13 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                   disabled
                   onClick={() => getAvailiableTimes(date.date)}>
                   <p>{date.date}</p>
-                </button>
+                </button>;
           })
         }
       </CalendarDiv>
     </div>
-  )
-}
+  );
+};
 
 const Styledheader = styled.header`
     display: flex;
@@ -136,7 +136,7 @@ const Styledheader = styled.header`
       padding-left: 20px;
     }
 
-`
+`;
 
 const DaysDiv = styled.div`
     display: grid;
@@ -151,7 +151,7 @@ const DaysDiv = styled.div`
         font-weight: 300;
     }
 
-`
+`;
 
 const CalendarDiv = styled.div`
     display: grid;
@@ -204,8 +204,6 @@ const CalendarDiv = styled.div`
         background-color:  #232323;
         color: white;
     }
+`;
 
-
-`
-
-export default Calendar
+export default Calendar;
