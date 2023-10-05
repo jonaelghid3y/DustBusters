@@ -13,7 +13,6 @@ import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
 import ServicesAdmin from './Admin/ServicesAdmin';
 import Login from './Pages/Login';
-import BookingAdmin from './Admin/BookingAdmin';
 
 const router = createBrowserRouter([
   {

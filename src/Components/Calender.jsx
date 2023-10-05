@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import styled from 'styled-components'
 import AvailableTimes from '../Components/AvailableTimes'
 import { Button } from './Button'
+import Modal from './Modal'
 
 const Calendar = () => {
 
@@ -11,11 +12,14 @@ const Calendar = () => {
     const [currYear, setCurrYear] = useState("");
     const [currDate, setCurrDate] = useState("");
 
-    const [clicked, setClicked] = useState(false)
-    const [clickedDate, setClickedDate] = useState(null)
+    const [clicked, setClicked] = useState(false);
+    const [clickedDate, setClickedDate] = useState(null);
 
     const [bookedTimes, setBookedTimes] = useState([]);
-    const [availiableTimesArr, setAvailiableTimesArr] = useState([9, 10, 11, 12, 13, 14, 15, 16, 17])
+    const [availiableTimesArr, setAvailiableTimesArr] = useState([]);
+
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     const renderCurrDate = () => {
         let date = new Date();
@@ -51,14 +55,12 @@ const Calendar = () => {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
                 class: "nonactive",
-                dotClass: "grey"
             }
             );
         } else {
             calendarDates.push({
                 date: lastDateofLastMonth - i + 1,
                 class: "nonactive",
-                dotClass: "green"
             }
             );
 
@@ -117,18 +119,18 @@ const Calendar = () => {
 
 
     const getAvailiableTimes = (date) => {
-        setAvailiableTimesArr([9, 10, 11, 12, 13, 14, 15, 16, 17])
+
         setClicked(true);
         setClickedDate(date);
 
-        bookedTimes.map((booking) => {
-            if (new Date(booking.date).getDate() == date) {
-                let newArr = availiableTimesArr.filter(time => booking.startTime !== time)
-                setAvailiableTimesArr(newArr);
-                console.log(availiableTimesArr);
-                console.log(newArr);
-            }
-        })
+        const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date);
+        const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+
+        let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+        availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+
+        setAvailiableTimesArr(availableTimes);
+
     }
 
     return (
@@ -159,16 +161,13 @@ const Calendar = () => {
                                         <div className="current" value={date.date}>
                                             <p>{date.date}</p>
                                         </div>
-                                        <div className="dot"></div>
                                     </button>
                                     : date.class == "active"
                                         ? <button className="active" key={date.date} onClick={() => getAvailiableTimes(date.date)}>
                                             <p>{date.date}</p>
-                                            <div className="dot"></div>
                                         </button>
-                                        : <button className="nonactive" key={date.date+31} disabled onClick={() => getAvailiableTimes(date.date)}>
+                                        : <button className="nonactive" key={date.date + 31} disabled onClick={() => getAvailiableTimes(date.date)}>
                                             <p>{date.date}</p>
-                                            <div className="dot"></div>
                                         </button>
                             })
                         }
@@ -181,11 +180,14 @@ const Calendar = () => {
                                 {days[new Date(currYear, currMonth, clickedDate).getDay()]} {clickedDate} {months[currMonth]}
                             </p>
                             <div id='times'>
-                                {
-                                    availiableTimesArr.map((time) => {
+                                {availiableTimesArr.length == 0
+                                    ? <NoDate>
+                                        No available times, please choose another date.
+                                    </NoDate>
+                                    : availiableTimesArr.map((time) => {
                                         return <div key={time} className='timeslot'>
                                             <p>{time}.00</p>
-                                            <Button primary size="small" label="Book" />
+                                            <Button primary size="small" label="Book" onClick={() => setModalOpen(true)} />
                                         </div>
                                     })
                                 }
@@ -196,6 +198,11 @@ const Calendar = () => {
                         </ChooseDate>
                 }
             </Wrapper>
+            <ModalContainer>
+                {modalOpen && (
+                    <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                )}
+            </ModalContainer>
         </div>
     )
 }
@@ -204,6 +211,11 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 5%;
+`
+
+const ModalContainer = styled.div`
+    position: fixed;
+    left: 30%;
 `
 
 const Styledheader = styled.header`
@@ -292,6 +304,9 @@ const CalendarDiv = styled.div`
 `
 const ChooseDate = styled.p`
     padding-top: 30%;
+`
+const NoDate = styled.p`
+    padding-top: 20%;
 `
 
 const Section = styled.section`
