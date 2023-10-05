@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components'
 import { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
