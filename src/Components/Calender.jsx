@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, months }) => {
+const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
 
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
@@ -54,6 +54,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   }
 
   const showNextMonth = () => {
+    setClicked(false);
     if (currMonth < 11)
       setCurrMonth(currMonth + 1);
     else
@@ -61,6 +62,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
 
   };
   const showPrevMonth = () => {
+    setClicked(false);
     if (currMonth > 0)
       setCurrMonth(currMonth - 1);
     else
