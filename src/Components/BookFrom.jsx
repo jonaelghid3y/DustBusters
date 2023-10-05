@@ -35,7 +35,7 @@ const BookFrom = ({ name, setName, adress, setAdress, email, setEmail, setSelect
       <StyledSelect name="services" id="select-service" onChange={(e) => setSelectedValue(e.target.value)}>
         <option value="">--Please choose a service--</option>
         {services.map((service) => {
-          return <option key={service.id} value={service.title}>{service.title}</option>
+          return <option key={service.id} value={service.title}>{service.title}</option>;
         })}
       </StyledSelect>
     </>
