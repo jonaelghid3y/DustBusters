@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
-import Slider from 'react-slick'
+import { AiFillStar } from 'react-icons/ai';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
@@ -10,6 +10,7 @@ import { Icon } from '../Components/Icons';
 import { ImageDivs } from '../Components/ImageDivs';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Modal from '../Components/Modal';
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function LandingPage() {
         },
       }));
     }
-  }, [controls, inView])
+  }, [controls, inView]);
 
   // ***** Effekt för första raden iconer******
 
@@ -55,7 +56,6 @@ function LandingPage() {
 
   // ***** Effekt för andra raden iconer******
 
-
   // ***** Effekt för slidern******
   const settings = {
     dots: true,
@@ -68,17 +68,17 @@ function LandingPage() {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2, 
+          slidesToShow: 2,
         },
       },
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 1, 
+          slidesToShow: 1,
         },
       },
     ],
-  }
+  };
   // ***** Effekt för slidern******
 
   // ***** Fetch för reviews ******
@@ -101,34 +101,18 @@ function LandingPage() {
 
   //**** open modal function *****/
 
-
   const [isModalOpen, setModalOpen] = useState(false);
 
   const leaveReview = () => {
-
     setModalOpen(!isModalOpen);
-
-  }
-
-  const variants = {
-    open: { opacity: 1, y: 0 },
-    closed: { opacity: 0, y: "-100vh" },
   };
-  //**** open modal function *****/
-  //**** Leave a review function *****/
-
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
 
-  const handleSubmit = async (e) => {
-    
-    e.preventDefault();
+  const handleSubmit = async () => {
 
-
-
-   
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review', {
         method: 'POST',
@@ -164,8 +148,7 @@ function LandingPage() {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
+          transition={{ ease: "easeOut", duration: 1 }}>
           <StyledHeadline>
             Who you gonna call?
           </StyledHeadline>
@@ -173,10 +156,8 @@ function LandingPage() {
         <Link to="/bookings">
           <Button primary size="large" label="Book now!" />
         </Link>
-
       </StyledLandingImg>
       <StyledRatingDiv>
-
         <StyledHeadlineDiv>
           <Styledh2headline1>
             Why Dust
@@ -208,7 +189,6 @@ function LandingPage() {
           </motion.div>
         </StyledIconDiv>
 
-
         <StyledSliderDiv>
           <Slider  {...settings}>
             {reviews.map(review => (
@@ -230,51 +210,21 @@ function LandingPage() {
             ))}
           </Slider>
         </StyledSliderDiv>
-        <Button primary size="small" label="Leave review!" onClick={leaveReview} />
+
+        <Button primary size="large" label="Leave review!" onClick={leaveReview} />
+
         {isModalOpen && (
-
-          <StyledReviewModal
-          initial="closed"
-          animate={isModalOpen ? "open" : "closed"}
-          variants={variants}
-          >
-            <StyledFormHeadline>
-              Review
-            </StyledFormHeadline>
-            <StyledForm onSubmit={handleSubmit}>
-              <StyledFormDivs>
-                <StyledLabel> Name:</StyledLabel>
-
-                <StyledInput type="text" required value={name} onChange={(e) => setName(e.target.value)}/>
-              </StyledFormDivs>
-              <StyledFormDivs>
-                <StyledLabel> Comments or feedback:</StyledLabel>
-                <Styledtextarea required value={content} onChange={(e) => setContent(e.target.value)} />
-              </StyledFormDivs>
-              <StyledRowDiv2>
-                {[...Array(5)].map((_, i) => (
-                  <StyledStar
-                    key={i}
-                    selected={i < rating}
-                    onClick={() => setRating(i + 1)}
-                  >
-                    <AiFillStar size={30} />
-                  </StyledStar>
-                ))}
-              </StyledRowDiv2>
-
-              <Button primary size="small" label="submit" />
-
-
-            </StyledForm>
-
-
-
-            <Button secondary size="small" label="go back" onClick={leaveReview} />
-
-          </StyledReviewModal>
-
-
+          <Modal
+            title="Review"
+            modalOpen={isModalOpen}
+            setModalOpen={setModalOpen}
+            name={name}
+            setName={setName}
+            content={content}
+            setContent={setContent}
+            rating={rating}
+            setRating={setRating}
+            handleSubmit={handleSubmit} />
         )}
       </StyledRatingDiv>
 
@@ -310,14 +260,14 @@ function LandingPage() {
         </Link>
       </StyledServicesDiv>
     </StyledDiv>
-  )
+  );
 }
 const StyledDiv = styled.div`
   width: 100%;
   min-height: 300vh;
   font-family: 'Poppins', sans-serif;
  
-`
+`;
 const StyledLandingImg = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -331,7 +281,7 @@ const StyledLandingImg = styled.div`
   @media (max-width: 768px) {
 
   }
-`
+`;
 const StyledHeadline = styled.h1`
 margin-top: 40vh;
 margin-bottom: 6vh;
@@ -342,8 +292,7 @@ color: white;
   font-size: 40px;
   text-align: center;
 }
-`
-
+`;
 const StyledRatingDiv = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -353,14 +302,14 @@ const StyledRatingDiv = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding-bottom: 100px;
-`
+`;
 const StyledHeadlineDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   margin-top: 100px;
-`
+`;
 const Styledh2headline1 = styled.h2`
 
 font-size:40px;
@@ -369,7 +318,7 @@ color: white;
   font-size: 30px;
   text-align: center;
 }
-`
+`;
 const Styledh2headline2 = styled.h2`
 font-size:40px;
 color: #FFD530;
@@ -377,7 +326,7 @@ color: #FFD530;
   font-size: 30px;
   text-align: center;
 }
-`
+`;
 const StyledSpan = styled.span`
 height: 5px;
 width: 60px;
@@ -386,7 +335,7 @@ border-radius: 10px;
 @media (max-width: 768px) {
  width: 40px;
 }
-`
+`;
 const StyledIconDiv = styled.div`
   width: 100%;
   margin-top:70px;
@@ -398,7 +347,7 @@ const StyledIconDiv = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
    }
-`
+`;
 const StyledText = styled.p`
 text-align: center;
 color: white;
@@ -408,14 +357,14 @@ width: 13vw;
 @media (max-width: 768px) {
   width: 40vw;
  }
-`
+`;
 const StyledIconsText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-`
+`;
 const StyledSliderDiv = styled.div`
 margin-top: 100px;
 padding:20px;
@@ -424,7 +373,8 @@ width: 70%;
 @media (max-width: 768px) {
   width: 83%;
  }
-`
+`;
+
 const StyledSlides = styled.div`
   color: black;
   background-color: white;
@@ -442,89 +392,8 @@ const StyledSlides = styled.div`
     width: 260px;
    }
 
-`
-
-const StyledReviewModal = styled(motion.div)`
-position: fixed;
-right: 50;
-top: 10vh;
-border: 1px solid lightgrey;
-background-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-width: 40%;
-min-height: 550px;
-padding: 25px;
-border-radius: 20px;
-padding: 25px;
-gap: 20px;
-@media (max-width: 768px) {
-
-  width: 80%;
-  min-height: 600px;
-  
- }
-`
-const StyledForm = styled.form`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  border: 1px solid black
-  width: 80%;
-  height: 80%;
-  gap: 25px;
-  
-`
-const StyledFormHeadline = styled.h3`
-
-font-size: 30px;
-margin-bottom: 20px;
-`
-
-const StyledFormDivs = styled.div`
-display: flex;
-align-items: flex-start;
-justify-content: center;
-flex-direction: column;
-`
-const StyledLabel = styled.label`
-
-`
-const StyledInput = styled.input`
-font-size: 16.5px;
-width: 20vw;
-height: 5vh;
-@media (max-width: 768px) {
-
-  width: 60vw;
-  
- }
-
-`
-const Styledtextarea = styled.textarea`
-width: 20vw;
-height: 9vw;
-font-size: 18px;
-resize: none;
-
-@media (max-width: 768px) {
-
-  width: 60vw;
-  height: 15vh;
-  
- }
-
-`
-const StyledStar = styled.div`
-  cursor: pointer;
-  color: ${props => (props.selected ? '#FFD530' : '#ccc')};
-  display: flex;
-  flex-direction: row;
-  transition: 0.5s;
 `;
+
 const StyledRowDiv1 = styled.div`
   display: flex;
   align-items: center;
@@ -532,23 +401,23 @@ const StyledRowDiv1 = styled.div`
   width: 100%;
   gap: 10px;
 
-`
+`;
 const StyledRowDiv2 = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
 width: 100%;
 gap: 10px;
-`
+`;
 const StyledRatingh3 = styled.h3`
 font-size:20px;
 margin-left: 5%;
-`
+`;
 const StyledP = styled.h3`
 font-size:15px;
 font-weight: normal;
 text-align: center;
-`
+`;
 const StyledServicesDiv = styled.div`
 width: 100%;
 min-height: 80vh;
@@ -558,14 +427,14 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-`
+`;
 const Styledh2headline3 = styled.h2`
 font-size:40px;
 color: black;
 @media (max-width: 768px) {
   font-size: 30px;
  }
-`
+`;
 const StyledServicesRowDiv = styled.div`
  margin-top: 50px;
  margin-bottom: 100px;
@@ -578,7 +447,7 @@ const StyledServicesRowDiv = styled.div`
     flex-direction: column;
    }
 
-`
+`;
 const StyledServicesText = styled.p`
 text-align: center;
 color: black;
@@ -589,5 +458,5 @@ width: 13vw;
   width: 40vw;
  }
 
-`
-export default LandingPage
+`;
+export default LandingPage;

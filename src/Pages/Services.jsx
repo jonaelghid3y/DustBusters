@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -9,8 +9,8 @@ function Services() {
   const [fetchedData, setfetchedData] = useState([]);
 
   useEffect(() => {
-    fetchServices()
-  }, [])
+    fetchServices();
+  }, []);
 
   const fetchServices = async () => {
     try {
@@ -20,9 +20,9 @@ function Services() {
 
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
 
 
@@ -32,19 +32,19 @@ function Services() {
 
 
 
- <img style={images} src={item.imgURL} alt="cleaning"></img>
- 
- <div style={StyledTextContainer}>
+      <img style={images} src={item.imgURL} alt="cleaning"></img>
 
-  <h1>{item.title}</h1>
-  <br></br>
-  <p style={paragraph}>{item.description}</p>
- <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
+      <div style={StyledTextContainer}>
 
-  </div>
- 
+        <h1>{item.title}</h1>
+        <br></br>
+        <p style={paragraph}>{item.description}</p>
+        <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
 
-  
+      </div>
+
+
+
     </div>
 
   ));
@@ -57,7 +57,7 @@ function Services() {
       {renderedData}
 
     </>
-  )
+  );
 
 
 
@@ -67,17 +67,14 @@ function Services() {
 
 const StyledTextContainer = {
   width: "50%",
-  height:"70%",
-  position:"relative",
-  top:"60px",
-  padding:"25px",
-  fontFamily:"poppins",
-  overflowY:"auto",
-  zIndex:"0",
-  
-}
-
-
+  height: "70%",
+  position: "relative",
+  top: "60px",
+  padding: "25px",
+  fontFamily: "poppins",
+  overflowY: "auto",
+  zIndex: "0",
+};
 
 const images = {
 
@@ -85,45 +82,40 @@ const images = {
   minWidth: "25%",
   borderRadius: "20px",
   margin: "60px",
-
-}
-
-
+};
 
 const component = {
   width: "100%",
-  height:"60vh",
-  backgroundColor:"white",
-  display:"flex",
-  justifyContent:"space-around",
-  flexDirection:"row",
+  height: "60vh",
+  backgroundColor: "white",
+  display: "flex",
+  justifyContent: "space-around",
+  flexDirection: "row",
 }
 
-const pricestyle= {
+const pricestyle = {
 
-position:"relative",
-top:"15%",
-float:"right",
-textDecoration:"underline",
-textUnderlineOffset: "10px",
-textDecorationColor:"#FFD530",
-textDecorationWidth:"30px",
-}
-const component1 ={
+  position: "relative",
+  top: "15%",
+  float: "right",
+  textDecoration: "underline",
+  textUnderlineOffset: "10px",
+  textDecorationColor: "#FFD530",
+  textDecorationWidth: "30px",
+};
+
+const component1 = {
   width: "100%",
-  height:"60vh",
-  backgroundColor:"#333333",
-  display:"flex",
-  justifyContent:"space-around",
-  flexDirection:"row-reverse",
-  color:"white",
-
-}
+  height: "60vh",
+  backgroundColor: "#333333",
+  display: "flex",
+  justifyContent: "space-around",
+  flexDirection: "row-reverse",
+  color: "white",
+};
 
 const paragraph = {
-  fontSize:"1rem",
-}
+  fontSize: "1rem",
+};
 
-
-
-export default Services
+export default Services;

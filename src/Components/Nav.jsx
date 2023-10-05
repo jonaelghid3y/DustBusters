@@ -1,33 +1,32 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Logo } from './Logo';
 import { Button } from './Button';
-import { motion } from 'framer-motion'
 
 function Nav() {
-    const [isopen, setIsopen] = useState(false);
-    const location = useLocation();
+  const [isopen, setIsopen] = useState(false);
+  const location = useLocation();
 
-    return (
-        <StyledNav>
-            <Link style={{textDecoration: 'none'}} to="/">
-                <Logo primary />
-            </Link>
-            <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
-            <StyledLänkcontainer $isopen={isopen}>
+  return (
+    <StyledNav>
+      <Link style={{ textDecoration: 'none' }} to="/">
+        <Logo primary />
+      </Link>
+      <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
+      <StyledLänkcontainer $isopen={isopen}>
 
-                <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
-                <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
-                <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
-                <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
+        <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
+        <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
+        <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
+        <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
 
-                <Link to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
-            </StyledLänkcontainer>
-        </StyledNav>
-    )
+        <Link to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
+      </StyledLänkcontainer>
+    </StyledNav>
+  );
 }
 
 const StyledNav = styled.nav`
@@ -89,8 +88,6 @@ const StyledLink = styled(NavLink)`
     }
 `;
 
-
-
 const StyledHamburgerIcon = styled(FaBars)`
     cursor: pointer;
     color: #FFD530;
@@ -99,8 +96,5 @@ const StyledHamburgerIcon = styled(FaBars)`
         display: none;
     }
 `;
-
-
-
 
 export default Nav;
