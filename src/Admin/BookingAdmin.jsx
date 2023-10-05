@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 function BookingAdmin() {
     const [bookings, setBookings] = useState([]);
@@ -16,7 +17,7 @@ function BookingAdmin() {
 
     const fetchBookings = async () => {
         try {
-            const response = await axios.get("");
+            const response = await axios.get("https://api-s5hih6nmta-uc.a.run.app/booking");
             setBookings(response.data);
         } catch (error) {
             console.error('Error fetching bookings:', error);
@@ -35,7 +36,7 @@ function BookingAdmin() {
         e.preventDefault();
 
         try {
-            await axios.post("", newBooking);
+            await axios.post("https://api-s5hih6nmta-uc.a.run.app/booking", newBooking);
             setNewBooking({
                 name: '',
                 date: '',
@@ -49,7 +50,7 @@ function BookingAdmin() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${id}`);
+            await axios.delete(`https://api-s5hih6nmta-uc.a.run.app/booking${id}`);
 
             fetchBookings();
         } catch (error) {
@@ -58,12 +59,13 @@ function BookingAdmin() {
     };
 
     return (
-        <div>
+        <div style={containerStyle}>
             <h1>List of Booking</h1>
 
 
             <form onSubmit={handleSubmit}>
-                <label>Name:</label>
+                <button type="submit">Add new booking</button>
+                <label>Customer:</label>
                 <input
                     type="text"
                     name="name"
@@ -77,27 +79,64 @@ function BookingAdmin() {
                     value={newBooking.date}
                     onChange={handleInputChange}
                 />
-                <label>Service:</label>
+                <label>Edit:</label>
                 <input
                     type="text"
                     name="service"
                     value={newBooking.service}
                     onChange={handleInputChange}
                 />
-                <button type="submit">Create Booking</button>
+
             </form>
 
+            <table style={tableStyle}>
 
-            <ul>
-                {bookings.map((booking) => (
-                    <li key={booking.id}>
-                        {booking.name} - {booking.date} - {booking.service}
-                        <button onClick={() => handleDelete(booking.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+                <thead>
+                    <tr>
+                        <th style={thStyle}>Cutomer</th>
+                        <th style={thStyle}>Date</th>
+                        <th style={thStyle}>Edit</th>
+                        <th style={thStyle}>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {bookings.map((booking) => (
+                            <li key={booking.id}>
+                                {booking.name} - {booking.date} - {booking.service}
+                                <button onClick={() => this.handleDelete(booking.id)}>
+                                    <MdDelete />
+                                </button>
+                                <button onClick={() => this.handleEdit(booking.id)}>
+                                    <MdEdit />
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </tbody>
+            </table>
         </div>
     );
 }
 
+const containerStyle = {
+    padding: "20px",
+    maxWidth: "800px",
+    margin: "0 auto",
+    fontFamily: 'Poppins',
+    textAlign: "center",
+};
+
+const tableStyle = {
+    width: "80%",
+    borderCollapse: "collapse",
+}
+
+const thStyle = {
+    backgroundColor: "#FFD530",
+    color: "#333333",
+    padding: "10px",
+    textAlign: "left",
+    margin: "10px",
+};
 export default BookingAdmin;
