@@ -132,7 +132,7 @@ function LandingPage() {
 
       const data = await response.json();
       console.log(data);
-      navigate('/')
+      navigate('/');
       window.location.reload();
 
     } catch (error) {

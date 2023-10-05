@@ -1,123 +1,111 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-
-
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-    const navigation = useNavigation();
-    const [accessToken, setAccessToken] = useState(null);
+  // const navigation = useNavigation();
+  const [accessToken, setAccessToken] = useState(null);
 
+  const handleLogin = async (username, password) => {
+    try {
+      const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+      const data = await response.json();
 
+      if (data.status === 200) {
+        console.log("hej");
 
-    const handleLogin = async (username, password) => {
-        try {
-            const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/token', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
-            });
-            const data = await response.json();
+        await AsyncStorage.setItem('accessToken', data.data.accessToken);
+        await AsyncStorage.setItem('userID', data.data._id);
 
-            if (data.status === 200) {
-                console.log("hej")
+        setAccessToken(data.data.accessToken);
 
-                await AsyncStorage.setItem('accessToken', data.data.accessToken);
-                await AsyncStorage.setItem('userID', data.data._id);
+      } else {
 
-                setAccessToken(data.data.accessToken);
+        console.log("hej");
 
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-            } else {
+  const handleRegister = async (username, password) => {
+    try {
+      const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+      const data = await response.json();
+      console.log(data.status);
 
-                console.log("hej")
+      if (data.status === 409) {
 
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+        console.log("hej");
 
-    const handleRegister = async (username, password) => {
-        try {
-            const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                }),
-            });
-            const data = await response.json();
-            console.log(data.status);
+      }
+      else {
 
-            if (data.status === 409) {
+        console.log("hej");
 
-                console.log("hej")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-            }
-            else {
+  const handleLogout = async () => {
+    console.log('handleLogout');
+    try {
+      await AsyncStorage.removeItem('accessToken');
+      setAccessToken(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-                console.log("hej")
+  const isLoggedIn = async () => {
+    console.log('isLoggedIn');
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      setAccessToken(token);
 
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    isLoggedIn();
 
+  }, []);
 
-    const handleLogout = async () => {
-        console.log('handleLogout');
-        try {
-            await AsyncStorage.removeItem('accessToken');
-            setAccessToken(null);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const isLoggedIn = async () => {
-        console.log('isLoggedIn');
-        try {
-            const token = await AsyncStorage.getItem('accessToken');
-            setAccessToken(token);
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-   
-    
-
-    useEffect(() => {
-        isLoggedIn();
-
-    }, []);
-
-    return (
-        <AuthContext.Provider
-            value={{
-               accessToken,
-               handleLogout,
-               handleLogin,
-               handleRegister
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{
+        accessToken,
+        handleLogout,
+        handleLogin,
+        handleRegister
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
-
