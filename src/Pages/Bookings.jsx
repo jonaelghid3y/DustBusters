@@ -22,6 +22,7 @@ function Bookings() {
   const [adress, setAdress] = useState('');
   const [email, setEmail] = useState('');
   const [clickedTime, setClickedTime] = useState(0);
+  const [selectedValue, setSelectedValue] = useState("")
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -39,9 +40,6 @@ function Bookings() {
   }
 
   const handleSubmit = async (e) => {
-    console.log(name)
-    console.log(clickedTime)
-    console.log()
 
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking', {
@@ -53,7 +51,7 @@ function Bookings() {
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
           startTime: clickedTime,
-          service: "Vardagsstädning"
+          service: selectedValue
         }),
       });
 
@@ -72,21 +70,7 @@ function Bookings() {
   useEffect(() => {
     renderCurrDate();
     fetchBookings();
-  }, [clickedDate]);
-
-  const showNextMonth = () => {
-    if (currMonth < 11)
-      setCurrMonth(currMonth + 1)
-    else
-      setCurrMonth(0)
-
-  }
-  const showPrevMonth = () => {
-    if (currMonth > 0)
-      setCurrMonth(currMonth - 1)
-    else
-      setCurrMonth(11)
-  }
+  }, []);
 
   const fetchBookings = async () => {
     try {
@@ -116,28 +100,14 @@ function Bookings() {
   return (
     <div>
       <Wrapper className="wrapper">
-        <div>
-          <Styledheader>
-            <button id="prev" onClick={() => showPrevMonth()}>&#60;</button>
-            <p className='month'>{months[currMonth]}</p>
-            <button id="next" onClick={() => showNextMonth()}>&#62;</button>
-          </Styledheader>
-          <DaysDiv>
-            <div><p>Mo</p></div>
-            <div><p>Tu</p></div>
-            <div><p>We</p></div>
-            <div><p>Th</p></div>
-            <div><p>Fr</p></div>
-            <div><p>Sa</p></div>
-            <div><p>Su</p></div>
-          </DaysDiv>
           <Calendar
             currYear={currYear}
             currMonth={currMonth}
+            setCurrMonth={setCurrMonth}
             currDate={currDate}
+            months={months}
             getAvailiableTimes={getAvailiableTimes}
           />
-        </div>
         {
           clicked == true
             ? <AvailableTimes
@@ -164,6 +134,8 @@ function Bookings() {
             setAdress={setAdress}
             email={email}
             setEmail={setEmail}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
             handleSubmit={handleSubmit} />
         )}
       </ModalContainer>
@@ -182,36 +154,6 @@ const ModalContainer = styled.div`
     left: 30%;
 `
 
-const Styledheader = styled.header`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    width: 35vw;
-    margin-bottom: 20px;
-    button {
-    all: unset;
-    cursor: pointer;
-    }
-    p {
-        font-size: 1.3rem;
-    }
-
-`
-
-const DaysDiv = styled.div`
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    width: 35vw;
-    background-color: #FFD530;
-    text-align: center;
-    padding: 10px 0;
-    margin-bottom: 10px;
-    p {
-        font-size: 1.2rem;
-        font-weight: 300;
-    }
-
-`
 const ChooseDate = styled.p`
     padding-top: 30%;
 `

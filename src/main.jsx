@@ -13,6 +13,7 @@ import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
 import ServicesAdmin from './Admin/ServicesAdmin';
 import Login from './Pages/Login';
+import Admin from './Pages/Admin';
 import Profile from './Pages/Profile';
 
 const router = createBrowserRouter([
@@ -35,22 +36,25 @@ const router = createBrowserRouter([
       },
       {
         path: "/Services",
-        element: (
-          <>
-            <Services />,
-            < ServicesAdmin />,
-          </>
-        ),
+        element:
+          <Services />,
       },
       {
         path: "/login",
-        element: <Login/>
+        element: <Login />
+
+      },
+      {
+        path: "/Admin",
+        element: <Admin />
+
       },
       {
         path: "/Profile",
-        element: <Profile/>,
-      },
-    
+        element: <Profile />
+
+      }
+
 
 
 
