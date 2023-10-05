@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import Nav from './Nav'
+import React from 'react';
+import styled from 'styled-components';
+import Nav from './Nav';
 
 function Header() {
   return (
     <Styledheader>
-        <Nav/>
+      <Nav />
     </Styledheader>
-  )
+  );
 }
 const Styledheader = styled.header`
   width: 100%;
@@ -15,6 +15,6 @@ const Styledheader = styled.header`
   overflow-y: hidden;
   
   
-`
+`;
 
-export default Header
+export default Header;

@@ -38,13 +38,16 @@ const StyledDiv = styled.div`
   width: 100%;
   padding: 5vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 5vw;
   align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+}
 `;
 
 const StyledImage = styled.img`
   height: auto;
-  max-width: 100%;
   border-radius: 35px;
   margin-bottom: 2rem;
 `;
@@ -52,7 +55,6 @@ const StyledImage = styled.img`
 const StyledTextContainer = styled.div`
   width: 100%;
   max-width: 800px;
-  text-align: center;
 `;
 
 const StyledText = styled.p`
