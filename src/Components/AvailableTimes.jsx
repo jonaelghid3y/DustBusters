@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Button } from './Button'
+import React from 'react';
+import styled from 'styled-components';
+import { Button } from './Button';
 
 const AvailableTimes = ({ availiableTimesArr, clickedDate, currMonth, currYear, months, bookTime }) => {
 
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   return (
     <Section>
@@ -23,13 +23,13 @@ const AvailableTimes = ({ availiableTimesArr, clickedDate, currMonth, currYear, 
                 primary size="small"
                 label="Book"
                 onClick={() => bookTime(time)} />
-            </TimeSlot>
+            </TimeSlot>;
           })
         }
       </div>
     </Section>
-  )
-}
+  );
+};
 
 const Section = styled.section`
   
@@ -48,12 +48,12 @@ const Section = styled.section`
     column-gap: 10%;
 
   }
-`
+`;
 const TimeSlot = styled.div`
   margin: 20px;
-`
+`;
 const NoDate = styled.p`
   padding-top: 20%;
-`
+`;
 
-export default AvailableTimes
+export default AvailableTimes;

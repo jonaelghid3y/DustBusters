@@ -31,7 +31,7 @@ function LandingPage() {
         },
       }));
     }
-  }, [controls, inView])
+  }, [controls, inView]);
 
   // ***** Effekt för första raden iconer******
 
@@ -55,7 +55,6 @@ function LandingPage() {
   }, [servicesControls, servicesInView]);
 
   // ***** Effekt för andra raden iconer******
-
 
   // ***** Effekt för slidern******
   const settings = {
@@ -113,7 +112,7 @@ function LandingPage() {
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
 
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/review', {
@@ -157,7 +156,6 @@ function LandingPage() {
           <Button primary size="large" label="Book now!" />
         </Link>
       </StyledLandingImg>
-      
       <StyledRatingDiv>
         <StyledHeadlineDiv>
           <Styledh2headline1>
@@ -395,87 +393,6 @@ const StyledSlides = styled.div`
 
 `;
 
-const StyledReviewModal = styled(motion.div)`
-position: fixed;
-right: 50;
-top: 10vh;
-border: 1px solid lightgrey;
-background-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-width: 40%;
-min-height: 550px;
-padding: 25px;
-border-radius: 20px;
-padding: 25px;
-gap: 20px;
-@media (max-width: 768px) {
-
-  width: 80%;
-  min-height: 600px;
-  
- }
-`;
-const StyledForm = styled.form`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  border: 1px solid black;
-  width: 80%;
-  height: 80%;
-  gap: 25px;
-  
-`;
-const StyledFormHeadline = styled.h3`
-
-font-size: 30px;
-margin-bottom: 20px;
-`;
-
-const StyledFormDivs = styled.div`
-display: flex;
-align-items: flex-start;
-justify-content: center;
-flex-direction: column;
-`;
-const StyledLabel = styled.label`
-
-`;
-const StyledInput = styled.input`
-font-size: 16.5px;
-width: 20vw;
-height: 5vh;
-@media (max-width: 768px) {
-
-  width: 60vw;
-  
- }
-
-`;
-const Styledtextarea = styled.textarea`
-width: 20vw;
-height: 9vw;
-font-size: 18px;
-resize: none;
-
-@media (max-width: 768px) {
-
-  width: 60vw;
-  height: 15vh;
-  
- }
-
-`;
-const StyledStar = styled.div`
-  cursor: pointer;
-  color: ${props => (props.selected ? '#FFD530' : '#ccc')};
-  display: flex;
-  flex-direction: row;
-  transition: 0.5s;
-`;
 const StyledRowDiv1 = styled.div`
   display: flex;
   align-items: center;
@@ -541,4 +458,4 @@ width: 13vw;
  }
 
 `;
-export default LandingPage
+export default LandingPage;

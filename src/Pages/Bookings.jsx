@@ -1,10 +1,10 @@
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import styled from 'styled-components'
-import AvailableTimes from '../Components/AvailableTimes'
-import Calendar from '../Components/Calender'
-import Modal from '../Components/Modal'
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import AvailableTimes from '../Components/AvailableTimes';
+import Calendar from '../Components/Calender';
+import Modal from '../Components/Modal';
 
 function Bookings() {
   const [currMonth, setCurrMonth] = useState("");
@@ -22,7 +22,7 @@ function Bookings() {
   const [adress, setAdress] = useState('');
   const [email, setEmail] = useState('');
   const [clickedTime, setClickedTime] = useState(0);
-  const [selectedValue, setSelectedValue] = useState("")
+  const [selectedValue, setSelectedValue] = useState("");
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -30,16 +30,16 @@ function Bookings() {
   const renderCurrDate = () => {
     let date = new Date();
     setCurrDate(date.getDate());
-    setCurrYear(date.getFullYear())
-    setCurrMonth(date.getMonth())
-  }
+    setCurrYear(date.getFullYear());
+    setCurrMonth(date.getMonth());
+  };
 
   const bookTime = (time) => {
     setModalOpen(!isModalOpen);
-    setClickedTime(time)
-  }
+    setClickedTime(time);
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
 
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking', {
@@ -95,19 +95,19 @@ function Bookings() {
 
     setAvailiableTimesArr(availableTimes);
 
-  }
+  };
 
   return (
     <div>
       <Wrapper className="wrapper">
-          <Calendar
-            currYear={currYear}
-            currMonth={currMonth}
-            setCurrMonth={setCurrMonth}
-            currDate={currDate}
-            months={months}
-            getAvailiableTimes={getAvailiableTimes}
-          />
+        <Calendar
+          currYear={currYear}
+          currMonth={currMonth}
+          setCurrMonth={setCurrMonth}
+          currDate={currDate}
+          months={months}
+          getAvailiableTimes={getAvailiableTimes}
+        />
         {
           clicked == true
             ? <AvailableTimes
@@ -140,22 +140,22 @@ function Bookings() {
         )}
       </ModalContainer>
     </div>
-  )
+  );
 }
 
 const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 5%;
-`
+`;
 
 const ModalContainer = styled.div`
     position: fixed;
     left: 30%;
-`
+`;
 
 const ChooseDate = styled.p`
     padding-top: 30%;
-`
+`;
 
-export default Bookings
+export default Bookings;
