@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../Components/Icons';
 import { ImageDivs } from '../Components/ImageDivs';
 import { motion, useAnimation } from 'framer-motion';
@@ -13,7 +13,7 @@ import { useInView } from 'react-intersection-observer';
 import Modal from '../Components/Modal';
 
 function LandingPage() {
-
+  const navigate = useNavigate();
   // ***** Effekt för första raden iconer******
 
   const controls = useAnimation();
@@ -132,6 +132,8 @@ function LandingPage() {
 
       const data = await response.json();
       console.log(data);
+      navigate('/');
+      window.location.reload();
 
     } catch (error) {
       console.log(error);
