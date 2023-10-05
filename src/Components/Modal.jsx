@@ -7,7 +7,7 @@ import { Button } from '../Components/Button';
 import { motion } from 'framer-motion';
 
 
-const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, email, setEmail, handleSubmit }) => {
+const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, email, setEmail, selectedValue, setSelectedValue, handleSubmit }) => {
 
     const [services, setServices] = useState([]);
 
@@ -96,7 +96,7 @@ const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setCont
                                     onChange={(e) => setEmail(e.target.value)} />
                             </StyledFormDivs>
                             <label htmlFor="select-service">Choose service:</label>
-                            <StyledSelect name="pets" id="select-service">
+                            <StyledSelect name="services" id="select-service" onChange={(e) => setSelectedValue(e.target.value)}>
                                 <option value="">--Please choose a service--</option>
                                 {services.map((service) => {
                                     return <option key={service.id} value={service.title}>{service.title}</option>
