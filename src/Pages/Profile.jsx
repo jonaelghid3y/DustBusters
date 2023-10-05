@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import cat from '../assets/cat.jpg';
 
 
+
+
 export default function Profile() {
 
 const [membercolor, setmembercolor] = useState("gold");
