@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { AiFillSafetyCertificate, AiFillStar } from 'react-icons/ai';
-import Slider from 'react-slick'
+import { AiFillStar } from 'react-icons/ai';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
@@ -79,7 +79,7 @@ function LandingPage() {
         },
       },
     ],
-  }
+  };
   // ***** Effekt för slidern******
 
   // ***** Fetch för reviews ******
@@ -107,7 +107,7 @@ function LandingPage() {
 
   const leaveReview = () => {
     setModalOpen(!isModalOpen);
-  }
+  };
 
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -261,14 +261,14 @@ function LandingPage() {
         </Link>
       </StyledServicesDiv>
     </StyledDiv>
-  )
+  );
 }
 const StyledDiv = styled.div`
   width: 100%;
   min-height: 300vh;
   font-family: 'Poppins', sans-serif;
  
-`
+`;
 const StyledLandingImg = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -282,7 +282,7 @@ const StyledLandingImg = styled.div`
   @media (max-width: 768px) {
 
   }
-`
+`;
 const StyledHeadline = styled.h1`
 margin-top: 40vh;
 margin-bottom: 6vh;
@@ -293,8 +293,7 @@ color: white;
   font-size: 40px;
   text-align: center;
 }
-`
-
+`;
 const StyledRatingDiv = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -304,14 +303,14 @@ const StyledRatingDiv = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding-bottom: 100px;
-`
+`;
 const StyledHeadlineDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   margin-top: 100px;
-`
+`;
 const Styledh2headline1 = styled.h2`
 
 font-size:40px;
@@ -320,7 +319,7 @@ color: white;
   font-size: 30px;
   text-align: center;
 }
-`
+`;
 const Styledh2headline2 = styled.h2`
 font-size:40px;
 color: #FFD530;
@@ -328,7 +327,7 @@ color: #FFD530;
   font-size: 30px;
   text-align: center;
 }
-`
+`;
 const StyledSpan = styled.span`
 height: 5px;
 width: 60px;
@@ -337,7 +336,7 @@ border-radius: 10px;
 @media (max-width: 768px) {
  width: 40px;
 }
-`
+`;
 const StyledIconDiv = styled.div`
   width: 100%;
   margin-top:70px;
@@ -349,7 +348,7 @@ const StyledIconDiv = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
    }
-`
+`;
 const StyledText = styled.p`
 text-align: center;
 color: white;
@@ -359,14 +358,14 @@ width: 13vw;
 @media (max-width: 768px) {
   width: 40vw;
  }
-`
+`;
 const StyledIconsText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-`
+`;
 const StyledSliderDiv = styled.div`
 margin-top: 100px;
 padding:20px;
@@ -434,17 +433,17 @@ const StyledFormHeadline = styled.h3`
 
 font-size: 30px;
 margin-bottom: 20px;
-`
+`;
 
 const StyledFormDivs = styled.div`
 display: flex;
 align-items: flex-start;
 justify-content: center;
 flex-direction: column;
-`
+`;
 const StyledLabel = styled.label`
 
-`
+`;
 const StyledInput = styled.input`
 font-size: 16.5px;
 width: 20vw;
@@ -455,7 +454,7 @@ height: 5vh;
   
  }
 
-`
+`;
 const Styledtextarea = styled.textarea`
 width: 20vw;
 height: 9vw;
@@ -469,7 +468,7 @@ resize: none;
   
  }
 
-`
+`;
 const StyledStar = styled.div`
   cursor: pointer;
   color: ${props => (props.selected ? '#FFD530' : '#ccc')};
@@ -484,23 +483,23 @@ const StyledRowDiv1 = styled.div`
   width: 100%;
   gap: 10px;
 
-`
+`;
 const StyledRowDiv2 = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
 width: 100%;
 gap: 10px;
-`
+`;
 const StyledRatingh3 = styled.h3`
 font-size:20px;
 margin-left: 5%;
-`
+`;
 const StyledP = styled.h3`
 font-size:15px;
 font-weight: normal;
 text-align: center;
-`
+`;
 const StyledServicesDiv = styled.div`
 width: 100%;
 min-height: 80vh;
@@ -510,14 +509,14 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-`
+`;
 const Styledh2headline3 = styled.h2`
 font-size:40px;
 color: black;
 @media (max-width: 768px) {
   font-size: 30px;
  }
-`
+`;
 const StyledServicesRowDiv = styled.div`
  margin-top: 50px;
  margin-bottom: 100px;
@@ -530,7 +529,7 @@ const StyledServicesRowDiv = styled.div`
     flex-direction: column;
    }
 
-`
+`;
 const StyledServicesText = styled.p`
 text-align: center;
 color: black;
@@ -541,5 +540,5 @@ width: 13vw;
   width: 40vw;
  }
 
-`
+`;
 export default LandingPage

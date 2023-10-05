@@ -19,8 +19,8 @@ const AvailableTimes = ({ availiableTimesArr, clickedDate, currMonth, currYear, 
           : availiableTimesArr.map((time) => {
             return <TimeSlot key={time} className='timeslot'>
               <p>{time}.00</p>
-              <Button 
-                primary size="small" 
+              <Button
+                primary size="small"
                 label="Book"
                 onClick={() => bookTime(time)} />
             </TimeSlot>
@@ -49,11 +49,11 @@ const Section = styled.section`
 
   }
 `
-const TimeSlot = styled.div `
+const TimeSlot = styled.div`
   margin: 20px;
 `
 const NoDate = styled.p`
-padding-top: 20%;
+  padding-top: 20%;
 `
 
 export default AvailableTimes
