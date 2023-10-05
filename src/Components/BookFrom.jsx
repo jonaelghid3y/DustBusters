@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 const BookFrom = ({ name, setName, adress, setAdress, email, setEmail, setSelectedValue, services }) => {
   return (
     <>
       <StyledFormDivs>
-        <StyledLabel> Name:</StyledLabel>
+        <label> Name:</label>
         <StyledInput
           type="text"
           name='name'
@@ -14,7 +14,7 @@ const BookFrom = ({ name, setName, adress, setAdress, email, setEmail, setSelect
           onChange={(e) => setName(e.target.value)} />
       </StyledFormDivs>
       <StyledFormDivs>
-        <StyledLabel> Adress:</StyledLabel>
+        <label> Adress:</label>
         <StyledInput
           type="text"
           name='name'
@@ -23,7 +23,7 @@ const BookFrom = ({ name, setName, adress, setAdress, email, setEmail, setSelect
           onChange={(e) => setAdress(e.target.value)} />
       </StyledFormDivs>
       <StyledFormDivs>
-        <StyledLabel> Email:</StyledLabel>
+        <label> Email:</label>
         <StyledInput
           type="text"
           name='name'
@@ -39,39 +39,33 @@ const BookFrom = ({ name, setName, adress, setAdress, email, setEmail, setSelect
         })}
       </StyledSelect>
     </>
-  )
-}
+  );
+};
 
 const StyledFormDivs = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    `
-const StyledLabel = styled.label`
+    `;
 
-`
 const StyledInput = styled.input`
     font-size: 16.5px;
     width: 20vw;
     height: 5vh;
     @media (max-width: 768px) {
-
-    width: 60vw;
-    
+    width: 60vw;  
     }
 
-`
+`;
 
 const StyledSelect = styled.select`
     font-size: 16.5px;
     width: 20vw;
     height: 5vh;
     @media (max-width: 768px) {
-
     width: 60vw;
-    
     }
-`
+`;
 
-export default BookFrom
+export default BookFrom;
