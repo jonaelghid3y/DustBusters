@@ -11,7 +11,6 @@ import LandingPage from './Pages/LandingPage';
 import Bookings from './Pages/Bookings';
 import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
-import ServicesAdmin from './Admin/ServicesAdmin';
 import Login from './Pages/Login';
 import Admin from './Pages/Admin';
 import Profile from './Pages/Profile';
