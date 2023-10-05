@@ -16,5 +16,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "semi": [2, "always"],
+    "quotes": "off",
+    "no-undef": "off",
+    "object-shorthand": 0,
+    "react/prop-types": "off"
   },
 }

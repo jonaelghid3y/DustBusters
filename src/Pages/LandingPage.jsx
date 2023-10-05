@@ -375,7 +375,8 @@ width: 70%;
 @media (max-width: 768px) {
   width: 83%;
  }
-`
+`;
+
 const StyledSlides = styled.div`
   color: black;
   background-color: white;
@@ -393,7 +394,7 @@ const StyledSlides = styled.div`
     width: 260px;
    }
 
-`
+`;
 
 const StyledReviewModal = styled(motion.div)`
 position: fixed;
@@ -417,18 +418,18 @@ gap: 20px;
   min-height: 600px;
   
  }
-`
+`;
 const StyledForm = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black
+  border: 1px solid black;
   width: 80%;
   height: 80%;
   gap: 25px;
   
-`
+`;
 const StyledFormHeadline = styled.h3`
 
 font-size: 30px;

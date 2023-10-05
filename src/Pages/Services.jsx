@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -9,8 +9,8 @@ function Services() {
   const [fetchedData, setfetchedData] = useState([]);
 
   useEffect(() => {
-    fetchServices()
-  }, [])
+    fetchServices();
+  }, []);
 
   const fetchServices = async () => {
     try {
@@ -20,9 +20,9 @@ function Services() {
 
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
 
 
@@ -57,7 +57,7 @@ function Services() {
       {renderedData}
 
     </>
-  )
+  );
 
 
 
@@ -74,10 +74,7 @@ const StyledTextContainer = {
   fontFamily:"poppins",
   overflowY:"auto",
   zIndex:"0",
-  
-}
-
-
+};
 
 const images = {
 
@@ -85,10 +82,7 @@ const images = {
   minWidth: "25%",
   borderRadius: "20px",
   margin: "60px",
-
-}
-
-
+};
 
 const component = {
   width: "100%",
@@ -108,7 +102,8 @@ textDecoration:"underline",
 textUnderlineOffset: "10px",
 textDecorationColor:"#FFD530",
 textDecorationWidth:"30px",
-}
+};
+
 const component1 ={
   width: "100%",
   height:"60vh",
@@ -117,13 +112,10 @@ const component1 ={
   justifyContent:"space-around",
   flexDirection:"row-reverse",
   color:"white",
-
-}
+};
 
 const paragraph = {
   fontSize:"1rem",
-}
+};
 
-
-
-export default Services
+export default Services;
