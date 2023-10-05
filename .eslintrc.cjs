@@ -25,6 +25,6 @@ module.exports = {
     "object-shorthand": 0,
     "react/prop-types": "off",
     "no-trailing-spaces": "error",
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
   },
 }
