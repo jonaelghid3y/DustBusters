@@ -19,6 +19,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "semi": [2, "always"],
+    "indent": ["error", 2],
     "quotes": "off",
     "no-undef": "off",
     "object-shorthand": 0,

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { useState} from 'react';
 import styled from 'styled-components';
-import cat from '../assets/cat.jpg'
+import cat from '../assets/cat.jpg';
 
 
 export default function Profile() {
 
-const [membercolor, setmembercolor] = useState("gold")
+const [membercolor, setmembercolor] = useState("gold");
 
   return (
     <>
@@ -43,7 +43,7 @@ const [membercolor, setmembercolor] = useState("gold")
 </Form>
 
     </>
-  )
+  );
 }
 
 const ProfileSide = styled.div`
@@ -57,8 +57,8 @@ justify-content: center;
 align-items: center; 
 align-items: center; 
 border-right:3px solid #333333;
+`;
 
-`
 const ButtonContainer = styled.div`
 
 display:flex;
@@ -67,7 +67,7 @@ padding:3%;
 gap:30px;
 margin-top:2%;
 width:75%;
-`
+`;
 
 const memberstyle = {
   fontSize:"30px",
@@ -76,7 +76,7 @@ const memberstyle = {
   padding:"10px",
   backgroundColor:"white",
   borderRadius:"5px",
-}
+};
 
 
 
@@ -100,7 +100,7 @@ background: linear-gradient(140deg, #f9d966, #d6ac17);
   left:40%;
  
 }
-`
+`;
 
 const ButtonDiv = {
 
@@ -112,7 +112,7 @@ backgroundColor:"yellow",
 fontWeight:"700",
 fontFamily:"Arial",
 
-}
+};
 
 const ButtonDiv2 = {
 
@@ -125,7 +125,7 @@ fontWeight:"700",
 fontFamily:"Arial",
 
 
-}
+};
 
 
 
@@ -137,7 +137,7 @@ border:"none",
 borderBottom:"2px solid black",
 backgroundColor: "transparent",
 
-}
+};
 
 
 
@@ -147,7 +147,7 @@ fontSize:"18px",
  left:"10px",
  marginTop:"25px",
  fontFamily:"poppins"
-}
+};
 
 
 const propic = {
@@ -156,7 +156,7 @@ const propic = {
     borderRadius:"50%",
     margin:"100px auto",
    
-}
+};
 
 const circle = {
     borderRadius: '50%',
@@ -168,7 +168,7 @@ const circle = {
     alignItems: 'center',
     overflow:"hidden",
   
-}
+};
 
 const username = {
 
@@ -176,7 +176,7 @@ fontFace:"Poppins",
 fontSize:"38px",
 position:"absolute",
 top:"20%"
-}
+};
 
 
 
@@ -185,5 +185,4 @@ const paragraph = {
     top:"28%",
     color:"black",
     opacity:"0.4",
-
-}
+};
