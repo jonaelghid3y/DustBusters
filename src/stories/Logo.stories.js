@@ -1,4 +1,4 @@
-import { Logo } from '../Components/Logo'
+import { Logo } from '../Components/Logo';
 
 export default {
   title: 'Example/Logo',
@@ -20,7 +20,5 @@ export const Primary = {
 
 export const Secondary = {
   args: {
-    
   },
 };
-

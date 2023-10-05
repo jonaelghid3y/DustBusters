@@ -80,4 +80,4 @@ const StyledRowDiv2 = styled.div`
     gap: 10px;
 `;
 
-export default ReviewForm
+export default ReviewForm;

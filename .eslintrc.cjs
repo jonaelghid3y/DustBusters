@@ -23,6 +23,9 @@ module.exports = {
     "quotes": "off",
     "no-undef": "off",
     "object-shorthand": 0,
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-trailing-spaces": "error",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+    "react/no-unescaped-entities": "off"
   },
 }

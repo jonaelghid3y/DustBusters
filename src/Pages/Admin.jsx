@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Admin() {
   return (
@@ -9,5 +9,5 @@ export default function Admin() {
       <Link to="/service-admin">Go to Service Admin</Link>
       <Link to="/booking-admin">Go to Booking Admin</Link>
     </div >
-  )
+  );
 }
