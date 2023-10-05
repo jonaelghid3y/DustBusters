@@ -5,14 +5,14 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Button } from '../Components/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../Components/Icons';
 import { ImageDivs } from '../Components/ImageDivs';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 function LandingPage() {
-
+  const navigate = useNavigate();
   // ***** Effekt för första raden iconer******
 
   const controls = useAnimation();
@@ -123,7 +123,10 @@ function LandingPage() {
   const [rating, setRating] = useState(0);
 
   const handleSubmit = async (e) => {
-   
+    
+    e.preventDefault();
+
+
 
    
     try {
@@ -145,6 +148,8 @@ function LandingPage() {
 
       const data = await response.json();
       console.log(data);
+      navigate('/')
+      window.location.reload();
 
     } catch (error) {
       console.log(error);
@@ -240,7 +245,7 @@ function LandingPage() {
               <StyledFormDivs>
                 <StyledLabel> Name:</StyledLabel>
 
-                <StyledInput type="text" name='name' required value={name} onChange={(e) => setName(e.target.value)}/>
+                <StyledInput type="text" required value={name} onChange={(e) => setName(e.target.value)}/>
               </StyledFormDivs>
               <StyledFormDivs>
                 <StyledLabel> Comments or feedback:</StyledLabel>
