@@ -10,7 +10,6 @@ function BookingAdmin() {
         service: '',
     });
 
-
     useEffect(() => {
         fetchBookings();
     }, []);
@@ -50,19 +49,21 @@ function BookingAdmin() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://api-s5hih6nmta-uc.a.run.app/booking${id}`);
-
+            await axios.delete(`https://api-s5hih6nmta-uc.a.run.app/booking/${id}`);
             fetchBookings();
         } catch (error) {
             console.error(`Error deleting booking ${id}:`, error);
         }
     };
 
+    const handleEdit = async (id) => {
+
+        console.log(`Editing booking ${id}`);
+    };
+
     return (
         <div style={containerStyle}>
-            <h1>List of Booking</h1>
-
-
+            <h1>List of Bookings</h1>
             <form onSubmit={handleSubmit}>
                 <button type="submit">Add new booking</button>
                 <label>Customer:</label>
@@ -79,40 +80,31 @@ function BookingAdmin() {
                     value={newBooking.date}
                     onChange={handleInputChange}
                 />
-                <label>Edit:</label>
-                <input
-                    type="text"
-                    name="service"
-                    value={newBooking.service}
-                    onChange={handleInputChange}
-                />
-
             </form>
-
             <table style={tableStyle}>
-
                 <thead>
                     <tr>
-                        <th style={thStyle}>Cutomer</th>
+                        <th style={thStyle}>Customer</th>
                         <th style={thStyle}>Date</th>
                         <th style={thStyle}>Edit</th>
-                        <th style={thStyle}>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ul>
-                        {bookings.map((booking) => (
-                            <li key={booking.id}>
-                                {booking.name} - {booking.date} - {booking.service}
-                                <button onClick={() => this.handleDelete(booking.id)}>
+                    {bookings.map((booking, index) => (
+                        <tr key={booking.id} style={{ backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
+                            <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{booking.name}</td>
+                            <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{booking.date}</td>
+                            <td>
+                                <button onClick={() => handleDelete(booking.id)} style={iconButtonStyle}>
                                     <MdDelete />
                                 </button>
-                                <button onClick={() => this.handleEdit(booking.id)}>
+
+                                <button onClick={() => handleEdit(booking.id)} style={iconButtonStyle}>
                                     <MdEdit />
                                 </button>
-                            </li>
-                        ))}
-                    </ul>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
@@ -125,12 +117,14 @@ const containerStyle = {
     margin: "0 auto",
     fontFamily: 'Poppins',
     textAlign: "center",
+    color: "color",
 };
 
 const tableStyle = {
     width: "80%",
     borderCollapse: "collapse",
-}
+    padding: "5px",
+};
 
 const thStyle = {
     backgroundColor: "#FFD530",
@@ -139,4 +133,19 @@ const thStyle = {
     textAlign: "left",
     margin: "10px",
 };
+
+const tdStyle = {
+    padding: "10px",
+    color: 'white',
+    margin: '10px',
+};
+
+const iconButtonStyle = {
+    background: 'none',
+    border: 'none',
+    color: 'white',
+    cursor: 'pointer',
+};
+
+
 export default BookingAdmin;

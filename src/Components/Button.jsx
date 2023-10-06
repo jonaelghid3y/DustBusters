@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 import styled, { css } from 'styled-components';
-
 
 export const Button = ({ label, ...rest }) => {
   return (
     <StyledButton
-      whileHover={{ scale: 1.1 }} 
-      whileTap={{ scale: 0.9 }}  
-      initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ duration: 0.5 }} 
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
       {...rest}
     >
       {label}
@@ -32,23 +31,22 @@ const getVariantStyles = ({ primary = false }) =>
         border: 2px solid #FFD530;
       `;
 
-
 const getSizeStyles = ({ size = 'large' }) => {
   switch (size) {
-    case 'small': {
-      return css`
+  case 'small': {
+    return css`
         font-size: 16px;
         padding: 10px 16px;
         border-radius: 12px;
       `;
-    }
-    default: {
-      return css`
+  }
+  default: {
+    return css`
         font-size: 24px;
         padding: 16px 30px;
         border-radius: 20px;
       `;
-    }
+  }
   }
 };
 
@@ -67,8 +65,7 @@ const StyledButton = styled(motion.button)`
     css`
       background-color: ${backgroundColor};
     `}
-`
-  
+`;
 
 Button.propTypes = {
   primary: PropTypes.bool,

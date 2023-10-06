@@ -2,8 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-
-
 function Services() {
 
   const [fetchedData, setfetchedData] = useState([]);
@@ -14,23 +12,18 @@ function Services() {
 
   const fetchServices = async () => {
     try {
-      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services')
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services');
       const data = await response.json();
       setfetchedData(data);
-
 
     } catch (error) {
       console.log(error);
     }
   };
 
-
-
   const renderedData = fetchedData.map((item, index) => (
 
     <div key={item.id} style={index % 2 === 0 ? component : component1}>
-
-
 
       <img style={images} src={item.imgURL} alt="cleaning"></img>
 
@@ -43,13 +36,9 @@ function Services() {
 
       </div>
 
-
-
     </div>
 
   ));
-
-
 
   return (
     <>
@@ -59,11 +48,7 @@ function Services() {
     </>
   );
 
-
-
 }
-
-
 
 const StyledTextContainer = {
   width: "50%",
@@ -91,7 +76,7 @@ const component = {
   display: "flex",
   justifyContent: "space-around",
   flexDirection: "row",
-}
+};
 
 const pricestyle = {
 

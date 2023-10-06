@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,77 +7,73 @@ import { motion } from 'framer-motion';
 import ReviewForm from './ReviewForm';
 import BookFrom from './BookFrom';
 
-
 const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, email, setEmail, setSelectedValue, handleSubmit }) => {
 
-    const [services, setServices] = useState([]);
+  const [services, setServices] = useState([]);
 
-    useEffect(() => {
-        fetchServices()
-    }, [])
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
-    const fetchServices = async () => {
-        try {
-            const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services')
-            const data = await response.json();
-            setServices(data);
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services');
+      const data = await response.json();
+      setServices(data);
 
-
-        } catch (error) {
-            console.log(error)
-        }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const handleModal = () => {
-        setModalOpen(!modalOpen);
-    }
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
-    const variants = {
-        open: { opacity: 1, y: 0 },
-        closed: { opacity: 0, y: "-100vh" },
-    };
+  const variants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: "-100vh" },
+  };
 
+  return (
+    <StyledReviewModal
+      initial="closed"
+      animate={modalOpen ? "open" : "closed"}
+      variants={variants}>
+      <StyledFormHeadline>
+        {title}
+      </StyledFormHeadline>
+      <StyledForm onSubmit={handleSubmit}>
+        {title == "Review"
+          ? <ReviewForm
+            name={name}
+            setName={setName}
+            content={content}
+            setContent={setContent}
+            rating={rating}
+            setRating={setRating} />
+          : title == "Book"
+            ? <BookFrom
+              name={name}
+              setName={setName}
+              adress={adress}
+              setAdress={setAdress}
+              email={email}
+              setEmail={setEmail}
+              setSelectedValue={setSelectedValue}
+              services={services}
+            />
+            : null}
 
-    return (
-        <StyledReviewModal
-            initial="closed"
-            animate={modalOpen ? "open" : "closed"}
-            variants={variants}>
-            <StyledFormHeadline>
-                {title}
-            </StyledFormHeadline>
-            <StyledForm onSubmit={handleSubmit}>
-                {title == "Review"
-                    ? <ReviewForm
-                        name={name}
-                        setName={setName}
-                        content={content}
-                        setContent={setContent}
-                        rating={rating}
-                        setRating={setRating} />
-                    : title == "Book"
-                        ? <BookFrom 
-                            name={name}
-                            setName={setName}
-                            adress={adress}
-                            setAdress={setAdress}
-                            email={email}
-                            setEmail={setEmail}
-                            setSelectedValue={setSelectedValue}
-                            services={services}
-                            />
-                        : null}
-
-                <Button primary size="small" label="Submit" />
-            </StyledForm>
-            <Button
-                secondary size="small"
-                label="Go back"
-                onClick={handleModal} />
-        </StyledReviewModal>
-    )
-}
-
+        <Button primary size="small" label="Submit" />
+      </StyledForm>
+      <Button
+        secondary size="small"
+        label="Go back"
+        onClick={handleModal} />
+    </StyledReviewModal>
+  );
+};
 
 const StyledReviewModal = styled(motion.div)`
     position: fixed;
@@ -101,7 +97,7 @@ const StyledReviewModal = styled(motion.div)`
     min-height: 600px;
     
     }
-`
+`;
 const StyledForm = styled.form`
   display: flex;
   align-items: center;
@@ -112,10 +108,10 @@ const StyledForm = styled.form`
   height: 80%;
   gap: 25px;
   
-`
+`;
 const StyledFormHeadline = styled.h3`
     font-size: 30px;
     margin-bottom: 20px;
-    `
+    `;
 
-export default Modal
+export default Modal;

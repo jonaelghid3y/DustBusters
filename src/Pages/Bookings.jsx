@@ -107,6 +107,7 @@ function Bookings() {
           currDate={currDate}
           months={months}
           getAvailiableTimes={getAvailiableTimes}
+          setClicked={setClicked}
         />
         {
           clicked == true
