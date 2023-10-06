@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
@@ -53,6 +53,44 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
     if (calendarDates.length == 35) break;
   }
 
+  const [bookedTimes, setBookedTimes] = useState([]);
+
+  useEffect(() => {
+    fetchBookings();
+    getAvaliableDates();
+  }, []);
+
+  const fetchBookings = async () => {
+    try {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking');
+      const data = await response.json();
+      setBookedTimes(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAvaliableDates = (date) => {
+
+    if (date < new Date().getDate() && currMonth == new Date().getMonth()) {
+      return "grey";
+    }
+    const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date);
+    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+
+    let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+
+    if (availableTimes.length == 0) {
+      return "red";
+    } else if(availableTimes.length < 5) {
+      return "yellow";
+    }
+    else {
+      return "green";
+    }
+  };
+
   const showNextMonth = () => {
     setClicked(false);
     if (currMonth < 11)
@@ -98,6 +136,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                 <div className="current" value={date.date}>
                   <p>{date.date}</p>
                 </div>
+                <div className={getAvaliableDates(date.date)}></div>
               </button>
               : date.class == "active"
                 ? <button
@@ -105,6 +144,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                   key={date.date}
                   onClick={() => getAvailiableTimes(date.date)}>
                   <p>{date.date}</p>
+                  <div className={getAvaliableDates(date.date)}></div>
                 </button>
                 : <button
                   className="nonactive"
@@ -112,6 +152,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                   disabled
                   onClick={() => getAvailiableTimes(date.date)}>
                   <p>{date.date}</p>
+                  <div className="grey"></div>
                 </button>;
           })
         }
@@ -175,12 +216,33 @@ const CalendarDiv = styled.div`
             font-weight: 300;
         }
 
-        .dot {
+        .green {
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        border-color: gray;
-        background-color: gray;
+        border-color: #3e907a;
+        background-color:  #3e907a;
+        }
+        .red {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border-color: #bc473a;
+        background-color: #bc473a;
+        }
+        .yellow {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border-color: yellow;
+        background-color: yellow;
+        }
+        .grey {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border-color: grey;
+        background-color: grey;
         }
 
     }
