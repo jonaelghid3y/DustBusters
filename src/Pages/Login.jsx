@@ -4,9 +4,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../Components/Button';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useContext} from 'react';
+import { AuthContext } from '../Components/Authcontext';
 
-function Login() {
+function Login(){
 
+  const {handleLogin, handleRegister} = useContext(AuthContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
 
   const toggleForm = () => {
@@ -31,14 +36,14 @@ function Login() {
               <StyledForm>
                 <StyledFormDivs>
                   <label> Username:</label>
-                  <StyledInput type="text" name='username' />
+                  <StyledInput type="text" name='username' value={username} onChange={(e) => setUsername(e.target.value)} />
                 </StyledFormDivs>
                 <StyledFormDivs>
                   <label> Password:</label>
-                  <StyledInput type="password" name='password' />
+                  <StyledInput type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </StyledFormDivs>
                 <StyledP>Already have an account? <Link onClick={toggleForm}>Sign in</Link></StyledP>
-                <Button primary size="small" label="Register" />
+                <Button primary size="small" label="Register" onClick={() => { handleRegister(username, password), toggleForm;}} />
               </StyledForm>
             </motion.div>
           ) : (
@@ -54,15 +59,16 @@ function Login() {
               <StyledForm>
                 <StyledFormDivs>
                   <label> Username:</label>
-                  <StyledInput type="text" name='username' />
+                  <StyledInput type="text" name='username' value={username} onChange={(e) => setUsername(e.target.value)} />
                 </StyledFormDivs>
                 <StyledFormDivs>
                   <label> Password:</label>
-                  <StyledInput type="password" name='password' />
+                  <StyledInput type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </StyledFormDivs>
                 <StyledP>Don't have an account? <Link onClick={toggleForm}>Register</Link></StyledP>
-                <Button primary size="small" label="Log in" />
+                <Button primary size="small" label="Log in" onClick={() => { handleLogin(username, password);}} />
               </StyledForm>
+
             </motion.div>
           )}
         </AnimatePresence>
@@ -104,7 +110,7 @@ box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   
  }
 `;
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;

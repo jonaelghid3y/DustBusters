@@ -11,9 +11,10 @@ import LandingPage from './Pages/LandingPage';
 import Bookings from './Pages/Bookings';
 import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
-import Login from './Pages/Login';
+
 import Admin from './Pages/Admin';
 import Profile from './Pages/Profile';
+import AuthNavigator from './Pages/AuthNavigator';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />
+        element: <AuthNavigator />
 
       },
       {

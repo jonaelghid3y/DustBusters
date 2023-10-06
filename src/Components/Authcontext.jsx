@@ -1,16 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
-  // const navigation = useNavigation();
   const [accessToken, setAccessToken] = useState(null);
+  const [admin, setAdmin] = useState(null);
 
   const handleLogin = async (username, password) => {
     try {
-      const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/token', {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,29 +18,27 @@ export const AuthProvider = ({ children }) => {
           password: password,
         }),
       });
+
       const data = await response.json();
+      console.log(data);
 
       if (data.status === 200) {
-        console.log("hej");
-
-        await AsyncStorage.setItem('accessToken', data.data.accessToken);
-        await AsyncStorage.setItem('userID', data.data._id);
-
-        setAccessToken(data.data.accessToken);
-
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('Admin', data.admin);
+        setAccessToken(data.accessToken);
+        setAdmin(data.admin);
+        console.log(accessToken);
       } else {
-
-        console.log("hej");
-
+        console.log("Failed to log in");
       }
+
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleRegister = async (username, password) => {
     try {
-      const response = await fetch('https://chat-api-with-auth.up.railway.app/auth/register', {
+      const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/user/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,18 +68,14 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogout = async () => {
     console.log('handleLogout');
-    try {
-      await AsyncStorage.removeItem('accessToken');
-      setAccessToken(null);
-    } catch (error) {
-      console.log(error);
-    }
+    localStorage.removeItem('accessToken');
+    setAccessToken(null);
   };
 
   const isLoggedIn = async () => {
     console.log('isLoggedIn');
     try {
-      const token = await AsyncStorage.getItem('accessToken');
+      const token = localStorage.getItem('accessToken');
       setAccessToken(token);
 
     } catch (error) {
@@ -93,12 +85,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     isLoggedIn();
-
+    handleLogout();
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
+        admin,
         accessToken,
         handleLogout,
         handleLogin,
