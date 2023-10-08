@@ -2,19 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useContext} from 'react';
-import { AuthContext } from '../Components/Authcontext';
-import LoginForm from '../Components/LoginForm';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Components/context/Authcontext';
+import LoginForm from '../../../Components/LoginForm';
 
-function Login(){
+function Login() {
 
-  const {handleLogin, handleRegister} = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { handleLogin, handleRegister,loginMessage } = useContext(AuthContext);
   const [isRegistering, setIsRegistering] = useState(false);
-
+  const handleRegisterClick = async (username, password) => {
+    const success = await handleRegister(username, password);
+    if (success) {
+      setTimeout(() => {
+        setIsRegistering(false);
+      }, 2000);
+    }
+  };
   return (
     <StyledDiv>
+      {loginMessage}
       <StyledLoginModal>
         <AnimatePresence mode='wait'>
           {isRegistering ? (
@@ -24,7 +30,9 @@ function Login(){
               key="registerform"
               text="Already have an account? "
               isRegistering={isRegistering}
-              setIsRegistering={setIsRegistering} />
+              setIsRegistering={setIsRegistering}
+              handleClick={handleRegisterClick}
+            />
           ) : (
             <LoginForm
               title="Log in"
@@ -33,6 +41,7 @@ function Login(){
               text="Don't have an account? "
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
+              handleClick={handleLogin}
             />
           )}
         </AnimatePresence>
@@ -59,7 +68,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-width: 30%;
+width: 450px;
 min-height: 550px;
 padding: 25px;
 border-radius: 20px;
@@ -69,7 +78,7 @@ box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 @media (max-width: 768px) {
 
   width: 80%;
-  min-height: 600px;
+  min-height: 500px;
   
  }
 `;

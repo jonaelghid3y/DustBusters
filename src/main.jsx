@@ -12,9 +12,9 @@ import Bookings from './Pages/Bookings';
 import AboutUs from './Pages/AboutUs';
 import Services from './Pages/Services';
 
-import Admin from './Pages/Admin';
-import Profile from './Pages/Profile';
-import AuthNavigator from './Pages/AuthNavigator';
+import Admin from './Pages/User/Admin/Admin';
+import Profile from './Pages/User/Admin/Profile';
+import AuthNavigator from './Pages/User/Admin/AuthNavigator';
 
 const router = createBrowserRouter([
   {

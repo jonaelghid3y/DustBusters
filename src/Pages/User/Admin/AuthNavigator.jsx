@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { AuthContext } from '../Components/Authcontext';
+import { AuthContext } from '../../../Components/context/Authcontext';
 import Login from './Login';
 import Admin from './Admin';
 import Profile from './Profile';

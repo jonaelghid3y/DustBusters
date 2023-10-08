@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import cat from '../assets/cat.jpg';
+import cat from '/imgs/cat.jpg';
 
 export default function Profile() {
 
