@@ -9,6 +9,7 @@ function BookingAdmin() {
     date: '',
     service: '',
   });
+  const [editingBookingId, setEditingBookingId] = useState(null);
 
   useEffect(() => {
     fetchBookings();
@@ -35,16 +36,46 @@ function BookingAdmin() {
     e.preventDefault();
 
     try {
-      await axios.post("https://api-s5hih6nmta-uc.a.run.app/booking", newBooking);
+      if (editingBookingId) {
+
+        await axios.put(`https://api-s5hih6nmta-uc.a.run.app/booking/${editingBookingId}`, newBooking);
+        setEditingBookingId(null);
+      } else {
+
+        await axios.post("https://api-s5hih6nmta-uc.a.run.app/booking", newBooking);
+      }
+
       setNewBooking({
         name: '',
         date: '',
         service: '',
       });
+
       fetchBookings();
     } catch (error) {
-      console.error('Error creating booking:', error);
+      console.error('Error creating/updating booking:', error);
     }
+  };
+
+  const handleEdit = (id) => {
+    const bookingToEdit = bookings.find((booking) => booking.id === id);
+    if (bookingToEdit) {
+      setNewBooking({
+        name: bookingToEdit.name,
+        date: bookingToEdit.date,
+        service: bookingToEdit.service,
+      });
+      setEditingBookingId(id);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setNewBooking({
+      name: '',
+      date: '',
+      service: '',
+    });
+    setEditingBookingId(null);
   };
 
   const handleDelete = async (id) => {
@@ -54,10 +85,6 @@ function BookingAdmin() {
     } catch (error) {
       console.error(`Error deleting booking ${id}:`, error);
     }
-  };
-
-  const handleEdit = async (id) => {
-    console.log(`Editing booking ${id}`);
   };
 
   return (
@@ -88,9 +115,22 @@ function BookingAdmin() {
           />
         </div>
 
-        <button type="submit" style={submitButtonStyle}>
-          Add new booking
-        </button>
+        <div>
+          {editingBookingId ? (
+            <div>
+              <button type="submit" style={submitButtonStyle}>
+                Update booking
+              </button>
+              <button onClick={handleCancelEdit} style={cancelButtonStyle}>
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button type="submit" style={submitButtonStyle}>
+              Add new booking
+            </button>
+          )}
+        </div>
       </form>
       <table style={tableStyle}>
         <thead>
@@ -139,6 +179,7 @@ const formStyle = {
   flexDirection: "column",
   alignItems: "center",
   marginTop: "20px",
+
 };
 
 const inputStyle = {
@@ -149,7 +190,18 @@ const inputStyle = {
 };
 
 const submitButtonStyle = {
-  padding: "10px 20px",
+  padding: "10px",
+  background: "#FFD530",
+  color: "#333333",
+  border: "none",
+  borderRadius: "5px",
+  display: "block",
+  width: "200px",
+  fontFamily: 'Poppins',
+};
+
+const cancelButtonStyle = {
+  padding: "10px",
   background: "#FFD530",
   color: "#333333",
   border: "none",
@@ -157,12 +209,14 @@ const submitButtonStyle = {
   display: "block",
   width: "40%",
   fontFamily: 'Poppins',
+  marginTop: "5px",
 };
 
 const tableStyle = {
   width: "80%",
   borderCollapse: "collapse",
   padding: "5px",
+  margin: "20px",
 };
 
 const thStyle = {
@@ -184,7 +238,7 @@ const iconButtonStyle = {
   border: 'none',
   color: 'white',
   cursor: 'pointer',
-  marginBottom: '10px',
+
 };
 
 const evenRowStyle = {
