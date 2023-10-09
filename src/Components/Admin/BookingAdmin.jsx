@@ -57,29 +57,40 @@ function BookingAdmin() {
   };
 
   const handleEdit = async (id) => {
-
     console.log(`Editing booking ${id}`);
   };
 
   return (
     <div style={containerStyle}>
       <h1>List of Bookings</h1>
-      <form onSubmit={handleSubmit}>
-        <button type="submit">Add new booking</button>
-        <label>Customer:</label>
-        <input
-          type="text"
-          name="name"
-          value={newBooking.name}
-          onChange={handleInputChange}
-        />
-        <label>Date:</label>
-        <input
-          type="text"
-          name="date"
-          value={newBooking.date}
-          onChange={handleInputChange}
-        />
+      <form onSubmit={handleSubmit} style={formStyle}>
+        <div>
+          <label htmlFor="name">Customer:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={newBooking.name}
+            onChange={handleInputChange}
+            style={inputStyle}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="date">Date:</label>
+          <input
+            type="text"
+            id="date"
+            name="date"
+            value={newBooking.date}
+            onChange={handleInputChange}
+            style={inputStyle}
+          />
+        </div>
+
+        <button type="submit" style={submitButtonStyle}>
+          Add new booking
+        </button>
       </form>
       <table style={tableStyle}>
         <thead>
@@ -87,20 +98,22 @@ function BookingAdmin() {
             <th style={thStyle}>Customer</th>
             <th style={thStyle}>Date</th>
             <th style={thStyle}>Edit</th>
+            <th style={thStyle}>Delete</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking, index) => (
-            <tr key={booking.id} style={{ backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
-              <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{booking.name}</td>
-              <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>{booking.date}</td>
-              <td>
-                <button onClick={() => handleDelete(booking.id)} style={iconButtonStyle}>
-                  <MdDelete />
-                </button>
-
+            <tr key={booking.id} style={index % 2 === 0 ? evenRowStyle : oddRowStyle}>
+              <td style={tableCellStyle}>{booking.name}</td>
+              <td style={tableCellStyle}>{booking.date}</td>
+              <td style={tableCellStyle}>
                 <button onClick={() => handleEdit(booking.id)} style={iconButtonStyle}>
                   <MdEdit />
+                </button>
+              </td>
+              <td style={tableCellStyle}>
+                <button onClick={() => handleDelete(booking.id)} style={iconButtonStyle}>
+                  <MdDelete />
                 </button>
               </td>
             </tr>
@@ -113,11 +126,37 @@ function BookingAdmin() {
 
 const containerStyle = {
   padding: "20px",
+  paddingTop: "40px",
   maxWidth: "800px",
   margin: "0 auto",
   fontFamily: 'Poppins',
   textAlign: "center",
-  color: "color",
+  color: "#333333",
+};
+
+const formStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  marginTop: "20px",
+};
+
+const inputStyle = {
+  width: "30%",
+  padding: "10px",
+  marginBottom: "10px",
+  margin: "5px",
+};
+
+const submitButtonStyle = {
+  padding: "10px 20px",
+  background: "#FFD530",
+  color: "#333333",
+  border: "none",
+  borderRadius: "5px",
+  display: "block",
+  width: "40%",
+  fontFamily: 'Poppins',
 };
 
 const tableStyle = {
@@ -134,10 +173,10 @@ const thStyle = {
   margin: "10px",
 };
 
-const tdStyle = {
+const tableCellStyle = {
   padding: "10px",
   color: 'white',
-  margin: '10px',
+  marginBottom: '10px',
 };
 
 const iconButtonStyle = {
@@ -145,6 +184,15 @@ const iconButtonStyle = {
   border: 'none',
   color: 'white',
   cursor: 'pointer',
+  marginBottom: '10px',
+};
+
+const evenRowStyle = {
+  backgroundColor: "gray",
+};
+
+const oddRowStyle = {
+  backgroundColor: "black",
 };
 
 export default BookingAdmin;

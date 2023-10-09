@@ -15,7 +15,8 @@ import Services from './Pages/Services';
 import Admin from './Pages/User/Admin/Admin';
 import Profile from './Pages/User/Admin/Profile';
 import AuthNavigator from './Pages/User/Admin/AuthNavigator';
-
+import ServicesAdmin from './Components/Admin/ServicesAdmin';
+import BookingAdmin from './Components/Admin/BookingAdmin'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
         path: "/Profile",
         element: <Profile />
 
+      },
+      {
+        path: "Services-Admin",
+        element: <ServicesAdmin />
+      },
+      {
+        path: "Booking-Admin",
+        element: <BookingAdmin />
       }
     ]
   },
