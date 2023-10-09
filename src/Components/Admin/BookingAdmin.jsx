@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MdDelete, MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+
 
 function BookingAdmin() {
   const [bookings, setBookings] = useState([]);
@@ -10,6 +12,7 @@ function BookingAdmin() {
     service: '',
   });
   const [editingBookingId, setEditingBookingId] = useState(null);
+  const [showAddBooking, setShowAddBooking] = useState(false);
 
   useEffect(() => {
     fetchBookings();
@@ -37,11 +40,9 @@ function BookingAdmin() {
 
     try {
       if (editingBookingId) {
-
         await axios.put(`https://api-s5hih6nmta-uc.a.run.app/booking/${editingBookingId}`, newBooking);
         setEditingBookingId(null);
       } else {
-
         await axios.post("https://api-s5hih6nmta-uc.a.run.app/booking", newBooking);
       }
 
@@ -52,6 +53,7 @@ function BookingAdmin() {
       });
 
       fetchBookings();
+      toggleAddBooking();
     } catch (error) {
       console.error('Error creating/updating booking:', error);
     }
@@ -66,6 +68,7 @@ function BookingAdmin() {
         service: bookingToEdit.service,
       });
       setEditingBookingId(id);
+      setShowAddBooking(true);
     }
   };
 
@@ -87,58 +90,67 @@ function BookingAdmin() {
     }
   };
 
+  const toggleAddBooking = () => {
+    setShowAddBooking(!showAddBooking);
+  };
+
   return (
     <div style={containerStyle}>
       <h1>List of Bookings</h1>
-      <form onSubmit={handleSubmit} style={formStyle}>
-        <div>
-          <label htmlFor="name">Customer:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={newBooking.name}
-            onChange={handleInputChange}
-            style={inputStyle}
-          />
-        </div>
 
-        <div>
-          <label htmlFor="date">Date:</label>
-          <input
-            type="text"
-            id="date"
-            name="date"
-            value={newBooking.date}
-            onChange={handleInputChange}
-            style={inputStyle}
-          />
-        </div>
+      {!showAddBooking ? (
+        <button onClick={toggleAddBooking} style={addBookingButtonStyle}>
+          Add new booking
+        </button>
 
-        <div>
-          {editingBookingId ? (
-            <div>
-              <button type="submit" style={submitButtonStyle}>
-                Update booking
-              </button>
+      ) : (
+        <form onSubmit={handleSubmit} style={formStyle}>
+          <div style={inputContainerStyle}>
+            <label htmlFor="name">Customer:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={newBooking.name}
+              onChange={handleInputChange}
+              style={inputStyle}
+            />
+            <Link to="/admin" style={backToAdminButton}>
+              <MdArrowBack />
+            </Link>
+          </div>
+
+          <div style={inputContainerStyle}>
+            <label htmlFor="date">Date:</label>
+            <input
+              type="text"
+              id="date"
+              name="date"
+              value={newBooking.date}
+              onChange={handleInputChange}
+              style={inputStyle}
+            />
+          </div>
+
+          <div>
+            <button type="submit" style={submitButtonStyle}>
+              {editingBookingId ? "Update booking" : "Add new booking"}
+            </button>
+            {editingBookingId && (
               <button onClick={handleCancelEdit} style={cancelButtonStyle}>
                 Cancel
               </button>
-            </div>
-          ) : (
-            <button type="submit" style={submitButtonStyle}>
-              Add new booking
-            </button>
-          )}
-        </div>
-      </form>
+            )}
+          </div>
+        </form>
+      )}
+
       <table style={tableStyle}>
         <thead>
           <tr>
             <th style={thStyle}>Customer</th>
             <th style={thStyle}>Date</th>
             <th style={thStyle}>Edit</th>
-            <th style={thStyle}>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -147,12 +159,10 @@ function BookingAdmin() {
               <td style={tableCellStyle}>{booking.name}</td>
               <td style={tableCellStyle}>{booking.date}</td>
               <td style={tableCellStyle}>
-                <button onClick={() => handleEdit(booking.id)} style={iconButtonStyle}>
+                <button onClick={() => handleEdit(booking.id)} style={actionButtonStyle}>
                   <MdEdit />
                 </button>
-              </td>
-              <td style={tableCellStyle}>
-                <button onClick={() => handleDelete(booking.id)} style={iconButtonStyle}>
+                <button onClick={() => handleDelete(booking.id)} style={actionButtonStyle}>
                   <MdDelete />
                 </button>
               </td>
@@ -166,7 +176,6 @@ function BookingAdmin() {
 
 const containerStyle = {
   padding: "20px",
-  paddingTop: "40px",
   maxWidth: "800px",
   margin: "0 auto",
   fontFamily: 'Poppins',
@@ -179,14 +188,20 @@ const formStyle = {
   flexDirection: "column",
   alignItems: "center",
   marginTop: "20px",
+};
 
+const inputContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
 };
 
 const inputStyle = {
-  width: "30%",
+  width: "100%",
   padding: "10px",
   marginBottom: "10px",
-  margin: "5px",
+  border: "1px solid #ccc",
+  borderRadius: "5px",
 };
 
 const submitButtonStyle = {
@@ -195,9 +210,10 @@ const submitButtonStyle = {
   color: "#333333",
   border: "none",
   borderRadius: "5px",
-  display: "block",
-  width: "200px",
-  fontFamily: 'Poppins',
+  width: "100%",
+  fontFamily: 'Poppins, sans-serif',
+  cursor: "pointer",
+  transition: "background 0.3s ease",
 };
 
 const cancelButtonStyle = {
@@ -206,17 +222,17 @@ const cancelButtonStyle = {
   color: "#333333",
   border: "none",
   borderRadius: "5px",
-  display: "block",
-  width: "40%",
-  fontFamily: 'Poppins',
+  width: "50%",
+  fontFamily: 'Poppins, sans-serif',
   marginTop: "5px",
+  cursor: "pointer",
+  transition: "background 0.3s ease",
 };
 
 const tableStyle = {
-  width: "80%",
+  width: "100%",
   borderCollapse: "collapse",
-  padding: "5px",
-  margin: "20px",
+  marginTop: "20px",
 };
 
 const thStyle = {
@@ -224,21 +240,20 @@ const thStyle = {
   color: "#333333",
   padding: "10px",
   textAlign: "left",
-  margin: "10px",
 };
 
 const tableCellStyle = {
   padding: "10px",
-  color: 'white',
-  marginBottom: '10px',
+  color: "white",
 };
 
-const iconButtonStyle = {
+const actionButtonStyle = {
   background: 'none',
   border: 'none',
   color: 'white',
   cursor: 'pointer',
-
+  marginRight: '10px',
+  transition: "background 0.3s ease",
 };
 
 const evenRowStyle = {
@@ -247,6 +262,25 @@ const evenRowStyle = {
 
 const oddRowStyle = {
   backgroundColor: "black",
+};
+
+const addBookingButtonStyle = {
+  backgroundColor: '#FFD530',
+  color: '#333333',
+  padding: '10px',
+  border: 'none',
+  borderRadius: '5px',
+  width: "200px",
+  fontFamily: 'Poppins, sans-serif',
+  cursor: "pointer",
+  transition: "background 0.3s ease",
+};
+
+const backToAdminButton = {
+  color: 'black',
+  padding: '10px',
+  margin: '10px',
+  cursor: 'pointer',
 };
 
 export default BookingAdmin;

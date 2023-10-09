@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { MdDelete, MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+
 
 class ServicesAdmin extends Component {
   state = {
@@ -8,6 +10,7 @@ class ServicesAdmin extends Component {
     title: "",
     price: "",
     editingServiceId: null,
+    showAddService: false,
   };
 
   componentDidMount() {
@@ -42,6 +45,8 @@ class ServicesAdmin extends Component {
 
       this.fetchServices();
       this.clearForm();
+
+      this.setState({ showAddService: false });
     } catch (error) {
       console.error("Error submitting service:", error);
     }
@@ -72,46 +77,68 @@ class ServicesAdmin extends Component {
     });
   };
 
+  toggleAddService = () => {
+    this.setState((prevState) => ({
+      showAddService: !prevState.showAddService,
+    }));
+  };
+
   render() {
-    const { title, price, editingServiceId, services } = this.state;
+    const { title, price, editingServiceId, services, showAddService } = this.state;
 
     return (
       <div style={containerStyle}>
         <h1>List of Services</h1>
-        <form style={formStyle} onSubmit={this.handleSubmit}>
+
+
+        {!showAddService && editingServiceId === null ? (
           <div>
-            <label>Title:</label>
-            <input
-              style={inputStyle}
-              type="text"
-              name="title"
-              value={title}
-              onChange={this.handleInputChange}
-            />
+            <button onClick={this.toggleAddService} style={addnewServiceButton}>
+              Add new service
+            </button>
+
+            <Link to="/admin" style={backToAdminButton}>
+              <MdArrowBack />
+            </Link>
           </div>
 
-          <div>
-            <label>Price:</label>
-            <input
-              style={inputStyle}
-              type="text"
-              name="price"
-              value={price}
-              onChange={this.handleInputChange}
-            />
-          </div>
 
-          <button style={buttonStyle} type="submit">
-            {editingServiceId ? "Update" : "Add new service"}
-          </button>
-        </form>
+        ) : (
+          <form style={formStyle} onSubmit={this.handleSubmit}>
+            <div>
+              <label>Title:</label>
+              <input
+                style={inputStyle}
+                type="text"
+                name="title"
+                value={title}
+                onChange={this.handleInputChange}
+              />
+            </div>
+
+            <div>
+              <label>Price:</label>
+              <input
+                style={inputStyle}
+                type="text"
+                name="price"
+                value={price}
+                onChange={this.handleInputChange}
+              />
+            </div>
+
+            <button style={buttonStyle} type="submit">
+              {editingServiceId ? "Update" : "Add new service"}
+            </button>
+          </form>
+        )}
+
         <table style={tableStyle}>
           <thead>
             <tr>
               <th style={thStyle}>Title</th>
               <th style={thStyle}>Price</th>
               <th style={thStyle}>Edit</th>
-              <th style={thStyle}>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -122,15 +149,13 @@ class ServicesAdmin extends Component {
                 <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
                   <button
                     onClick={() => this.handleEdit(service)}
-                    style={iconButtonStyle}
+                    style={editButtonStyle}
                   >
                     <MdEdit />
                   </button>
-                </td>
-                <td style={{ ...tdStyle, backgroundColor: index % 2 === 0 ? "gray" : "black" }}>
                   <button
                     onClick={() => this.handleDelete(service.id)}
-                    style={iconButtonStyle}
+                    style={deleteButtonStyle}
                   >
                     <MdDelete />
                   </button>
@@ -160,6 +185,8 @@ const inputStyle = {
   width: "30%",
   padding: "10px",
   marginBottom: "10px",
+  border: "1px solid #ccc",
+  borderRadius: "5px",
   margin: "5px",
 };
 
@@ -174,8 +201,10 @@ const buttonStyle = {
 };
 
 const tableStyle = {
-  width: "80%",
+  width: "70%",
   borderCollapse: "collapse",
+  padding: "10px",
+  margin: "10px",
 };
 
 const thStyle = {
@@ -191,11 +220,37 @@ const tdStyle = {
   color: "white",
 };
 
-const iconButtonStyle = {
+const editButtonStyle = {
+  background: 'none',
+  border: 'none',
+  color: 'white',
+  cursor: 'pointer',
+  marginRight: '10px',
+};
+
+const deleteButtonStyle = {
   background: 'none',
   border: 'none',
   color: 'white',
   cursor: 'pointer',
 };
+
+const backToAdminButton = {
+  color: 'black',
+  padding: '10px',
+  margin: '10px',
+  cursor: 'pointer',
+};
+
+const addnewServiceButton = {
+  backgroundColor: '#FFD530',
+  color: '#333333',
+  padding: '10px',
+  border: 'none',
+  borderRadius: '5px',
+  margin: '10px',
+  cursor: 'pointer',
+};
+
 
 export default ServicesAdmin;
