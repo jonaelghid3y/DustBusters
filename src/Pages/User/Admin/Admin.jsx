@@ -6,8 +6,9 @@ export default function Admin() {
     <div>
 
       <h1>Admin page</h1>
-      <Link to="/Services-Admin">Go to Service Admin</Link>
-      <Link to="/Booking-Admin">Go to Booking Admin</Link>
+      <Link to="/Services-Admin">Services Admin</Link>
+      <br></br>
+      <Link to="/Booking-Admin"> Bookings Admin</Link>
     </div >
   );
 }
