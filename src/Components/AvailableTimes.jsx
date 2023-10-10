@@ -36,30 +36,18 @@ const Section = styled.section`
   #chooseDate {
     margin-top: 200px;
     font-size: 1.3rem;
-   
   }
   #todaysDate {
     font-size: 1.3rem;
     margin-bottom: 50px;
-    @media (max-width: 768px) {
-      margin-bottom: 20px;
-    }
   }
   #times {
     text-align: center;
     display: flex;
     flex-flow: row wrap;
     column-gap: 10%;
-    @media (max-width: 768px) {
-      justify-content: center;
-    }
-  }
 
-  @media (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  }
 `;
 const TimeSlot = styled.div`
   margin: 20px;

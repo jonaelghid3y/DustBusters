@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-// import { motion } from 'framer-motion';
+
 
 function BookingAdmin() {
   const [bookings, setBookings] = useState([]);
@@ -195,16 +195,17 @@ const formStyle = {
 };
 
 const inputContainerStyle = {
-  alignItems: "center",
-  gap: '10px',
+  justifyContent: 'center',
+  marginBottom: "5px",
 };
 
 const inputStyle = {
+  width: "200px",
   padding: "10px",
   marginBottom: "10px",
-  border: "1px solid",
+  border: "1px solid #ccc",
   borderRadius: "5px",
-  margin: '5px',
+  margin: "5px",
 };
 
 const submitButtonStyle = {

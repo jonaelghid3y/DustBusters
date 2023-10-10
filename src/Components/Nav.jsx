@@ -9,17 +9,9 @@ import { useContext } from 'react';
 import { AuthContext } from './context/Authcontext';
 
 function Nav() {
-
   const [isopen, setIsopen] = useState(false);
   const location = useLocation();
   const { handleLogout, accessToken, admin } = useContext(AuthContext);
-
-  const handleLinkClick = (path, callback) => {
-    setIsopen(false);
-    if (callback) {
-      callback();
-    }
-  };
 
   return (
 
@@ -32,11 +24,11 @@ function Nav() {
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`} onClick={handleLinkClick}>Home</StyledLink>
-            <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`} onClick={handleLinkClick}>Book</StyledLink>
-            <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`} onClick={handleLinkClick}>Services</StyledLink>
-            <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`} onClick={handleLinkClick}>About us</StyledLink>
-            <Link to="/login" id="linkButton" onClick={handleLinkClick}><Button primary size="small" label="Log in" /></Link>
+            <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
+            <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
+            <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
+            <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
+            <Link to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
@@ -49,12 +41,14 @@ function Nav() {
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <Link to="/" id="linkButton"><Button secondary size="small" onClick={() => handleLinkClick('/', handleLogout)} label="Log out"  /></Link>
+            {/* ... Other Links ... */}
+            <Link to="/login" id="linkButton"><Button secondary size="small" onClick={handleLogout} label="Log out" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
 
       {
+        // If both accessToken and admin are present
         accessToken && admin &&
         <StyledNav>
           <Link style={{ textDecoration: 'none' }} to="/">
@@ -62,9 +56,9 @@ function Nav() {
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <StyledLink to="/Services-Admin" className={`links ${location.pathname === "/Services-Admin" ? "active" : ""}`} onClick={handleLinkClick}>Services</StyledLink>
-            <StyledLink to="/Booking-Admin" className={`links ${location.pathname === "/Booking-Admin" ? "active" : ""}`} onClick={handleLinkClick}>Bookings</StyledLink>
-            <Link to="/" id="linkButton"><Button secondary size="small" onClick={() => handleLinkClick('/', handleLogout)} label="Log out" /></Link>
+            <StyledLink to="/Services-Admin" className={`links ${location.pathname === "/Services-Admin" ? "active" : ""}`}>Services</StyledLink>
+            <StyledLink to="/Booking-Admin" className={`links ${location.pathname === "/Booking-Admin" ? "active" : ""}`}>Bookings</StyledLink>
+            <Link to="/login" id="linkButton"><Button secondary size="small" onClick={handleLogout} label="Log out" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
@@ -96,7 +90,7 @@ const StyledLänkcontainer = styled.div`
         right: 0;
         padding: 15px;
         background-color: #232323;
-        width: 40%;
+        width: 30%;
         flex-direction: column;
         display: ${props => (props.$isopen ? 'flex' : 'none')};
     }
