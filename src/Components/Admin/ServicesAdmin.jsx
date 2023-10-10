@@ -253,7 +253,7 @@ const addnewServiceButton = {
   borderRadius: '5px',
   margin: '10px',
   cursor: 'pointer',
-  justifyContent: 'center',
+
 };
 
 export default ServicesAdmin;
