@@ -198,10 +198,12 @@ const buttonStyle = {
 };
 
 const tableStyle = {
-  width: "70%",
+  width: "100%",
   borderCollapse: "collapse",
   padding: "10px",
   margin: "10px",
+
+  justifyContent: 'center',
 };
 
 const thStyle = {
@@ -254,5 +256,7 @@ const addnewServiceButton = {
   margin: '10px',
   cursor: 'pointer',
 };
+
+
 
 export default ServicesAdmin;
