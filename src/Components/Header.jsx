@@ -13,8 +13,6 @@ const Styledheader = styled.header`
   width: 100%;
   height:10vh;
   overflow-y: hidden;
-  
-  
 `;
 
 export default Header;

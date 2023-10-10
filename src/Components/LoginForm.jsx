@@ -1,10 +1,13 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../Components/Button';
 
-const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering}) => {
+const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, handleClick}) => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
@@ -22,14 +25,14 @@ const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering}) =
       <StyledForm>
         <StyledFormDivs>
           <label> Username:</label>
-          <StyledInput type="text" name='username' />
+          <StyledInput type="text" name='username' value={username}  onChange={(e) => setUsername(e.target.value)} />
         </StyledFormDivs>
         <StyledFormDivs>
           <label> Password:</label>
-          <StyledInput type="password" name='password' />
+          <StyledInput type="password" name='password'value={password} autocomplete="current-password" onChange={(e) => setPassword(e.target.value)}/>
         </StyledFormDivs>
         <StyledP>{text}<Link onClick={toggleForm}>Sign in</Link></StyledP>
-        <Button primary size="small" label={label} />
+        <Button primary size="small" label={label} onClick={()=>handleClick(username, password) } />
       </StyledForm>
     </motion.div>
   );
@@ -41,7 +44,7 @@ font-size: 30px;
 margin-bottom: 20px;
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
