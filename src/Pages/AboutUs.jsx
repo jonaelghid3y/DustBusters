@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+// import { motion, useAnimation } from 'framer-motion';
+// import { useInView } from 'react-intersection-observer';
 
 function AboutUs() {
   const controls1 = useAnimation();
@@ -44,7 +44,7 @@ function AboutUs() {
           </StyledTextContainer>
         </motion.div>
       </StyledDiv>
-      <StyledDiv style={{ backgroundColor: '#232323', color: 'white' }}>
+      <StyledDiv style={{ backgroundColor: '#232323', color: 'white', display: 'flex', justifyContent: 'center', }}>
         <StyledTextContainer>
           <motion.div initial={{ opacity: 0, y: 50 }} transition={{delay: 1, ease: 'easeOut'}}  animate={controls2} ref={ref2}>
             <StyledText>
