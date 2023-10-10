@@ -21,6 +21,7 @@ function ServiceItem({ item, index }) {
       initial={{ opacity: 0 }}
       animate={controls}
       transition={{ duration: 1, ease: "easeOut" }}
+      id={`${item.id}`}
       key={item.id}
     >
       <StyledItem $even={index % 2 === 0}  >
@@ -72,7 +73,7 @@ const StyledItem = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-around;
-  background-color: #333333;
+  background-color:  #232323;
     flex-direction: row-reverse;
     color: white;
 
@@ -101,7 +102,9 @@ const StyledImg = styled.img`
   @media (max-width: 768px) {
 
     width: 80%;
-    height: 200px;
+    height: 300px;
+    
+
 
   }
 `;
