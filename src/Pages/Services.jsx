@@ -117,6 +117,7 @@ padding: 25px;
 fontFamily: poppins;
 overflowY: auto;
 
+
 @media (max-width: 768px) {
 
   width: 80%;
@@ -142,6 +143,8 @@ float: none;
 const StyledP = styled.p`
 
   font-size: 17px;
+  margin-bottom: 15px;
+
 
 `;
 
