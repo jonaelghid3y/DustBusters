@@ -98,7 +98,7 @@ function Bookings() {
   };
 
   return (
-    <div>
+    <div >
       <Wrapper className="wrapper">
         <Calendar
           currYear={currYear}
@@ -149,6 +149,10 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 5%;
+    gap: 20px;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 const ModalContainer = styled.div`

@@ -108,7 +108,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   };
 
   return (
-    <div>
+    <CalenderContainer >
       <Styledheader>
         {new Date().getMonth() == currMonth
           ? <button id="first" className="arrow" disabled ></button>
@@ -168,9 +168,18 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
           })
         }
       </CalendarDiv>
-    </div>
+    </CalenderContainer>
   );
 };
+
+const CalenderContainer = styled.div`
+ @media (max-width: 768px) {
+      min-width: 70vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+`;
 
 const Styledheader = styled.header`
     display: flex;
@@ -204,9 +213,17 @@ const DaysDiv = styled.div`
     text-align: center;
     padding: 10px 0;
     margin-bottom: 10px;
+    min-width: 340px;
+    @media (max-width: 768px) {
+      min-width: 70vw;
+    }
+
     p {
         font-size: 1.2rem;
         font-weight: 300;
+        @media (max-width: 321px) {
+          font-size: 0.9rem;
+        }
     }
 
 `;
@@ -215,6 +232,11 @@ const CalendarDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     width: 35vw;
+    min-width: 340px;
+    @media (max-width: 768px) {
+      min-width: 70vw;
+
+    }
 
     div, button {
         cursor: pointer;
@@ -225,10 +247,16 @@ const CalendarDiv = styled.div`
         justify-content: center;
         gap: 10px;
         height: 72px;
+        @media (max-width: 321px) {
+          height: 50px;
+        }
 
         p {
             font-size: 1.2rem;
             font-weight: 300;
+            @media (max-width: 321px) {
+              font-size: 0.9rem;
+            }
         }
 
         .green, .red, .yellow, .grey {
