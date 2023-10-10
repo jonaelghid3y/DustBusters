@@ -21,6 +21,7 @@ function ServiceItem({ item, index }) {
       initial={{ opacity: 0 }}
       animate={controls}
       transition={{ duration: 1, ease: "easeOut" }}
+      id={`${item.id}`}
       key={item.id}
     >
       <StyledItem $even={index % 2 === 0}  >
@@ -101,7 +102,9 @@ const StyledImg = styled.img`
   @media (max-width: 768px) {
 
     width: 80%;
-    height: 200px;
+    height: 300px;
+    
+
 
   }
 `;
