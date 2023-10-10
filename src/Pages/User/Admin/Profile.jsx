@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import cat from '/imgs/cat.jpg';
-import { Button } from '../Components/Button';
+import { Button } from '../../../Components/Button';
 
 export default function Profile() {
 
-  const [membercolor, setmembercolor] = useState("#c4a011");
+  // const [membercolor, setmembercolor] = useState("#c4a011");
   const [title, settitle] = useState("Mr. Garfield");
   const [name,setname] = useState("");
   const [lastname, setlastname] = useState("");
@@ -20,7 +20,7 @@ export default function Profile() {
           <img style={propic} src={cat} alt="profileimg"></img>
         </div>
         <h1 style={username}>{title}</h1>
-        <h3 style={memberstyle}><b style={{ color: membercolor }}>Gold</b>Member </h3>
+        <h3 style={memberstyle}><b style={{ color: "#c4a011" }}>Gold</b>Member </h3>
 
       </ProfileSide>
 
