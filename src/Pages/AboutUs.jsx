@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+// import { motion, useAnimation } from 'framer-motion';
+// import { useInView } from 'react-intersection-observer';
 
 function AboutUs() {
   return (
