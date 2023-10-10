@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../Components/Button';
 
-const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, handleClick}) => {
+const LoginForm = ({title, key, label, text, toggleLink, setIsRegistering, isRegistering, handleClick}) => {
   console.log(Object.groupBy);
 
   const [username, setUsername] = useState('');
@@ -32,7 +32,7 @@ const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, ha
           <label> Password:</label>
           <StyledInput type="password" name='password'value={password} autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}/>
         </StyledFormDivs>
-        <StyledP>{text}<Link onClick={toggleForm}>Sign in</Link></StyledP>
+        <StyledP>{text}<Link onClick={toggleForm}>{toggleLink}</Link></StyledP>
         <Button primary size="small" label={label} onClick={()=>handleClick(username, password) } />
       </StyledForm>
     </motion.div>

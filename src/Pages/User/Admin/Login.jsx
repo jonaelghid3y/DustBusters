@@ -29,6 +29,7 @@ function Login() {
               label="Register"
               key="registerform"
               text="Already have an account? "
+              toggleLink="Sign up"
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
               handleClick={handleRegisterClick}
@@ -39,6 +40,7 @@ function Login() {
               label="Log in"
               key="loginform"
               text="Don't have an account? "
+              toggleLink="Sign in"
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
               handleClick={handleLogin}

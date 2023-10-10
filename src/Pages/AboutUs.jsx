@@ -12,7 +12,7 @@ function AboutUs() {
 
   const controls2 = useAnimation();
   const [ref2, inView2] = useInView({
-    threshold: 0.1,
+    threshold: 1,
     triggerOnce: true,
   });
 
@@ -46,7 +46,7 @@ function AboutUs() {
       </StyledDiv>
       <StyledDiv style={{ backgroundColor: '#232323', color: 'white', display: 'flex', justifyContent: 'center', }}>
         <StyledTextContainer>
-          <motion.div initial={{ opacity: 0, y: 50 }} transition={{delay: 1, ease: 'easeOut'}}  animate={controls2} ref={ref2}>
+          <motion.div initial={{ opacity: 0, y: 50 }} transition={{delay: 0.5, ease: 'easeOut'}}  animate={controls2} ref={ref2}>
             <StyledText>
               Our vision is to make cleaning services accessible to everyone, regardless of their location in the country. Therefore, it is important to us that you feel comfortable and confident in our services, including pricing, execution, and quality.
             </StyledText>
