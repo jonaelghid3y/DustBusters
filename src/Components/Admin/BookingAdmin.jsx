@@ -185,6 +185,7 @@ const containerStyle = {
   margin: "0 auto",
   fontFamily: 'Poppins',
   textAlign: "center",
+  minimumHeight: '500px',
 };
 
 const formStyle = {
