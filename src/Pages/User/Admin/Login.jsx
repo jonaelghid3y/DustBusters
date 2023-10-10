@@ -52,7 +52,6 @@ function Login() {
 
 const StyledDiv = styled.div`
   width: 100%;
-  border: 1px solid black;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   display: flex;

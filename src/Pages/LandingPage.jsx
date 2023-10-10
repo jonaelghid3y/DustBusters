@@ -372,6 +372,7 @@ height: 400px;
 width: 70%;
 @media (max-width: 768px) {
   width: 83%;
+  height: 350px;
  }
 `;
 
