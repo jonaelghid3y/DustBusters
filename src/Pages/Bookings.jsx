@@ -87,7 +87,7 @@ function Bookings() {
     setClicked(true);
     setClickedDate(date);
 
-    const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date);
+    const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
     const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
 
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
