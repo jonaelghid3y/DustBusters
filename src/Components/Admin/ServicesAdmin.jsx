@@ -257,6 +257,4 @@ const addnewServiceButton = {
   cursor: 'pointer',
 };
 
-
-
 export default ServicesAdmin;
