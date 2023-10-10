@@ -23,7 +23,7 @@ function ServiceItem({ item, index }) {
       transition={{ duration: 1, ease: "easeOut" }}
       key={item.id}
     >
-      <StyledItem even={index % 2 === 0}  >
+      <StyledItem $even={index % 2 === 0}  >
         <StyledImg src={item.imgURL} alt="cleaning" />
         <StyledTextDiv>
           <h1>{item.title}</h1>
@@ -76,7 +76,7 @@ justify-content: space-around;
     flex-direction: row-reverse;
     color: white;
 
-  ${props => props.even && css`
+  ${props => props.$even && css`
   background-color: white;
   display: flex;
   align-items: center;
@@ -109,7 +109,7 @@ const StyledTextDiv = styled.div`
 
 width: 50%;
 height: 70%;
-
+margin-top: 15px;
 padding: 25px;
 fontFamily: poppins;
 overflowY: auto;
