@@ -16,7 +16,7 @@ import Admin from './Pages/User/Admin/Admin';
 import Profile from './Pages/User/Admin/Profile';
 import AuthNavigator from './Pages/User/Admin/AuthNavigator';
 import ServicesAdmin from './Components/Admin/ServicesAdmin';
-import BookingAdmin from './Components/Admin/BookingAdmin'
+import BookingAdmin from './Components/Admin/BookingAdmin';
 const router = createBrowserRouter([
   {
     path: "/",
