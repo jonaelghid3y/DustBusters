@@ -2,10 +2,14 @@ import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import cat from '../assets/cat.jpg';
+import { Button } from '../Components/Button';
 
 export default function Profile() {
 
-  const [membercolor, setmembercolor] = useState("gold");
+const [membercolor, setmembercolor] = useState("#c4a011");
+const [title, settitle] = useState("Mr. Garfield");
+const [name,setname] = useState("");
+const [lastname, setlastname] = useState("");
 
   return (
     <>
@@ -15,32 +19,27 @@ export default function Profile() {
         <div style={circle}>
           <img style={propic} src={cat} alt="profileimg"></img>
         </div>
-        <h1 style={username}>Mr. Garfield </h1>
-        <p style={paragraph}>14th April 1976</p>
-
-        <h3 style={memberstyle}><b style={{ color: membercolor }}>Gold</b> Member</h3>
+        <h1 style={username}>{title}</h1>
+        <h3 style={memberstyle}><b style={{ color: membercolor }}>Gold</b>Member </h3>
 
       </ProfileSide>
 
       <Form>
 
-        <label for="username" style={labelfield}>First name</label>
-        <input type="text" placeholder="Enter your Firstname..." style={inputfield} name="username"></input>
-        <label for="lastname" style={labelfield}>Last name</label>
-        <input type="text" name="lastname" placeholder="Enter your Lastname..." style={inputfield}></input>
-        <label for="email" style={labelfield}>Adress</label>
+        <label htmlFor="username" style={labelfield}>First name:</label>
+        <input type="text" placeholder="Enter your Firstname..." style={inputfield} onChange={(e) => setname(e.target.value)} name="username"></input>
+        <label htmlFor="lastname" style={labelfield}>Last name:</label>
+        <input type="text" name="lastname" placeholder="Enter your Lastname..." style={inputfield} onChange={(e) => setlastname(e.target.value)}></input>
+        <label htmlFor="email" style={labelfield}>Adress:</label>
         <input type="text" name="Adress" placeholder="Enter your Adress..." style={inputfield}></input>
-        <label for="adress" style={labelfield}>Telephone</label>
+        <label htmlFor="adress" style={labelfield}>Telephone:</label>
         <input type="text" name="Tel" placeholder="Enter your Telephone..." style={inputfield}></input>
-        <label for="adress" style={labelfield}>E-mail</label>
+        <label htmlFor="adress" style={labelfield}>E-mail:</label>
         <input type="text" name="Email" placeholder="Enter your E-mail..." style={inputfield}></input>
-
-        <ButtonContainer>
-          <button style={ButtonDiv} >Edit Profile</button>
-          <button style={ButtonDiv2}>Save</button>
-        </ButtonContainer>
+<ButtonContainer>
+<Button primary size="small" label="Edit Profile" onClick={() => settitle(name + " " + lastname)}/>
+</ButtonContainer>
       </Form>
-
     </>
   );
 }
@@ -49,88 +48,58 @@ const ProfileSide = styled.div`
 
 width: 35%;
 height: 100vh;
-background-color: gray;
+background-color: #d9d9d9;
 display: flex;
 flex-direction: column; 
 justify-content: center;
 align-items: center; 
 align-items: center; 
-border-right:3px solid #333333;
+
 `;
 
 const ButtonContainer = styled.div`
-
-display:flex;
-flex-direction:row;
-padding:3%;
-gap:30px;
-margin-top:2%;
-width:75%;
+margin-top:5%;
+position:relative;
+left:25%;
+color:black;
+border-radius:2%;
 `;
 
 const memberstyle = {
-  fontSize: "30px",
+  fontSize: "22px",
   position: "relative",
-  top: "18%",
+  top: "17%",
   padding: "10px",
-  backgroundColor: "white",
   borderRadius: "5px",
+  fontFamily:"arial",
+  color:"black",
 };
 
 const Form = styled.div`
 
 width: 30%;
 Height:630px;
-border:5px solid black;
 display: flex;
 justify-content: left;
-align-items: center; 
+align-items: left; 
 flex-direction:column;
 position:absolute;
 left:55%;
 top:15%;
-border-radius:13%;
-background: linear-gradient(140deg, #f9d966, #d6ac17);
 @media (max-width: 768px) {
-
   width:360px;
   left:40%;
- 
 }
 `;
 
-const ButtonDiv = {
 
-  padding: "10px",
-  width: "50%",
-  borderRadius: "10px",
-  boxShadow: "2px 3px  3px black",
-  backgroundColor: "yellow",
-  fontWeight: "700",
-  fontFamily: "Arial",
-
-};
-
-const ButtonDiv2 = {
-
-  padding: "10px",
-  width: "50%",
-  borderRadius: "10px",
-  boxShadow: "2px 3px  3px black",
-  backgroundColor: "green",
-  fontWeight: "700",
-  fontFamily: "Arial",
-
-};
 
 const inputfield = {
   padding: "10px",
   marginTop: "3%",
-  width: "70%",
-  border: "none",
-  borderBottom: "2px solid black",
-  backgroundColor: "transparent",
-
+  width: "80%",
+  backgroundColor: "#d9d9d9",
+  border:"none",
 };
 
 const labelfield = {
@@ -146,7 +115,6 @@ const propic = {
   height: "auto",
   borderRadius: "50%",
   margin: "100px auto",
-
 };
 
 const circle = {
@@ -158,20 +126,13 @@ const circle = {
   display: 'flex',
   alignItems: 'center',
   overflow: "hidden",
-
+  position:"relative",
+  bottom:"15%",
 };
 
 const username = {
-
-  fontFace: "Poppins",
-  fontSize: "38px",
-  position: "absolute",
-  top: "20%"
-};
-
-const paragraph = {
-  position: "absolute",
-  top: "28%",
-  color: "black",
-  opacity: "0.4",
+  position:"relative",
+  bottom:"10%",
+  fontSize: "2.5em",
+  fontFamily:"Poppins",
 };
