@@ -235,23 +235,32 @@ function LandingPage() {
 
           <motion.div custom={0} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
             <StyledIconsText>
+
               <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6195278.jpg' />
+
               <StyledServicesText>Everyday cleaning</StyledServicesText>
             </StyledIconsText>
+            <Link />
           </motion.div>
 
           <motion.div custom={1} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
             <StyledIconsText>
+
               <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6196685.jpg' />
+
               <StyledServicesText>Final cleaning</StyledServicesText>
             </StyledIconsText>
           </motion.div>
 
           <motion.div custom={2} animate={servicesControls} initial={{ y: -50, opacity: 0 }}>
+
             <StyledIconsText>
+
               <ImageDivs primary size={'large'} src='/imgs/pexels-tima-miroshnichenko-6197122.jpg' />
+
               <StyledServicesText>Window cleaning</StyledServicesText>
             </StyledIconsText>
+
           </motion.div>
 
         </StyledServicesRowDiv>
