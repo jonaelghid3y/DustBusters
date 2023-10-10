@@ -187,21 +187,22 @@ const inputStyle = {
 };
 
 const buttonStyle = {
-  padding: "10px 20px",
+  padding: "10px",
   background: "#FFD530",
   color: "#333333",
   border: "none",
   borderRadius: "5px",
   display: "block",
-  width: "40%",
+  width: "20%",
   justifyContent: 'center',
 };
 
 const tableStyle = {
-  width: "70%",
+  width: "100%",
   borderCollapse: "collapse",
   padding: "10px",
   margin: "10px",
+  justifyContent: 'center',
 };
 
 const thStyle = {
@@ -253,6 +254,7 @@ const addnewServiceButton = {
   borderRadius: '5px',
   margin: '10px',
   cursor: 'pointer',
+
 };
 
 export default ServicesAdmin;

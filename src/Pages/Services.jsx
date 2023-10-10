@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import styled, { css } from 'styled-components';
 
 function ServiceItem({ item, index }) {
   const controls = useAnimation();
@@ -10,26 +11,27 @@ function ServiceItem({ item, index }) {
 
   useEffect(() => {
     if (inView) {
-      controls.start({ opacity: 1});
+      controls.start({ opacity: 1 });
     }
   }, [controls, inView]);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0}}
+      initial={{ opacity: 0 }}
       animate={controls}
-      transition={{ duration: 1 , ease: "easeOut", delay: 0.5}}
+      transition={{ duration: 1, ease: "easeOut" }}
       key={item.id}
-      style={index % 2 === 0 ? component : component1}
     >
-      <img style={images} src={item.imgURL} alt="cleaning" />
-      <div style={StyledTextContainer}>
-        <h1>{item.title}</h1>
-        <br />
-        <p style={paragraph}>{item.description}</p>
-        <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
-      </div>
+      <StyledItem $even={index % 2 === 0}  >
+        <StyledImg src={item.imgURL} alt="cleaning" />
+        <StyledTextDiv>
+          <h1>{item.title}</h1>
+          <br />
+          <StyledP>{item.description}</StyledP>
+          <StyledPrice >Price: {item.price}:-/h</StyledPrice>
+        </StyledTextDiv>
+      </StyledItem>
     </motion.div>
   );
 }
@@ -52,66 +54,92 @@ function Services() {
   };
 
   return (
-    <>
+    <StyledDiv>
       {fetchedData.map((item, index) => (
         <ServiceItem item={item} index={index} key={item.id} />
       ))}
-    </>
+    </StyledDiv>
   );
 }
 
-const StyledTextContainer = {
-  width: "50%",
-  height: "70%",
-  position: "relative",
-  top: "60px",
-  padding: "25px",
-  fontFamily: "poppins",
-  overflowY: "auto",
-  zIndex: "0"
-};
+const StyledDiv = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+ 
+`;
+const StyledItem = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-around;
+  background-color: #333333;
+    flex-direction: row-reverse;
+    color: white;
 
-const images = {
+  ${props => props.$even && css`
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  color: black;
 
-  height: "auto",
-  minWidth: "25%",
-  borderRadius: "20px",
-  margin: "60px",
-  objectFit: "cover"
-};
+  `}
+  @media (max-width: 768px) {
 
-const component = {
-  width: "100%",
-  height: "60vh",
-  backgroundColor: "white",
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "row",
-};
+    flex-direction: column;
 
-const pricestyle = {
+  }
+`;
 
-  position: "relative",
-  top: "15%",
-  float: "right",
-  textDecoration: "underline",
-  textUnderlineOffset: "10px",
-  textDecorationColor: "#FFD530",
-  textDecorationWidth: "30px",
-};
+const StyledImg = styled.img`
+  height: 300px;
+  width: 400px;
+  border-radius: 20px;
+  margin: 60px;
+  object-fit: cover;
+  @media (max-width: 768px) {
 
-const component1 = {
-  width: "100%",
-  height: "60vh",
-  backgroundColor: "#333333",
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "row-reverse",
-  color: "white",
-};
+    width: 80%;
+    height: 200px;
 
-const paragraph = {
-  fontSize: "1rem",
-};
+  }
+`;
+const StyledTextDiv = styled.div`
+
+width: 50%;
+height: 70%;
+margin-top: 15px;
+padding: 25px;
+fontFamily: poppins;
+overflowY: auto;
+
+@media (max-width: 768px) {
+
+  width: 80%;
+  text-aling: center;
+
+}
+ 
+`;
+const StyledPrice = styled.h4`
+
+textDecoration: underline;
+textUnderlineOffset: 10px;
+textDecorationColor: #FFD530;
+textDecorationWidth: 30px;
+float: right;
+@media (max-width: 768px) {
+margin-top: 30px;
+text-align: center;
+float: none;
+
+}
+`;
+const StyledP = styled.p`
+
+  font-size: 17px;
+
+`;
 
 export default Services;
