@@ -422,7 +422,7 @@ const StyledServicesDiv = styled.div`
 width: 100%;
 min-height: 80vh;
 padding: 100px 0;
-border: 1px solid black;
+
 display: flex;
 align-items: center;
 justify-content: center;

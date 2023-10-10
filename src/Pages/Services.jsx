@@ -128,15 +128,17 @@ textDecoration: underline;
 textUnderlineOffset: 10px;
 textDecorationColor: #FFD530;
 textDecorationWidth: 30px;
+float: right;
 @media (max-width: 768px) {
 margin-top: 30px;
 text-align: center;
+float: none;
 
 }
 `;
 const StyledP = styled.p`
 
-  font-size: 1rem;
+  font-size: 17px;
 
 `;
 

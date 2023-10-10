@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { motion, useAnimation } from 'framer-motion';
-// import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function AboutUs() {
   const controls1 = useAnimation();
@@ -92,7 +92,7 @@ const StyledTextContainer = styled.div`
 `;
 
 const StyledText = styled.p`
-  font-size: 19px;
+  font-size: 17px;
   margin-bottom: 1.5rem;
 `;
 

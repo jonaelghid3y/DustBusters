@@ -7,7 +7,7 @@ function Footer() {
   return (
     <StyledFooter>
       <FooterContainer1>
-        <h3 style={{ ...footerHeader, color: '#FFD530' }}>Opening hours</h3>
+        <h3 style={{ ...footerHeader, color: '#232323' }}>Opening hours</h3>
         <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <li>Mon - Fri: 07:00 -16:00</li>
@@ -17,26 +17,26 @@ function Footer() {
       </FooterContainer1>
 
       <FooterContainer2>
-        <h3 style={{ ...footerHeader, color: '#FFD530' }}>Follow DustBusters</h3>
+        <h3 style={{ ...footerHeader, color: '#232323' }}>Follow DustBusters</h3>
         <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <div>
-            <AiFillFacebook /> Facebook
+            <AiFillFacebook color='black' /> Facebook
           </div>
           <div>
-            <FaInstagram /> Instagram
+            <FaInstagram color='black'  /> Instagram
           </div>
           <div>
-            <FaLinkedin /> LinkedIn
+            <FaLinkedin color='black'  /> LinkedIn
           </div>
           <div>
-            <FaTwitter /> Twitter
+            <FaTwitter color='black'  /> Twitter
           </div>
         </ul>
       </FooterContainer2>
 
       <FooterContainer3>
-        <h3 style={{ ...footerHeader, color: '#FFD530' }}>Contacts</h3>
+        <h3 style={{ ...footerHeader, color: '#232323' }}>Contacts</h3>
         <hr style={{ borderColor: 'rgba(255, 165, 0, 0.1)' }} />
         <ul style={listStyle}>
           <li>Tel: +46 347 82 83</li>
@@ -51,14 +51,14 @@ function Footer() {
 const footerHeader = {
   fontFamily: 'Poppins',
   textAlign: 'left',
-  fontSize: '24px',
+  fontSize: '22px',
 };
 
 const listStyle = {
   listStyle: 'none',
   margin: '10px 0',
   padding: '2px',
-  color: 'white',
+  color: '#232323',
   fontFamily: 'Poppins',
 };
 
@@ -67,14 +67,16 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  background: #333333;
+  background: #D9D9D9;
   gap: 10px;
+  
 `;
 
 const FooterContainer1 = styled.footer`
   flex: 1;
   max-width: 25rem;
   margin: 20px;
+  color: black;
 `;
 
 const FooterContainer2 = styled.footer`
