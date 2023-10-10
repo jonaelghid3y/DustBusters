@@ -1,8 +1,40 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
+function ServiceItem({ item, index }) {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start({ opacity: 1});
+    }
+  }, [controls, inView]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0}}
+      animate={controls}
+      transition={{ duration: 1 , ease: "easeOut", delay: 0.5}}
+      key={item.id}
+      style={index % 2 === 0 ? component : component1}
+    >
+      <img style={images} src={item.imgURL} alt="cleaning" />
+      <div style={StyledTextContainer}>
+        <h1>{item.title}</h1>
+        <br />
+        <p style={paragraph}>{item.description}</p>
+        <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
+      </div>
+    </motion.div>
+  );
+}
 
 function Services() {
-
   const [fetchedData, setfetchedData] = useState([]);
 
   useEffect(() => {
@@ -14,39 +46,18 @@ function Services() {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/services');
       const data = await response.json();
       setfetchedData(data);
-
     } catch (error) {
       console.log(error);
     }
   };
 
-  const renderedData = fetchedData.map((item, index) => (
-
-    <div key={item.id} style={index % 2 === 0 ? component : component1}>
-
-      <img style={images} src={item.imgURL} alt="cleaning"></img>
-
-      <div style={StyledTextContainer}>
-
-        <h1>{item.title}</h1>
-        <br></br>
-        <p style={paragraph}>{item.description}</p>
-        <h4 style={pricestyle}>Price: {item.price}:-/h</h4>
-
-      </div>
-
-    </div>
-
-  ));
-
   return (
     <>
-
-      {renderedData}
-
+      {fetchedData.map((item, index) => (
+        <ServiceItem item={item} index={index} key={item.id} />
+      ))}
     </>
   );
-
 }
 
 const StyledTextContainer = {
@@ -57,7 +68,7 @@ const StyledTextContainer = {
   padding: "25px",
   fontFamily: "poppins",
   overflowY: "auto",
-  zIndex: "0",
+  zIndex: "0"
 };
 
 const images = {
@@ -66,6 +77,7 @@ const images = {
   minWidth: "25%",
   borderRadius: "20px",
   margin: "60px",
+  objectFit: "cover"
 };
 
 const component = {

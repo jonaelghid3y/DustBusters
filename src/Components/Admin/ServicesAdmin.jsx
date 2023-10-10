@@ -3,7 +3,6 @@ import axios from "axios";
 import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-
 class ServicesAdmin extends Component {
   state = {
     services: [],
@@ -99,7 +98,6 @@ class ServicesAdmin extends Component {
               Add new service
             </button>
           </div>
-
 
         ) : (
           <form style={formStyle} onSubmit={this.handleSubmit}>
@@ -256,6 +254,5 @@ const addnewServiceButton = {
   margin: '10px',
   cursor: 'pointer',
 };
-
 
 export default ServicesAdmin;

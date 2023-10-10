@@ -4,7 +4,6 @@ import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-
 function BookingAdmin() {
   const [bookings, setBookings] = useState([]);
   const [newBooking, setNewBooking] = useState({

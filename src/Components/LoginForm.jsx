@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../Components/Button';
 
 const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, handleClick}) => {
+  console.log(Object.groupBy);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,11 +26,11 @@ const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, ha
       <StyledForm>
         <StyledFormDivs>
           <label> Username:</label>
-          <StyledInput type="text" name='username' value={username}  onChange={(e) => setUsername(e.target.value)} />
+          <StyledInput type="text" name='username' value={username} autoComplete='user-name'  onChange={(e) => setUsername(e.target.value)} />
         </StyledFormDivs>
         <StyledFormDivs>
           <label> Password:</label>
-          <StyledInput type="password" name='password'value={password} autocomplete="current-password" onChange={(e) => setPassword(e.target.value)}/>
+          <StyledInput type="password" name='password'value={password} autoComplete="current-password" onChange={(e) => setPassword(e.target.value)}/>
         </StyledFormDivs>
         <StyledP>{text}<Link onClick={toggleForm}>Sign in</Link></StyledP>
         <Button primary size="small" label={label} onClick={()=>handleClick(username, password) } />
