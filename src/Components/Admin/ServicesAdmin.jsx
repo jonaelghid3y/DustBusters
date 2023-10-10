@@ -90,16 +90,14 @@ class ServicesAdmin extends Component {
       <div style={containerStyle}>
         <h1>List of Services</h1>
 
-
         {!showAddService && editingServiceId === null ? (
           <div>
-            <button onClick={this.toggleAddService} style={addnewServiceButton}>
-              Add new service
-            </button>
-
             <Link to="/admin" style={backToAdminButton}>
               <MdArrowBack />
             </Link>
+            <button onClick={this.toggleAddService} style={addnewServiceButton}>
+              Add new service
+            </button>
           </div>
 
 
@@ -198,6 +196,7 @@ const buttonStyle = {
   borderRadius: "5px",
   display: "block",
   width: "40%",
+  justifyContent: 'center',
 };
 
 const tableStyle = {
@@ -211,13 +210,19 @@ const thStyle = {
   backgroundColor: "#FFD530",
   color: "#333333",
   padding: "10px",
-  textAlign: "left",
+  textAlign: "center",
   margin: "10px",
+  justifyContent: 'center',
 };
 
 const tdStyle = {
   padding: "10px",
   color: "white",
+  margin: "10px",
+  paddingButton: '10px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  maxWidth: '40%',
 };
 
 const editButtonStyle = {
@@ -226,6 +231,7 @@ const editButtonStyle = {
   color: 'white',
   cursor: 'pointer',
   marginRight: '10px',
+  justifyContent: 'center',
 };
 
 const deleteButtonStyle = {
@@ -239,7 +245,6 @@ const backToAdminButton = {
   color: 'black',
   padding: '10px',
   margin: '10px',
-  cursor: 'pointer',
 };
 
 const addnewServiceButton = {

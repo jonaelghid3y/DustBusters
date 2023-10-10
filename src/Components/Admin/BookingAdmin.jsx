@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 
 function BookingAdmin() {
@@ -99,14 +100,20 @@ function BookingAdmin() {
       <h1>List of Bookings</h1>
 
       {!showAddBooking ? (
-        <button onClick={toggleAddBooking} style={addBookingButtonStyle}>
-          Add new booking
-        </button>
+        <div>
+          <Link to="/admin" style={backToAdminButton}> <MdArrowBack />
+          </Link>
+
+          <button onClick={toggleAddBooking} style={addBookingButtonStyle}>
+            Add new booking
+          </button>
+        </div>
 
       ) : (
         <form onSubmit={handleSubmit} style={formStyle}>
           <div style={inputContainerStyle}>
             <label htmlFor="name">Customer:</label>
+
             <input
               type="text"
               id="name"
@@ -115,9 +122,7 @@ function BookingAdmin() {
               onChange={handleInputChange}
               style={inputStyle}
             />
-            <Link to="/admin" style={backToAdminButton}>
-              <MdArrowBack />
-            </Link>
+
           </div>
 
           <div style={inputContainerStyle}>
@@ -143,7 +148,8 @@ function BookingAdmin() {
             )}
           </div>
         </form>
-      )}
+      )
+      }
 
       <table style={tableStyle}>
         <thead>
@@ -170,7 +176,7 @@ function BookingAdmin() {
           ))}
         </tbody>
       </table>
-    </div>
+    </div >
   );
 }
 
@@ -180,7 +186,6 @@ const containerStyle = {
   margin: "0 auto",
   fontFamily: 'Poppins',
   textAlign: "center",
-  color: "#333333",
 };
 
 const formStyle = {
@@ -191,17 +196,17 @@ const formStyle = {
 };
 
 const inputContainerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
+  alignItems: "center",
+  gap: '10px',
 };
 
 const inputStyle = {
-  width: "100%",
   padding: "10px",
   marginBottom: "10px",
-  border: "1px solid #ccc",
+  border: "1px solid",
   borderRadius: "5px",
+  margin: '5px',
+  marginBottom: '10px'
 };
 
 const submitButtonStyle = {
@@ -211,7 +216,7 @@ const submitButtonStyle = {
   border: "none",
   borderRadius: "5px",
   width: "100%",
-  fontFamily: 'Poppins, sans-serif',
+  fontFamily: 'Poppins',
   cursor: "pointer",
   transition: "background 0.3s ease",
 };
@@ -223,7 +228,7 @@ const cancelButtonStyle = {
   border: "none",
   borderRadius: "5px",
   width: "50%",
-  fontFamily: 'Poppins, sans-serif',
+  fontFamily: 'Poppins',
   marginTop: "5px",
   cursor: "pointer",
   transition: "background 0.3s ease",
@@ -239,7 +244,7 @@ const thStyle = {
   backgroundColor: "#FFD530",
   color: "#333333",
   padding: "10px",
-  textAlign: "left",
+  textAlign: "center",
 };
 
 const tableCellStyle = {
@@ -270,10 +275,9 @@ const addBookingButtonStyle = {
   padding: '10px',
   border: 'none',
   borderRadius: '5px',
-  width: "200px",
-  fontFamily: 'Poppins, sans-serif',
-  cursor: "pointer",
-  transition: "background 0.3s ease",
+  margin: '10px',
+  cursor: 'pointer',
+  marginTop: '10px',
 };
 
 const backToAdminButton = {
@@ -281,6 +285,7 @@ const backToAdminButton = {
   padding: '10px',
   margin: '10px',
   cursor: 'pointer',
+  marginleft: '10px',
 };
 
 export default BookingAdmin;
