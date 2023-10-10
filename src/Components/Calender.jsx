@@ -75,7 +75,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
     if (date < new Date().getDate() && currMonth == new Date().getMonth()) {
       return "grey";
     }
-    const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date);
+    const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
     const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
 
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
@@ -83,7 +83,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
 
     if (availableTimes.length == 0) {
       return "red";
-    } else if(availableTimes.length < 5) {
+    } else if (availableTimes.length < 5) {
       return "yellow";
     }
     else {
@@ -110,7 +110,9 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   return (
     <div>
       <Styledheader>
-        <button id="prev" className="arrow" onClick={() => showPrevMonth()}>&#60;</button>
+        {new Date().getMonth() == currMonth
+          ? <button id="first" className="arrow" disabled ></button>
+          : <button id="prev" className="arrow" onClick={() => showPrevMonth()}>&#60;</button>}
         <p className='month'>{months[currMonth]}</p>
         <button id="next" className="arrow" onClick={() => showNextMonth()}>&#62;</button>
       </Styledheader>
@@ -138,22 +140,31 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                 </div>
                 <div className={getAvaliableDates(date.date)}></div>
               </button>
-              : date.class == "active"
+              : date.class == "active" && getAvaliableDates(date.date) == "grey"
                 ? <button
-                  className="active"
+                  className="active-no-click"
                   key={date.date}
+                  disabled
                   onClick={() => getAvailiableTimes(date.date)}>
                   <p>{date.date}</p>
                   <div className={getAvaliableDates(date.date)}></div>
                 </button>
-                : <button
-                  className="nonactive"
-                  key={date.date + 31}
-                  disabled
-                  onClick={() => getAvailiableTimes(date.date)}>
-                  <p>{date.date}</p>
-                  <div className="grey"></div>
-                </button>;
+                : date.class == "active" && getAvaliableDates(date.date) != "grey"
+                  ? <button
+                    className="active"
+                    key={date.date}
+                    onClick={() => getAvailiableTimes(date.date)}>
+                    <p>{date.date}</p>
+                    <div className={getAvaliableDates(date.date)}></div>
+                  </button>
+                  : <button
+                    className="nonactive"
+                    key={date.date + 31}
+                    disabled
+                    onClick={() => getAvailiableTimes(date.date)}>
+                    <p>{date.date}</p>
+                    <div className="grey"></div>
+                  </button>;
           })
         }
       </CalendarDiv>
@@ -177,6 +188,10 @@ const Styledheader = styled.header`
     .arrow {
       padding-right: 20px;
       padding-left: 20px;
+    }
+    #first {
+      cursor: default;
+      color: white;
     }
 
 `;
@@ -216,7 +231,7 @@ const CalendarDiv = styled.div`
             font-weight: 300;
         }
 
-        .green {
+        .green, .red, .yellow, .grey {
         width: 8px;
         height: 8px;
         border-radius: 50%;
@@ -224,23 +239,14 @@ const CalendarDiv = styled.div`
         background-color:  #3e907a;
         }
         .red {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
         border-color: #bc473a;
         background-color: #bc473a;
         }
         .yellow {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
         border-color: yellow;
         background-color: yellow;
         }
         .grey {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
         border-color: grey;
         background-color: grey;
         }
@@ -248,6 +254,9 @@ const CalendarDiv = styled.div`
     }
     .active {
         background-color: white;
+    }
+    .active-no-click {
+      cursor: default;
     }
 
     .nonactive {
