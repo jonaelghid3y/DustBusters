@@ -72,7 +72,7 @@ const StyledItem = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-around;
-  background-color: #333333;
+  background-color:  #232323;
     flex-direction: row-reverse;
     color: white;
 
