@@ -12,7 +12,7 @@ function AboutUs() {
 
   const controls2 = useAnimation();
   const [ref2, inView2] = useInView({
-    threshold: 0.1,
+    threshold: 1,
     triggerOnce: true,
   });
 

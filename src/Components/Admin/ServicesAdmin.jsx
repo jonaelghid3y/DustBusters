@@ -254,7 +254,6 @@ const addnewServiceButton = {
   borderRadius: '5px',
   margin: '10px',
   cursor: 'pointer',
-
 };
 
 export default ServicesAdmin;
