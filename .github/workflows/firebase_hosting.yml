@@ -45,10 +45,10 @@ jobs:
     - run: npm run test
     - run: npm run build
     - name: Archive Build
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@3
       with:
         name: build
-        path: build
+        path: src/
 
   deploy:
     name: Deploy
@@ -57,10 +57,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Download Build
-        uses: actions/download-artifact
+        uses: actions/download-artifact@3
         with:
           name: build
-          path: build
+          path: src/
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
