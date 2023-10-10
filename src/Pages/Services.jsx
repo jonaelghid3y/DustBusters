@@ -66,6 +66,7 @@ const images = {
   minWidth: "25%",
   borderRadius: "20px",
   margin: "60px",
+  objectFit: "cover"
 };
 
 const component = {
