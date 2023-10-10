@@ -29,7 +29,6 @@ function Login() {
               label="Register"
               key="registerform"
               text="Already have an account? "
-              toggleLink="Sign in"
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
               handleClick={handleRegisterClick}
@@ -40,7 +39,6 @@ function Login() {
               label="Log in"
               key="loginform"
               text="Don't have an account? "
-              toggleLink="Sign up"
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
               handleClick={handleLogin}
@@ -54,6 +52,7 @@ function Login() {
 
 const StyledDiv = styled.div`
   width: 100%;
+  border: 1px solid black;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   display: flex;

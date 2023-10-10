@@ -134,7 +134,7 @@ top: 85vh;
 right: 40;
 @media (max-width: 768px) {
 
-  top: 86vh;
+  top: 80vh;
    
   }
 `;
@@ -152,7 +152,7 @@ top: 85vh;
 right: 40;
 @media (max-width: 768px) {
 
- top: 86vh;
+ top: 80vh;
   
  }
 `;

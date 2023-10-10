@@ -192,7 +192,6 @@ const buttonStyle = {
   color: "#333333",
   border: "none",
   borderRadius: "5px",
-  display: "block",
   width: "20%",
   justifyContent: 'center',
 };
@@ -254,6 +253,7 @@ const addnewServiceButton = {
   borderRadius: '5px',
   margin: '10px',
   cursor: 'pointer',
+
 };
 
 export default ServicesAdmin;
