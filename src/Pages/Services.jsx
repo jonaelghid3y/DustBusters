@@ -114,23 +114,21 @@ width: 50%;
 height: 70%;
 margin-top: 15px;
 padding: 25px;
-fontFamily: poppins;
-overflowY: auto;
+font-family: poppins;
+overflow-Y: auto;
 
 @media (max-width: 768px) {
 
   width: 80%;
-  text-aling: center;
+  text-align: center;
 
 }
  
 `;
 const StyledPrice = styled.h4`
-
-textDecoration: underline;
-textUnderlineOffset: 10px;
-textDecorationColor: #FFD530;
-textDecorationWidth: 30px;
+text-decoration: underline;
+text-underline-offset: 10px;
+text-decoration-color: #FFD530;
 float: right;
 @media (max-width: 768px) {
 margin-top: 30px;
