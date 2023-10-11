@@ -22,7 +22,8 @@ function Bookings() {
   const [adress, setAdress] = useState('');
   const [email, setEmail] = useState('');
   const [clickedTime, setClickedTime] = useState(0);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedHours, setSelectedHours] = useState(0);
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -51,7 +52,8 @@ function Bookings() {
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
           startTime: clickedTime,
-          service: selectedValue
+          duration: selectedHours,
+          service: selectedService
         }),
       });
 
@@ -144,9 +146,13 @@ function Bookings() {
             setAdress={setAdress}
             email={email}
             setEmail={setEmail}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-            handleSubmit={handleSubmit} />
+            selectedService={selectedService}
+            setSelectedService={setSelectedService}
+            selectedHours={selectedHours}
+            setSelectedHours={setSelectedHours}
+            handleSubmit={handleSubmit}
+            availiableTimesArr={availiableTimesArr}
+            clickedTime={clickedTime} />
         )}
       </ModalContainer>
     </div>

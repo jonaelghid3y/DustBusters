@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import ReviewForm from './ReviewForm';
 import BookFrom from './BookFrom';
 
-const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, email, setEmail, setSelectedValue, handleSubmit }) => {
+const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setContent, rating, setRating, adress, setAdress, clickedTime, email, setEmail, setSelectedService, setSelectedHours, handleSubmit, availiableTimesArr }) => {
 
   const [services, setServices] = useState([]);
 
@@ -60,8 +60,11 @@ const Modal = ({ title, modalOpen, setModalOpen, name, setName, content, setCont
               setAdress={setAdress}
               email={email}
               setEmail={setEmail}
-              setSelectedValue={setSelectedValue}
+              setSelectedService={setSelectedService}
+              setSelectedHours={setSelectedHours}
               services={services}
+              availiableTimesArr={availiableTimesArr}
+              clickedTime={clickedTime}
             />
             : null}
 

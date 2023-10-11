@@ -58,10 +58,18 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
       return "grey";
     }
     const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
-    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedDuration = bookedTimesOnSelectedDate.map(booking => booking.duration);
+    let allBookedTimes = [];
+
+    for (let i = 0; i <= bookedStartTimes.length - 1; i++) {
+      for (let x = bookedStartTimes[i]; x < (bookedStartTimes[i] + bookedDuration[i]); x++) {
+        allBookedTimes.push(x);
+      }
+    }
 
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+    availableTimes = availableTimes.filter(time => !allBookedTimes.includes(time));
 
     if (availableTimes.length == 0) {
       return "red";
