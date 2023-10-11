@@ -16,10 +16,10 @@ export default function Profile() {
 
       <ProfileSide>
 
-        <div style={circle}>
-          <img style={propic} src={cat} alt="profileimg"></img>
-        </div>
-        <h1 style={username}>{title}</h1>
+        <Circle>
+          <Propic src={cat} alt="profileimg"></Propic>
+        </Circle>
+        <Username>{title}</Username>
         <h3 style={memberstyle}><b style={{ color: "#c4a011" }}>Gold</b>Member </h3>
 
       </ProfileSide>
@@ -87,7 +87,7 @@ position:absolute;
 left:55%;
 top:15%;
 @media (max-width: 768px) {
-  width:360px;
+  width:65%;
   left:40%;
 }
 `;
@@ -105,32 +105,44 @@ const labelfield = {
   position: "relative",
   left: "10px",
   marginTop: "25px",
-  fontFamily: "poppins"
+  fontFamily: "poppins",
 };
 
-const propic = {
-  width: "300px",
-  height: "auto",
-  borderRadius: "50%",
-  margin: "100px auto",
-};
+const Propic = styled.img`
+  width: 300px;
+  height: auto;
+  border-radius: 50%;
+  margin:100px auto;
+  @media (max-width: 790px) {
+    width: 30vw;
+    height:30vw;
+  }
+  `;
 
-const circle = {
-  borderRadius: '50%',
-  border: '4px outset gold',
-  width: '300px',
-  height: '300px',
-  backgroundColor: 'black',
-  display: 'flex',
-  alignItems: 'center',
-  overflow: "hidden",
-  position:"relative",
-  bottom:"15%",
-};
+const Circle = styled.div`
+  border-radius: 50%;
+  border:4px outset gold;
+  width: 300px;
+  height: 300px;
+  backgroun-color: black;
+  display:flex;
+  align-items: center;
+  overflow: hidden;
+  position:relative;
+  bottom:15%;
+  @media (max-width: 790px) {
+    width: 30vw;
+    height:30vw;
+  }
+  `;
 
-const username = {
-  position:"relative",
-  bottom:"10%",
-  fontSize: "2.5em",
-  fontFamily:"Poppins",
-};
+const Username = styled.h1`
+  position:absolute;
+  bottom:25%;
+  font-size:250%;
+  fontFamily:Poppins;
+  @media (max-width: 768px) {
+    font-size:150%;
+    bottom:32%;
+  }
+  `;
