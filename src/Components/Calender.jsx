@@ -126,8 +126,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
                 ? <button
                   className="active-no-click"
                   key={date.date}
-                  disabled
-                  onClick={() => getAvailiableTimes(date.date)}>
+                  disabled>
                   <p>{date.date}</p>
                   <div className={getAvaliableDates(date.date)}></div>
                 </button>
@@ -142,8 +141,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
                   : <button
                     className="nonactive"
                     key={date.date + 31}
-                    disabled
-                    onClick={() => getAvailiableTimes(date.date)}>
+                    disabled>
                     <p>{date.date}</p>
                     <div className="grey"></div>
                   </button>;
