@@ -3,7 +3,6 @@ import axios from 'axios';
 import { MdDelete, MdEdit, MdArrowBack } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-
 function BookingAdmin() {
   const [bookings, setBookings] = useState([]);
   const [newBooking, setNewBooking] = useState({
@@ -100,19 +99,18 @@ function BookingAdmin() {
 
       {!showAddBooking ? (
         <div>
-          <Link to="/admin" style={backToAdminButton}> <MdArrowBack />
+          <Link to="/admin" style={backToAdminButton}>
+            <MdArrowBack />
           </Link>
 
           <button onClick={toggleAddBooking} style={addBookingButtonStyle}>
             Add new booking
           </button>
         </div>
-
       ) : (
         <form onSubmit={handleSubmit} style={formStyle}>
           <div style={inputContainerStyle}>
-            <label htmlFor="name">Customer:</label>
-
+            <label htmlFor="name" style={labelStyle}>Customer:</label>
             <input
               type="text"
               id="name"
@@ -121,11 +119,10 @@ function BookingAdmin() {
               onChange={handleInputChange}
               style={inputStyle}
             />
-
           </div>
 
           <div style={inputContainerStyle}>
-            <label htmlFor="date">Date:</label>
+            <label htmlFor="date" style={labelStyle}>Date:</label>
             <input
               type="text"
               id="date"
@@ -147,8 +144,7 @@ function BookingAdmin() {
             )}
           </div>
         </form>
-      )
-      }
+      )}
 
       <table style={tableStyle}>
         <thead>
@@ -175,7 +171,7 @@ function BookingAdmin() {
           ))}
         </tbody>
       </table>
-    </div >
+    </div>
   );
 }
 
@@ -185,7 +181,7 @@ const containerStyle = {
   margin: "0 auto",
   fontFamily: 'Poppins',
   textAlign: "center",
-  minimumHeight: '500px',
+  minHeight: '500px',
 };
 
 const formStyle = {
@@ -198,15 +194,21 @@ const formStyle = {
 const inputContainerStyle = {
   justifyContent: 'center',
   marginBottom: "5px",
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const labelStyle = {
+  width: '100px',
+  marginRight: '10px',
 };
 
 const inputStyle = {
-  width: "200px",
+  width: "100%",
   padding: "10px",
   marginBottom: "10px",
   border: "1px solid #ccc",
   borderRadius: "5px",
-  margin: "5px",
 };
 
 const submitButtonStyle = {
@@ -278,6 +280,7 @@ const addBookingButtonStyle = {
   margin: '10px',
   cursor: 'pointer',
   marginTop: '10px',
+  justifyContent: 'center',
 };
 
 const backToAdminButton = {
@@ -285,7 +288,7 @@ const backToAdminButton = {
   padding: '10px',
   margin: '10px',
   cursor: 'pointer',
-  marginleft: '10px',
+  marginLeft: '10px',
 };
 
 export default BookingAdmin;
