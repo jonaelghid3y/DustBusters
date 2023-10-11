@@ -13,37 +13,18 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   const calendarDates = [];
 
   for (let i = firstDayofMonth; i > 0; i--) {
-    if (i < currDate) {
-      calendarDates.push({
-        date: lastDateofLastMonth - i + 1,
-        class: "nonactive",
-      }
-      );
-    } else {
-      calendarDates.push({
-        date: lastDateofLastMonth - i + 1,
-        class: "nonactive",
-      }
-      );
-
+    calendarDates.push({
+      date: lastDateofLastMonth - i + 1,
+      class: "nonactive",
     }
+    );
   }
   for (let i = 1; i <= lastDateofMonth; i++) {
-    if (i < currDate) {
-      calendarDates.push({
-        date: i,
-        class: "active"
-      }
-      );
+    calendarDates.push({
+      date: i,
+      class: "active"
     }
-    else {
-      calendarDates.push(
-        {
-          date: i,
-          class: "active"
-        }
-      );
-    }
+    );
   }
   for (let i = 1; calendarDates.length < 42; i++) {
     calendarDates.push({
