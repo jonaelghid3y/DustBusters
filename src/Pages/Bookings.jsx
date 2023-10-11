@@ -22,7 +22,8 @@ function Bookings() {
   const [adress, setAdress] = useState('');
   const [email, setEmail] = useState('');
   const [clickedTime, setClickedTime] = useState(0);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedHours, setSelectedHours] = useState(0);
 
   const months = ["January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"];
@@ -51,7 +52,8 @@ function Bookings() {
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
           startTime: clickedTime,
-          service: selectedValue
+          duration: selectedHours,
+          service: selectedService
         }),
       });
 
@@ -88,11 +90,19 @@ function Bookings() {
     setClickedDate(date);
 
     const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
-    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedDuration = bookedTimesOnSelectedDate.map(booking => booking.duration);
+    let allBookedTimes = [];
+
+    for (let i = 0; i <= bookedStartTimes.length - 1; i++) {
+      for (let x = bookedStartTimes[i]; x < (bookedStartTimes[i] + bookedDuration[i]); x++) {
+        allBookedTimes.push(x);
+      }
+    }
 
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
-
+    availableTimes = availableTimes.filter(time => !allBookedTimes.includes(time));
+    console.log(availableTimes);
     setAvailiableTimesArr(availableTimes);
 
   };
@@ -136,9 +146,13 @@ function Bookings() {
             setAdress={setAdress}
             email={email}
             setEmail={setEmail}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-            handleSubmit={handleSubmit} />
+            selectedService={selectedService}
+            setSelectedService={setSelectedService}
+            selectedHours={selectedHours}
+            setSelectedHours={setSelectedHours}
+            handleSubmit={handleSubmit}
+            availiableTimesArr={availiableTimesArr}
+            clickedTime={clickedTime} />
         )}
       </ModalContainer>
     </div>

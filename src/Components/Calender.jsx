@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
+const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setClicked, months }) => {
 
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
@@ -39,6 +39,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   useEffect(() => {
     fetchBookings();
     getAvaliableDates();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchBookings = async () => {
@@ -57,10 +58,18 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
       return "grey";
     }
     const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
-    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedDuration = bookedTimesOnSelectedDate.map(booking => booking.duration);
+    let allBookedTimes = [];
+
+    for (let i = 0; i <= bookedStartTimes.length - 1; i++) {
+      for (let x = bookedStartTimes[i]; x < (bookedStartTimes[i] + bookedDuration[i]); x++) {
+        allBookedTimes.push(x);
+      }
+    }
 
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+    availableTimes = availableTimes.filter(time => !allBookedTimes.includes(time));
 
     if (availableTimes.length == 0) {
       return "red";
@@ -125,8 +134,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                 ? <button
                   className="active-no-click"
                   key={date.date}
-                  disabled
-                  onClick={() => getAvailiableTimes(date.date)}>
+                  disabled>
                   <p>{date.date}</p>
                   <div className={getAvaliableDates(date.date)}></div>
                 </button>
@@ -141,8 +149,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                   : <button
                     className="nonactive"
                     key={date.date + 31}
-                    disabled
-                    onClick={() => getAvailiableTimes(date.date)}>
+                    disabled>
                     <p>{date.date}</p>
                     <div className="grey"></div>
                   </button>;
