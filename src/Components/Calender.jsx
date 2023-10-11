@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
+const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setClicked, months }) => {
 
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
@@ -39,6 +39,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   useEffect(() => {
     fetchBookings();
     getAvaliableDates();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchBookings = async () => {
