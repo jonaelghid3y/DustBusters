@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setClicked, months }) => {
-
+const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
     firstDayofMonth = 6;
   }
   let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); // getting last date of month
   let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
-
   const calendarDates = [];
-
   for (let i = firstDayofMonth; i > 0; i--) {
-    calendarDates.push({
-      date: lastDateofLastMonth - i + 1,
-      class: "nonactive",
+    if (i < currDate) {
+      calendarDates.push({
+        date: lastDateofLastMonth - i + 1,
+        class: "nonactive",
+      }
+      );
+    } else {
+      calendarDates.push({
+        date: lastDateofLastMonth - i + 1,
+        class: "nonactive",
+      }
+      );
     }
-    );
   }
   for (let i = 1; i <= lastDateofMonth; i++) {
-    calendarDates.push({
-      date: i,
-      class: "active"
+    if (i < currDate) {
+      calendarDates.push({
+        date: i,
+        class: "active"
+      }
+      );
     }
-    );
+    else {
+      calendarDates.push(
+        {
+          date: i,
+          class: "active"
+        }
+      );
+    }
   }
   for (let i = 1; calendarDates.length < 42; i++) {
     calendarDates.push({
@@ -33,15 +47,11 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
     });
     if (calendarDates.length == 35) break;
   }
-
   const [bookedTimes, setBookedTimes] = useState([]);
-
   useEffect(() => {
     fetchBookings();
     getAvaliableDates();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const fetchBookings = async () => {
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking');
@@ -51,26 +61,14 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
       console.log(error);
     }
   };
-
   const getAvaliableDates = (date) => {
-
     if (date < new Date().getDate() && currMonth == new Date().getMonth()) {
       return "grey";
     }
     const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
-    let bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
-    let bookedDuration = bookedTimesOnSelectedDate.map(booking => booking.duration);
-    let allBookedTimes = [];
-
-    for (let i = 0; i <= bookedStartTimes.length - 1; i++) {
-      for (let x = bookedStartTimes[i]; x < (bookedStartTimes[i] + bookedDuration[i]); x++) {
-        allBookedTimes.push(x);
-      }
-    }
-
+    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    availableTimes = availableTimes.filter(time => !allBookedTimes.includes(time));
-
+    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
     if (availableTimes.length == 0) {
       return "red";
     } else if (availableTimes.length < 5) {
@@ -80,14 +78,12 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
       return "green";
     }
   };
-
   const showNextMonth = () => {
     setClicked(false);
     if (currMonth < 11)
       setCurrMonth(currMonth + 1);
     else
       setCurrMonth(0);
-
   };
   const showPrevMonth = () => {
     setClicked(false);
@@ -96,9 +92,8 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
     else
       setCurrMonth(11);
   };
-
   return (
-    <div>
+    <CalenderContainer >
       <Styledheader>
         {new Date().getMonth() == currMonth
           ? <button id="first" className="arrow" disabled ></button>
@@ -134,7 +129,8 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
                 ? <button
                   className="active-no-click"
                   key={date.date}
-                  disabled>
+                  disabled
+                  onClick={() => getAvailiableTimes(date.date)}>
                   <p>{date.date}</p>
                   <div className={getAvaliableDates(date.date)}></div>
                 </button>
@@ -149,17 +145,25 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
                   : <button
                     className="nonactive"
                     key={date.date + 31}
-                    disabled>
+                    disabled
+                    onClick={() => getAvailiableTimes(date.date)}>
                     <p>{date.date}</p>
                     <div className="grey"></div>
                   </button>;
           })
         }
       </CalendarDiv>
-    </div>
+    </CalenderContainer>
   );
 };
-
+const CalenderContainer = styled.div`
+ @media (max-width: 768px) {
+      min-width: 70vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+`;
 const Styledheader = styled.header`
     display: flex;
     flex-flow: row nowrap;
@@ -181,9 +185,7 @@ const Styledheader = styled.header`
       cursor: default;
       color: white;
     }
-
 `;
-
 const DaysDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -192,18 +194,26 @@ const DaysDiv = styled.div`
     text-align: center;
     padding: 10px 0;
     margin-bottom: 10px;
+    min-width: 340px;
+    @media (max-width: 768px) {
+      min-width: 70vw;
+    }
     p {
         font-size: 1.2rem;
         font-weight: 300;
+        @media (max-width: 321px) {
+          font-size: 0.9rem;
+        }
     }
-
 `;
-
 const CalendarDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     width: 35vw;
-
+    min-width: 340px;
+    @media (max-width: 768px) {
+      min-width: 70vw;
+    }
     div, button {
         cursor: pointer;
         border: 1px solid black;
@@ -213,12 +223,16 @@ const CalendarDiv = styled.div`
         justify-content: center;
         gap: 10px;
         height: 72px;
-
+        @media (max-width: 321px) {
+          height: 50px;
+        }
         p {
             font-size: 1.2rem;
             font-weight: 300;
+            @media (max-width: 321px) {
+              font-size: 0.9rem;
+            }
         }
-
         .green, .red, .yellow, .grey {
         width: 8px;
         height: 8px;
@@ -238,7 +252,6 @@ const CalendarDiv = styled.div`
         border-color: grey;
         background-color: grey;
         }
-
     }
     .active {
         background-color: white;
@@ -246,7 +259,6 @@ const CalendarDiv = styled.div`
     .active-no-click {
       cursor: default;
     }
-
     .nonactive {
         cursor: default;
         background-color: #d9d9d9;
@@ -260,11 +272,9 @@ const CalendarDiv = styled.div`
         margin-bottom: -4px;
         margin-top: -5px;
     }
-
     .active:hover {
         background-color:  #232323;
         color: white;
     }
 `;
-
 export default Calendar;
