@@ -43,7 +43,7 @@ function Bookings() {
           name: name,
           date: new Date(currYear, currMonth, clickedDate + 1).toJSON().slice(0, 10),
           startTime: clickedTime,
-          duration: selectedHours,
+          duration: parseInt(selectedHours),
           service: selectedService
         }),
       });
