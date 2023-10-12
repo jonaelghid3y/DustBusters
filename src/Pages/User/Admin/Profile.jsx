@@ -12,35 +12,37 @@ export default function Profile() {
   const [lastname, setlastname] = useState("");
 
   return (
-    <>
+    <div>
+      <Container>
 
-      <ProfileSide>
+        <ProfileSide>
 
-        <Circle>
-          <Propic src={cat} alt="profileimg"></Propic>
-        </Circle>
-        <Username>{title}</Username>
-        <h3 style={memberstyle}><b style={{ color: "#c4a011" }}>Gold</b>Member </h3>
+          <Circle>
+            <Propic src={cat} alt="profileimg"></Propic>
+          </Circle>
+          <Username>{title}</Username>
+          <h3 style={memberstyle}><b style={{ color: "#c4a011" }}>Gold</b>Member </h3>
 
-      </ProfileSide>
+        </ProfileSide>
 
-      <Form>
+        <Form>
 
-        <label htmlFor="username" style={labelfield}>First name:</label>
-        <input type="text" placeholder="Enter your Firstname..." style={inputfield} onChange={(e) => setname(e.target.value)} name="username"></input>
-        <label htmlFor="lastname" style={labelfield}>Last name:</label>
-        <input type="text" name="lastname" placeholder="Enter your Lastname..." style={inputfield} onChange={(e) => setlastname(e.target.value)}></input>
-        <label htmlFor="email" style={labelfield}>Adress:</label>
-        <input type="text" name="Adress" placeholder="Enter your Adress..." style={inputfield}></input>
-        <label htmlFor="adress" style={labelfield}>Telephone:</label>
-        <input type="text" name="Tel" placeholder="Enter your Telephone..." style={inputfield}></input>
-        <label htmlFor="adress" style={labelfield}>E-mail:</label>
-        <input type="text" name="Email" placeholder="Enter your E-mail..." style={inputfield}></input>
-        <ButtonContainer>
-          <Button primary size="small" label="Edit Profile" onClick={() => settitle(name + " " + lastname)}/>
-        </ButtonContainer>
-      </Form>
-    </>
+          <label htmlFor="username" style={labelfield}>First name:</label>
+          <input type="text" placeholder="Enter your Firstname..." style={inputfield} onChange={(e) => setname(e.target.value)} name="username"></input>
+          <label htmlFor="lastname" style={labelfield}>Last name:</label>
+          <input type="text" name="lastname" placeholder="Enter your Lastname..." style={inputfield} onChange={(e) => setlastname(e.target.value)}></input>
+          <label htmlFor="email" style={labelfield}>Adress:</label>
+          <input type="text" name="Adress" placeholder="Enter your Adress..." style={inputfield}></input>
+          <label htmlFor="adress" style={labelfield}>Telephone:</label>
+          <input type="text" name="Tel" placeholder="Enter your Telephone..." style={inputfield}></input>
+          <label htmlFor="adress" style={labelfield}>E-mail:</label>
+          <input type="text" name="Email" placeholder="Enter your E-mail..." style={inputfield}></input>
+          <ButtonContainer>
+            <Button primary size="small" label="Edit Profile" onClick={() => settitle(name + " " + lastname)}/>
+          </ButtonContainer>
+        </Form>
+      </Container>
+    </div>
   );
 }
 
@@ -53,16 +55,19 @@ display: flex;
 flex-direction: column; 
 justify-content: center;
 align-items: center; 
-align-items: center; 
-
+@media (max-width: 768px) {
+  width:100%;
+  left:20%;
+}
 `;
 
 const ButtonContainer = styled.div`
-margin-top:5%;
-position:relative;
-left:25%;
-color:black;
-border-radius:2%;
+display: flex;
+justify-content: center; 
+align-items: center; 
+margin-top: 5%;
+color: black;
+border-radius: 2%;
 `;
 
 const memberstyle = {
@@ -80,15 +85,15 @@ const Form = styled.div`
 width: 30%;
 Height:630px;
 display: flex;
-justify-content: left;
-align-items: left; 
+align-items: center; 
 flex-direction:column;
-position:absolute;
-left:55%;
-top:15%;
+position:relative;
+left:20%;
+top:3em; 
 @media (max-width: 768px) {
   width:65%;
-  left:40%;
+  left:20%;
+  top:0em;
 }
 `;
 
@@ -113,10 +118,6 @@ const Propic = styled.img`
   height: auto;
   border-radius: 50%;
   margin:100px auto;
-  @media (max-width: 790px) {
-    width: 30vw;
-    height:30vw;
-  }
   `;
 
 const Circle = styled.div`
@@ -130,10 +131,6 @@ const Circle = styled.div`
   overflow: hidden;
   position:relative;
   bottom:15%;
-  @media (max-width: 790px) {
-    width: 30vw;
-    height:30vw;
-  }
   `;
 
 const Username = styled.h1`
@@ -142,7 +139,14 @@ const Username = styled.h1`
   font-size:250%;
   fontFamily:Poppins;
   @media (max-width: 768px) {
-    font-size:150%;
-    bottom:32%;
+    bottom:26%;
   }
+  `;
+
+const Container = styled.div`
+display:flex;
+flex-direction:row;
+@media (max-width: 768px) {
+ flex-direction:column;
+}
   `;
