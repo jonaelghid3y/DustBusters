@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTimes, setClicked, months }) => {
+
+const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setClicked, months }) => {
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
   if (firstDayofMonth == -1) {
     firstDayofMonth = 6;
@@ -9,36 +10,16 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
   const calendarDates = [];
   for (let i = firstDayofMonth; i > 0; i--) {
-    if (i < currDate) {
-      calendarDates.push({
-        date: lastDateofLastMonth - i + 1,
-        class: "nonactive",
-      }
-      );
-    } else {
-      calendarDates.push({
-        date: lastDateofLastMonth - i + 1,
-        class: "nonactive",
-      }
-      );
-    }
+    calendarDates.push({
+      date: lastDateofLastMonth - i + 1,
+      class: "nonactive",
+    });
   }
   for (let i = 1; i <= lastDateofMonth; i++) {
-    if (i < currDate) {
-      calendarDates.push({
-        date: i,
-        class: "active"
-      }
-      );
-    }
-    else {
-      calendarDates.push(
-        {
-          date: i,
-          class: "active"
-        }
-      );
-    }
+    calendarDates.push({
+      date: i,
+      class: "active"
+    });
   }
   for (let i = 1; calendarDates.length < 42; i++) {
     calendarDates.push({
@@ -51,7 +32,9 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
   useEffect(() => {
     fetchBookings();
     getAvaliableDates();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const fetchBookings = async () => {
     try {
       const response = await fetch('https://api-s5hih6nmta-uc.a.run.app/booking');
@@ -62,13 +45,24 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
     }
   };
   const getAvaliableDates = (date) => {
+
     if (date < new Date().getDate() && currMonth == new Date().getMonth()) {
       return "grey";
     }
     const bookedTimesOnSelectedDate = bookedTimes.filter(booking => new Date(booking.date).getDate() === date && new Date(booking.date).getMonth() == currMonth);
-    const bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedStartTimes = bookedTimesOnSelectedDate.map(booking => booking.startTime);
+    let bookedDuration = bookedTimesOnSelectedDate.map(booking => booking.duration);
+    let allBookedTimes = [];
+
+    for (let i = 0; i <= bookedStartTimes.length - 1; i++) {
+      for (let x = bookedStartTimes[i]; x < (bookedStartTimes[i] + bookedDuration[i]); x++) {
+        allBookedTimes.push(x);
+      }
+    }
+
     let availableTimes = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    availableTimes = availableTimes.filter(time => !bookedStartTimes.includes(time));
+    availableTimes = availableTimes.filter(time => !allBookedTimes.includes(time));
+
     if (availableTimes.length == 0) {
       return "red";
     } else if (availableTimes.length < 5) {
@@ -129,8 +123,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                 ? <button
                   className="active-no-click"
                   key={date.date}
-                  disabled
-                  onClick={() => getAvailiableTimes(date.date)}>
+                  disabled>
                   <p>{date.date}</p>
                   <div className={getAvaliableDates(date.date)}></div>
                 </button>
@@ -145,8 +138,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
                   : <button
                     className="nonactive"
                     key={date.date + 31}
-                    disabled
-                    onClick={() => getAvailiableTimes(date.date)}>
+                    disabled>
                     <p>{date.date}</p>
                     <div className="grey"></div>
                   </button>;
@@ -156,6 +148,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, currDate, getAvailiableTi
     </CalenderContainer>
   );
 };
+
 const CalenderContainer = styled.div`
  @media (max-width: 768px) {
       min-width: 70vw;
