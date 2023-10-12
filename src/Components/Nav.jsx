@@ -13,22 +13,29 @@ function Nav() {
   const location = useLocation();
   const { handleLogout, accessToken, admin } = useContext(AuthContext);
 
+  const closeNav = (callback) => {
+    setIsopen(false);
+    if (callback) {
+      callback();
+    }
+  };
+
   return (
 
     <>
       {
         !accessToken &&
         <StyledNav>
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link onClick={() => closeNav()} style={{ textDecoration: 'none' }} to="/">
             <Logo primary />
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <StyledLink to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
-            <StyledLink to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
-            <StyledLink to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
-            <StyledLink to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
-            <Link to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
+            <StyledLink onClick={() => closeNav()} to="/" className={`links ${location.pathname === "/" ? "active" : ""}`}>Home</StyledLink>
+            <StyledLink onClick={() => closeNav()} to="/Bookings" className={`links ${location.pathname === "/Bookings" ? "active" : ""}`}>Book</StyledLink>
+            <StyledLink onClick={() => closeNav()} to="/Services" className={`links ${location.pathname === "/Services" ? "active" : ""}`}>Services</StyledLink>
+            <StyledLink onClick={() => closeNav()} to="/Aboutus" className={`links ${location.pathname === "/Aboutus" ? "active" : ""}`}>About us</StyledLink>
+            <Link onClick={() => closeNav()} to="/login" id="linkButton"><Button primary size="small" label="Log in" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
@@ -36,28 +43,27 @@ function Nav() {
       {
         accessToken && !admin &&
         <StyledNav>
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link onClick={() => closeNav()} style={{ textDecoration: 'none' }} to="/">
             <Logo primary />
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <Link to="/login" id="linkButton"><Button secondary size="small" onClick={handleLogout} label="Log out" /></Link>
+            <Link  to="/" id="linkButton"><Button secondary size="small" onClick={() => closeNav(handleLogout)}label="Log out" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
 
       {
-        // If both accessToken and admin are present
         accessToken && admin &&
         <StyledNav>
-          <Link style={{ textDecoration: 'none' }} to="/">
+          <Link onClick={() => closeNav()} style={{ textDecoration: 'none' }} to="/">
             <Logo primary />
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            <StyledLink to="/Services-Admin" className={`links ${location.pathname === "/Services-Admin" ? "active" : ""}`}>Services</StyledLink>
-            <StyledLink to="/Booking-Admin" className={`links ${location.pathname === "/Booking-Admin" ? "active" : ""}`}>Bookings</StyledLink>
-            <Link to="/login" id="linkButton"><Button secondary size="small" onClick={handleLogout} label="Log out" /></Link>
+            <StyledLink onClick={() => closeNav()} to="/Services-Admin" className={`links ${location.pathname === "/Services-Admin" ? "active" : ""}`}>Services</StyledLink>
+            <StyledLink onClick={() => closeNav()} to="/Booking-Admin" className={`links ${location.pathname === "/Booking-Admin" ? "active" : ""}`}>Bookings</StyledLink>
+            <Link  to="/" id="linkButton"><Button secondary size="small" onClick={() => closeNav(handleLogout)} label="Log out" /></Link>
           </StyledLänkcontainer>
         </StyledNav>
       }
@@ -89,8 +95,9 @@ const StyledLänkcontainer = styled.div`
         right: 0;
         padding: 15px;
         background-color: #232323;
-        width: 30%;
+        width: 40%;
         flex-direction: column;
+        z-index: 1;
         display: ${props => (props.$isopen ? 'flex' : 'none')};
     }
 

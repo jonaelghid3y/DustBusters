@@ -50,7 +50,7 @@ const ProfileSide = styled.div`
 
 width: 35%;
 height: 100vh;
-background-color: #d9d9d9;
+background-color: #ededed;
 display: flex;
 flex-direction: column; 
 justify-content: center;
@@ -87,9 +87,7 @@ Height:630px;
 display: flex;
 align-items: center; 
 flex-direction:column;
-position:relative;
-left:20%;
-top:3em; 
+
 @media (max-width: 768px) {
   width:65%;
   left:20%;
@@ -145,7 +143,10 @@ const Username = styled.h1`
 
 const Container = styled.div`
 display:flex;
+align-items: center;
+justify-content: flex-start;
 flex-direction:row;
+gap: 15vw;
 @media (max-width: 768px) {
  flex-direction:column;
 }

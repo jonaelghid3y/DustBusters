@@ -103,7 +103,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     isLoggedIn();
-
   }, []);
 
   return (
@@ -125,7 +124,7 @@ const StyledSuccsesMessage = styled.p`
 
 font-size: 16px;
 color: #5cb85c;
-background-color: white;
+
 display: flex;
 border-radius: 5px;
 padding: 10px;
@@ -135,7 +134,7 @@ top: 85vh;
 right: 40;
 @media (max-width: 768px) {
 
-  top: 80vh;
+  top: 83vh;
    
   }
 `;
@@ -143,7 +142,7 @@ const StyledErrorMessage = styled.p`
 
 font-size: 16px;
 color: #cc0000;
-background-color: white;
+
 display: flex;
 border-radius: 5px;
 padding: 10px;
@@ -153,7 +152,7 @@ top: 85vh;
 right: 40;
 @media (max-width: 768px) {
 
- top: 80vh;
+ top: 83vh;
   
  }
 `;

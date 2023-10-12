@@ -7,16 +7,14 @@ import Profile from './Profile';
 
 export default function AuthNavigator() {
   const { accessToken, admin } = useContext(AuthContext);
-  console.log(accessToken,admin);
+  console.log(accessToken, admin);
 
   return (
     <>
       {
-        accessToken && admin
-          ? <Admin />
-          : accessToken
-            ? <Profile />
-            : <Login />
+        accessToken
+          ? (admin ? <Admin /> : <Profile />)
+          : <Login />
       }
     </>
   );
