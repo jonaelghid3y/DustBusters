@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import CalenderDate from './CalenderDate';
 
 const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setClicked, months }) => {
   let firstDayofMonth = new Date(currYear, currMonth, 1).getDay() - 1; // getting first day of month
@@ -32,7 +33,7 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
   useEffect(() => {
     fetchBookings();
     getAvaliableDates();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchBookings = async () => {
@@ -110,38 +111,36 @@ const Calendar = ({ currYear, currMonth, setCurrMonth, getAvailiableTimes, setCl
             return date.date == new Date().getDate()
               && currMonth == new Date().getMonth()
               && date.class != "nonactive"
-              ? <button
+              ? <CalenderDate
                 className="active"
-                key={date.date}
-                onClick={() => getAvailiableTimes(date.date)}>
-                <div className="current" value={date.date}>
-                  <p>{date.date}</p>
-                </div>
-                <div className={getAvaliableDates(date.date)}></div>
-              </button>
+                date={date.date}
+                disabled={false}
+                getAvailiableTimes={getAvailiableTimes}
+                divClass="current"
+                dotColor={getAvaliableDates(date.date)} />
               : date.class == "active" && getAvaliableDates(date.date) == "grey"
-                ? <button
+                ? <CalenderDate
                   className="active-no-click"
-                  key={date.date}
-                  disabled>
-                  <p>{date.date}</p>
-                  <div className={getAvaliableDates(date.date)}></div>
-                </button>
+                  date={date.date}
+                  disabled={true}
+                  getAvailiableTimes={getAvailiableTimes}
+                  divClass="noncurrent"
+                  dotColor={getAvaliableDates(date.date)} />
                 : date.class == "active" && getAvaliableDates(date.date) != "grey"
-                  ? <button
+                  ? <CalenderDate
                     className="active"
-                    key={date.date}
-                    onClick={() => getAvailiableTimes(date.date)}>
-                    <p>{date.date}</p>
-                    <div className={getAvaliableDates(date.date)}></div>
-                  </button>
-                  : <button
+                    date={date.date}
+                    disabled={false}
+                    getAvailiableTimes={getAvailiableTimes}
+                    divClass="noncurrent"
+                    dotColor={getAvaliableDates(date.date)} />
+                  : <CalenderDate
                     className="nonactive"
-                    key={date.date + 31}
-                    disabled>
-                    <p>{date.date}</p>
-                    <div className="grey"></div>
-                  </button>;
+                    date={date.date}
+                    disabled={true}
+                    getAvailiableTimes={getAvailiableTimes}
+                    divClass="noncurrent"
+                    dotColor="grey" />;
           })
         }
       </CalendarDiv>
@@ -251,6 +250,7 @@ const CalendarDiv = styled.div`
     }
     .active-no-click {
       cursor: default;
+      background-color: #efeeee;
     }
     .nonactive {
         cursor: default;
