@@ -92,9 +92,9 @@ export const AuthProvider = ({ children }) => {
     console.log('isLoggedIn');
     try {
       const token = localStorage.getItem('accessToken');
-      const admin = localStorage.getItem('admin');
+      const adminStatus = localStorage.getItem('admin') === 'true'; // Convert string to boolean here
       setAccessToken(token);
-      setAdmin(admin);
+      setAdmin(adminStatus);
 
     } catch (error) {
       console.log(error);
