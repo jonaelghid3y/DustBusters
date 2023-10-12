@@ -22,7 +22,7 @@ export const PrimaryMedium = {
   args: {
     primary: true,
     src: '/imgs/Monster.png',
-    size: 'Medium'
+    size: 'medium'
   }
 };
 
