@@ -106,7 +106,6 @@ const StyledForm = styled.form`
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black;
   width: 80%;
   height: 80%;
   gap: 25px;
