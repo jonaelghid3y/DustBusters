@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../Components/Button';
 
-const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, handleClick}) => {
-  console.log(Object.groupBy);
+const LoginForm = ({title, label, text, setIsRegistering, isRegistering, handleClick}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +15,6 @@ const LoginForm = ({title, key, label, text, setIsRegistering, isRegistering, ha
 
   return (
     <motion.div
-      key={key}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}>

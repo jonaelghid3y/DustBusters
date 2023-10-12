@@ -41,7 +41,6 @@ function Nav() {
           </Link>
           <StyledHamburgerIcon onClick={() => setIsopen(!isopen)} size={30} />
           <StyledLänkcontainer $isopen={isopen}>
-            {/* ... Other Links ... */}
             <Link to="/login" id="linkButton"><Button secondary size="small" onClick={handleLogout} label="Log out" /></Link>
           </StyledLänkcontainer>
         </StyledNav>

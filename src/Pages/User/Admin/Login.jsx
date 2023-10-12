@@ -27,7 +27,6 @@ function Login() {
             <LoginForm
               title="Register"
               label="Register"
-              key="registerform"
               text="Already have an account? "
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}
@@ -37,7 +36,6 @@ function Login() {
             <LoginForm
               title="Log in"
               label="Log in"
-              key="loginform"
               text="Don't have an account? "
               isRegistering={isRegistering}
               setIsRegistering={setIsRegistering}

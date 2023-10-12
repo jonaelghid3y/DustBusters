@@ -83,8 +83,9 @@ export const AuthProvider = ({ children }) => {
   const handleLogout = async () => {
     console.log('handleLogout');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('admin');
     setAccessToken(null);
-    console.log(accessToken);
+    setAdmin(null);
   };
 
   const isLoggedIn = async () => {
