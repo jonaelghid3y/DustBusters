@@ -22,7 +22,7 @@ const getVariantStyles = ({ primary = false }) =>
   primary
     ? css`
         color: black;
-        background-color: pink;
+        background-color: #FFD530;
         border: 2px solid transparent;
       `
     : css`
